@@ -1,0 +1,41 @@
+# package files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+target/
+
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# Gradle Files
+.gradle/
+gradle/
+/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+/out/
+
+.mvn
+# ignore eclipse files
+.project
+.classpath
+.settings
+.metadata
+
+# node modules
+node_modules/
+
+# MacOS folder file
+.DS_Store
