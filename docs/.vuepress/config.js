@@ -11,11 +11,19 @@ module.exports = {
   },
   themeConfig: {
     nav: [
-      {text: 'home', link: '/'},
-      {text: 'category', link: '/'},
-      {text: 'tag', link: '/'},
-      {text: 'timeline', link: '/'},
-      
+      {text: 'home', link: '/', icon: ''},
+      {text: 'category', link: '/categories/', icon: ''},
+      {text: 'tags', link: '/tag/', icon: ''},
+      {text: 'timeline', link: '/timeline/', icon: ''},
+      {text: 'contact', icon: '', children: [{
+        text: '',
+        link: '',
+        icon: ''
+      }, {
+        text: '',
+        link: '',
+        icon: ''
+      }]}
     ]
   }
 }

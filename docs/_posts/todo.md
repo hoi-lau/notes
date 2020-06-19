@@ -1,0 +1,34 @@
+# Todo
+
+- java io nio
+- java io nio ManagementFactory
+- Spring*,[springAOP之代理模式](https://www.cnblogs.com/teach/p/10763845.html)
+- RN
+- Linux shell
+- 数据结构,算法
+- mysql
+- kotlin
+- shiro
+- docker & k8s
+- Tcp
+- 指令重排
+- docker
+- K8
+- Tcp
+- websocket
+- 消息中间件
+- DelegatingFilterProxy
+- hexo,gittalk, minfive
+- 发布,订阅者模式
+-  electron  typescript
+-  seo
+
+ https://juejin.im/post/5ebd283be51d454da74186f1?utm_source=gold_browser_extension 
+
+共识算法
+
+https://www.jianshu.com/p/776ed057343a
+
+ https://www.zhihu.com/question/20299384 
+
+ https://blog.csdn.net/u014745069/article/details/83820511 

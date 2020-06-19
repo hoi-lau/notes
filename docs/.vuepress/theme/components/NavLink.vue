@@ -6,7 +6,6 @@
     :exact="exact"
     @focusout.native="focusoutAction"
   >
-    test
     {{ item.text }}
   </RouterLink>
   <a
