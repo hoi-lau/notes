@@ -21,7 +21,7 @@
 - hexo,gittalk, minfive
 - 发布,订阅者模式
 -  electron  typescript
--  seo
+-  seo UI库
 
  https://juejin.im/post/5ebd283be51d454da74186f1?utm_source=gold_browser_extension 
 
