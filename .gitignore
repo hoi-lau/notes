@@ -35,6 +35,8 @@ gradle/
 .metadata
 
 # node modules
+package-lock.json
+yarn.lock
 node_modules/
 
 # MacOS folder file
