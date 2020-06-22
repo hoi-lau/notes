@@ -1,70 +1,50 @@
 <template>
   <header class="navbar">
-    <SidebarButton @toggle-sidebar="$emit('toggle-sidebar')" />
+    <SidebarButton @toggle-sidebar="$emit('toggle-sidebar')"/>
 
-    <RouterLink
+    <router-link
       :to="$localePath"
-      class="home-link"
-    >
+      class="home-link">
       <img
-        v-if="$site.themeConfig.logo"
         class="logo"
-        :src="$withBase($site.themeConfig.logo)"
-        :alt="$siteTitle"
-      >
+        v-if="$themeConfig.logo"
+        :src="$withBase($themeConfig.logo)"
+        :alt="$siteTitle">
       <span
-        v-if="$siteTitle"
         ref="siteName"
         class="site-name"
-        :class="{ 'can-hide': $site.themeConfig.logo }"
-      >{{ $siteTitle }}</span>
-    </RouterLink>
+        v-if="$siteTitle">{{ $siteTitle }}</span>
+    </router-link>
 
     <div
       class="links"
       :style="linksWrapMaxWidth ? {
         'max-width': linksWrapMaxWidth + 'px'
-      } : {}"
-    >
+      } : {}">
+
+      <Mode />
       <AlgoliaSearchBox
         v-if="isAlgoliaSearch"
-        :options="algolia"
-      />
-      <SearchBox v-else-if="$site.themeConfig.search !== false && $page.frontmatter.search !== false" />
-      <NavLinks class="can-hide" />
+        :options="algolia"/>
+      <SearchBox v-else-if="$themeConfig.search !== false && $frontmatter.search !== false"/>
+      <NavLinks class="can-hide"/>
     </div>
   </header>
 </template>
 
 <script>
-import AlgoliaSearchBox from '@AlgoliaSearchBox'
-import SearchBox from '@SearchBox'
-import SidebarButton from '@theme/components/SidebarButton.vue'
-import NavLinks from '@theme/components/NavLinks.vue'
+import AlgoliaSearchBox from './AlgoliaSearchBox'
+import SearchBox from './SearchBox'
+import SidebarButton from './SidebarButton'
+import NavLinks from './NavLinks'
+import Mode from './Mode'
 
 export default {
-  name: 'Navbar',
-
-  components: {
-    SidebarButton,
-    NavLinks,
-    SearchBox,
-    AlgoliaSearchBox
-  },
+  components: { SidebarButton, NavLinks, SearchBox, AlgoliaSearchBox, Mode },
 
   data () {
     return {
       linksWrapMaxWidth: null
-    }
-  },
-
-  computed: {
-    algolia () {
-      return this.$themeLocaleConfig.algolia || this.$site.themeConfig.algolia || {}
-    },
-
-    isAlgoliaSearch () {
-      return this.algolia && this.algolia.apiKey && this.algolia.indexName
     }
   },
 
@@ -75,12 +55,22 @@ export default {
       if (document.documentElement.clientWidth < MOBILE_DESKTOP_BREAKPOINT) {
         this.linksWrapMaxWidth = null
       } else {
-        this.linksWrapMaxWidth = this.$el.offsetWidth - NAVBAR_VERTICAL_PADDING
-          - (this.$refs.siteName && this.$refs.siteName.offsetWidth || 0)
+        this.linksWrapMaxWidth = this.$el.offsetWidth - NAVBAR_VERTICAL_PADDING -
+          (this.$refs.siteName && this.$refs.siteName.offsetWidth || 0)
       }
     }
     handleLinksWrapWidth()
     window.addEventListener('resize', handleLinksWrapWidth, false)
+  },
+
+  computed: {
+    algolia () {
+      return this.$themeLocaleConfig.algolia || this.$themeConfig.algolia || {}
+    },
+
+    isAlgoliaSearch () {
+      return this.algolia && this.algolia.apiKey && this.algolia.indexName
+    }
   }
 }
 
@@ -93,12 +83,16 @@ function css (el, property) {
 </script>
 
 <style lang="stylus">
+@require '../styles/mode.styl'
+
 $navbar-vertical-padding = 0.7rem
 $navbar-horizontal-padding = 1.5rem
 
 .navbar
   padding $navbar-vertical-padding $navbar-horizontal-padding
   line-height $navbarHeight - 1.4rem
+  box-shadow var(--box-shadow)
+  background var(--background-color)
   a, span, img
     display inline-block
   .logo
@@ -106,21 +100,23 @@ $navbar-horizontal-padding = 1.5rem
     min-width $navbarHeight - 1.4rem
     margin-right 0.8rem
     vertical-align top
+    border-radius 50%
   .site-name
-    font-size 1.3rem
+    font-size 1.2rem
     font-weight 600
-    color $textColor
+    color var(--text-color)
     position relative
+    background var(--background-color)
   .links
     padding-left 1.5rem
     box-sizing border-box
-    background-color white
     white-space nowrap
     font-size 0.9rem
     position absolute
     right $navbar-horizontal-padding
     top $navbar-vertical-padding
     display flex
+    background-color var(--background-color)
     .search-box
       flex: 0 0 auto
       vertical-align top
@@ -131,10 +127,5 @@ $navbar-horizontal-padding = 1.5rem
     .can-hide
       display none
     .links
-      padding-left 1.5rem
-    .site-name
-      width calc(100vw - 9.4rem)
-      overflow hidden
-      white-space nowrap
-      text-overflow ellipsis
+      padding-left .2rem
 </style>

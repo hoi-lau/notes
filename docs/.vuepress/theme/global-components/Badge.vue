@@ -24,21 +24,22 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@require '../styles/mode.styl'
 .badge
   display inline-block
   font-size 14px
   height 18px
   line-height 18px
-  border-radius 3px
+  border-radius $borderRadius
   padding 0 6px
   color white
   background-color #42b983
   &.tip, &.green
-    background-color $badgeTipColor
+    background-color #42b983
   &.error
-    background-color $badgeErrorColor
+    background-color #DA5961
   &.warning, &.warn, &.yellow
-    background-color $badgeWarningColor
+    background-color darken(#ffe564, 35%)
   & + &
     margin-left 5px
 </style>

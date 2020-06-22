@@ -10,19 +10,22 @@ module.exports = {
     lineNumbers: true
   },
   themeConfig: {
+    type: 'blog',
+    mode: 'light',
+    author: 'liukai',
     nav: [
-      {text: 'home', link: '/', icon: ''},
-      {text: 'category', link: '/categories/', icon: ''},
-      {text: 'tags', link: '/tag/', icon: ''},
-      {text: 'timeline', link: '/timeline/', icon: ''},
-      {text: 'contact', icon: '', children: [{
-        text: '',
-        link: '',
-        icon: ''
+      {text: 'Home', link: '/', icon: 'icon-home_n'},
+      {text: 'Category', link: '/categories/', icon: 'icon-icon-goodscategory'},
+      {text: 'Tags', link: '/tag/', icon: 'icon-tag'},
+      {text: 'Timeline', link: '/timeline/', icon: 'icon-shijian'},
+      {text: 'Contact', icon: 'icon-contact', items: [{
+        text: 'github',
+        link: 'https://github.com/imLiukai',
+        icon: 'icon-git'
       }, {
-        text: '',
-        link: '',
-        icon: ''
+        text: 'telegram',
+        link: 'https://t.me/im_liukai',
+        icon: 'icon-telegram'
       }]}
     ]
   }
