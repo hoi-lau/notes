@@ -28,12 +28,16 @@ export default {
     },
     homeCom () {
       const { type } = this.$themeConfig
-      console.log(type)
       if (type !== undefined) {
         return type == 'blog' ? 'HomeBlog' : type
       }
       return 'Home'
     }
+  },
+  beforeMount() {
+    // debugger
+    // this.$site.pages
+    console.log(this)
   }
 }
 </script>

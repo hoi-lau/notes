@@ -9,6 +9,9 @@ module.exports = {
   markdown: {
     lineNumbers: true
   },
+  plugins: [
+    require('./plugins/excludepost')
+  ],
   themeConfig: {
     type: 'blog',
     mode: 'light',
