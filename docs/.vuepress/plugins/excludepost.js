@@ -1,27 +1,22 @@
+// 排除未发布的post
+// mixins
+const path = require('path')
 module.exports = (options, ctx) => {
   return {
     async ready() {
-      console.log('------')
-      ctx.pages.forEach(item => {
-        console.log(item)
-      })
-      console.log(ctx.pages.length)
+      for (let i = 0; i < ctx.pages.length; i++) {
+        const frontMatter = ctx.pages[i].frontmatter
+        if (frontMatter.publish === false) {
+          ctx.pages.splice(i, 1)
+          i--
+        }
+      }
       // ...
     },
     updated() {
-      console.log('------')
-      ctx.pages.forEach(item => {
-        console.log(item)
-      })
-      console.log(ctx.pages.length)
     },
     async generated (pagePaths) {
-      console.log('------')
-      ctx.pages.forEach(item => {
-        console.log(item)
-      })
-      console.log(ctx.pages.length)
-      // ...
-    }
+    },
+    clientRootMixin: path.resolve(__dirname, '../theme/mixins/posts.js')
   }
 }

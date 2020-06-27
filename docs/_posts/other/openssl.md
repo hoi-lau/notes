@@ -1,4 +1,10 @@
-# openssl
+---
+title: 使用openssl生成证书
+category:
+ - util
+tags:
+ - openssl
+---
 
 OpenSSL 是一个开源项目，其组成主要包括一下三个组件：
 

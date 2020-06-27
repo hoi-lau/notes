@@ -30,8 +30,12 @@
 </template>
 
 <script>
-// import { version } from '../package.json'
+import AccessNumber from './comments/AccessNumber'
+import Comments from './comments/Comments'
 export default {
+  components: {
+    AccessNumber, Comments
+  },
   data () {
     return {
       version: '1.0.0'

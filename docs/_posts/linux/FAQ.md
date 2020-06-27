@@ -1,4 +1,12 @@
-# FAQ
+---
+title: linux学习
+category: 
+ - linux
+tags:
+ - FAQ
+---
+
+
 
 ## 网络启动失败
 

@@ -80,10 +80,11 @@ import PageInfo from './PageInfo'
 import { resolvePage, outboundRE, endingSlashRE } from '../util'
 import ModuleTransition from './ModuleTransition'
 import moduleTransitonMixin from '../mixins/moduleTransiton'
+import Comments from './comments/Comments'
 
 export default {
   mixins: [moduleTransitonMixin],
-  components: { PageInfo, ModuleTransition },
+  components: { PageInfo, ModuleTransition, Comments},
 
   props: ['sidebarItems'],
 

@@ -35,8 +35,6 @@ export default {
     }
   },
   beforeMount() {
-    // debugger
-    // this.$site.pages
     console.log(this)
   }
 }

@@ -1,6 +1,12 @@
-# git 常用命令
+---
+title: git常用命令
+category:
+ - util
+tags:
+ - git
+---
 
-> ssh-keygen -o -t rsa -b 4096 -C "im.liukai2333@gmail.com"
+> 生成公私钥: ssh-keygen -o -t rsa -b 4096 -C "im.liukai2333@gmail.com"
 
 *1*. ` git init `初始化当前文件夹,(.git目录),该文件夹下所有文件都可以被git管理
 
