@@ -37,7 +37,7 @@ import AlgoliaSearchBox from './AlgoliaSearchBox'
 import SearchBox from './SearchBox'
 import SidebarButton from './SidebarButton'
 import NavLinks from './NavLinks'
-import Mode from './Mode'
+import Mode from './mode'
 
 export default {
   components: { SidebarButton, NavLinks, SearchBox, AlgoliaSearchBox, Mode },
