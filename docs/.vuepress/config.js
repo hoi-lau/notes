@@ -9,6 +9,7 @@ module.exports = {
   markdown: {
     lineNumbers: true
   },
+  plugins: [],
   themeConfig: {
     type: 'blog',
     mode: 'light',

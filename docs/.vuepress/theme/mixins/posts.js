@@ -2,46 +2,47 @@ import { filterPosts, sortPostsByStickyAndDate, sortPostsByDate } from '../helpe
 
 export default {
   computed: {
-    $recoPosts () {
-      const {
-        $categories: { list: articles }
-      } = this
+    $myPosts () {
+      console.log('----')
+      console.log(this)
+      // const {
+      //   $categories: { list: articles }
+      // } = this
+      // let posts = articles.reduce((allData, currentData) => {
+      //   return [...allData, ...currentData.pages]
+      // }, [])
 
-      let posts = articles.reduce((allData, currentData) => {
-        return [...allData, ...currentData.pages]
-      }, [])
+      // posts = filterPosts(posts, false)
+      // sortPostsByStickyAndDate(posts)
 
-      posts = filterPosts(posts, false)
-      sortPostsByStickyAndDate(posts)
-
-      return posts
-    },
-    $recoPostsForTimeline () {
-      let pages = this.$recoPosts
-      const formatPages = {}
-      const formatPagesArr = []
-      pages = filterPosts(pages, true)
-      this.pages = pages.length == 0 ? [] : pages
-      for (let i = 0, length = pages.length; i < length; i++) {
-        const page = pages[i]
-        const pageDateYear = dateFormat(page.frontmatter.date, 'year')
-        if (formatPages[pageDateYear]) formatPages[pageDateYear].push(page)
-        else {
-          formatPages[pageDateYear] = [page]
-        }
-      }
-
-      for (const key in formatPages) {
-        const data = formatPages[key]
-        sortPostsByDate(data)
-        formatPagesArr.unshift({
-          year: key,
-          data
-        })
-      }
-
-      return formatPagesArr
+      return []
     }
+    // $recoPostsForTimeline () {
+    //   let pages = this.$recoPosts
+    //   const formatPages = {}
+    //   const formatPagesArr = []
+    //   pages = filterPosts(pages, true)
+    //   this.pages = pages.length == 0 ? [] : pages
+    //   for (let i = 0, length = pages.length; i < length; i++) {
+    //     const page = pages[i]
+    //     const pageDateYear = dateFormat(page.frontmatter.date, 'year')
+    //     if (formatPages[pageDateYear]) formatPages[pageDateYear].push(page)
+    //     else {
+    //       formatPages[pageDateYear] = [page]
+    //     }
+    //   }
+
+    //   for (const key in formatPages) {
+    //     const data = formatPages[key]
+    //     sortPostsByDate(data)
+    //     formatPagesArr.unshift({
+    //       year: key,
+    //       data
+    //     })
+    //   }
+
+    //   return formatPagesArr
+    // }
   }
 }
 

@@ -1,4 +1,9 @@
-# nginx
+---
+title: nginx 配置
+category:
+ - nginx
+publish: false
+---
 
 ## 配置白名单
 

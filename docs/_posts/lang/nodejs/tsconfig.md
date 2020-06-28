@@ -1,6 +1,9 @@
-# TypeScript
+---
+title:  使用vscode 搭建 typescript 的nodejs 自动编译自动启动服务
+publish: false
+---
 
- 使用vscode 搭建 typescript 的nodejs 自动编译自动启动服务
+依赖
 
 ```json
 {
