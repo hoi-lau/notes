@@ -301,3 +301,12 @@ flush privileges;
 ```
 
 ## docker网络
+
+## 遇到过的问题
+
+### docker: Error response from daemon: driver failed programming external connectivity on endpoint
+
+启动一个容器时报错.原因:
+
+> docker服务启动时定义的自定义链DOCKER由于某种原因被清掉,*重启docker*服务及可重新生成自定义链DOCKER,遇到问题无法解决时,重启试一下.
+
