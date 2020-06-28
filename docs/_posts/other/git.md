@@ -1,5 +1,6 @@
 ---
 title: git常用命令
+date: 2018-08-15
 categories:
  - utils
 tags:

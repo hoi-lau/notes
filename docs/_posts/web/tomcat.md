@@ -1,9 +1,11 @@
 ---
 title: tomcat配置
+date: 2018-12-10
 categories: 
  - utils
 tags:
  - tomcat
+publish: false
 ---
 
 ## 配置访问路径

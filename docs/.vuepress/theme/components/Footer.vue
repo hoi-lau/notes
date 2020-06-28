@@ -2,7 +2,7 @@
   <div class="footer-wrapper">
     <span>
       <!-- <i class="iconfont reco-theme"></i> -->
-      <a target="blank" href="https://www.vuepress.cn/">© powered by vuepress.</a>
+      <a target="blank" href="https://www.vuepress.cn/">powered by vuepress.</a>
     </span>
     <span v-if="$themeConfig.record">
       <i class="iconfont reco-beian"></i>
@@ -11,7 +11,7 @@
     <span>
       <i class="iconfont reco-copyright"></i>
       <a>
-        <span v-if="$themeConfig.author || $site.title">{{ $themeConfig.author || $site.title }}</span>
+        <span v-if="$themeConfig.author">© {{ $themeConfig.author }}</span>
         &nbsp;&nbsp;
         <span v-if="$themeConfig.startYear && $themeConfig.startYear != (new Date().getFullYear())">{{ $themeConfig.startYear }} - </span>
         {{ new Date().getFullYear() }}
@@ -68,7 +68,7 @@ export default {
       font-size 14px
     }
     > span {
-      margin-left 1rem
+      margin-left 2rem
       > i {
         margin-right .5rem
       }

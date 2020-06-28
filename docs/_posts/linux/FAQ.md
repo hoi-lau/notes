@@ -1,5 +1,6 @@
 ---
 title: linux学习
+date: 2020-02-18
 categories: 
  - linux
 tags:
