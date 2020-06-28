@@ -1,8 +1,8 @@
 <template>
   <div class="footer-wrapper">
     <span>
-      <i class="iconfont reco-theme"></i>
-      <a target="blank" href="https://vuepress-theme-reco.recoluan.com">{{`vuepress-theme-reco@${version}`}}</a>
+      <!-- <i class="iconfont reco-theme"></i> -->
+      <a target="blank" href="https://www.vuepress.cn/">© powered by vuepress.</a>
     </span>
     <span v-if="$themeConfig.record">
       <i class="iconfont reco-beian"></i>
@@ -25,7 +25,7 @@
       <img src="https://img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png" alt="">
       <a :href="$themeConfig.cyberSecurityLink || '#'">{{ $themeConfig.cyberSecurityRecord }}</a>
     </p>
-    <Comments :isShowComments="false"/>
+    <!-- <Comments :isShowComments="false"/> -->
   </div>
 </template>
 

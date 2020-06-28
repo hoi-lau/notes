@@ -1,6 +1,10 @@
 ---
 title: linux常用命令
 date: 2019-06-06
+categories: 
+ - linux
+tags: 
+ - linux
 ---
 
 ## 安装

@@ -1,6 +1,6 @@
 <template>
   <div class="search-box">
-    <i class="iconfont reco-search"></i>
+    <i class="iconfont icon-search"></i>
     <input
       @input="query = $event.target.value"
       aria-label="Search"

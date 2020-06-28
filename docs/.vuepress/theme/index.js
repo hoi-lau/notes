@@ -23,7 +23,6 @@ module.exports = (options, ctx) => {
 
     plugins: [
       require('../plugins/excludepost'),
-      require('../plugins/myPosts'),
       ["@vuepress/active-header-links", options.activeHeaderLinks],
       ["@vuepress/search", {
         searchMaxSuggestions: 10

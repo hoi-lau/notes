@@ -1,7 +1,7 @@
 ---
 title: 使用openssl生成证书
-category:
- - util
+categories:
+ - utils
 tags:
  - openssl
 ---

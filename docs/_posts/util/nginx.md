@@ -1,7 +1,7 @@
 ---
 title: nginx 配置
-category:
- - nginx
+categories:
+ - utils
 publish: false
 ---
 

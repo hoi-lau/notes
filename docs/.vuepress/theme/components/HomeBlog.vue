@@ -30,12 +30,12 @@
         <div class="blog-list">
           <!-- 博客列表 -->
           <note-abstract
-            :data="$site.pages"
+            :data="$myPosts"
             :currentPage="currentPage"></note-abstract>
           <!-- 分页 -->
           <Pagetion
             class="pagation"
-            :total="$site.pages.length"
+            :total="$myPosts.length"
             :currentPage="currentPage"
             @getCurrentPage="getCurrentPage" />
         </div>
@@ -43,7 +43,7 @@
           <PersonalInfo/>
           <h4><i class="iconfont reco-category"></i> category </h4>
           <ul class="category-wrapper">
-            <li class="category-item" v-for="(item, index) in this.$categories.list" :key="index">
+            <li class="category-item" v-for="(item, index) in categoryList" :key="index">
               <router-link :to="item.path">
                 <span class="category-name">{{ item.name }}</span>
                 <span class="post-num" :style="{ 'backgroundColor': getOneColor() }">{{ item.pages.length }}</span>
@@ -70,6 +70,7 @@ import TagList from './TagList'
 // import FriendLink from './FriendLink'
 import NoteAbstract from './NoteAbstract'
 import pagination from '../mixins/pagination'
+import posts from '../mixins/posts'
 import Pagetion from './Pagetion'
 import ModuleTransition from './ModuleTransition'
 import PersonalInfo from './PersonalInfo'
@@ -77,14 +78,15 @@ import { getOneColor } from '../helpers/other'
 import moduleTransitonMixin from '../mixins/moduleTransiton'
 
 export default {
-  mixins: [pagination, moduleTransitonMixin],
+  mixins: [pagination, moduleTransitonMixin, posts],
   // FriendLink
   components: { NoteAbstract, TagList, ModuleTransition, PersonalInfo, Pagetion },
   data () {
     return {
       recoShow: false,
       currentPage: 1,
-      tags: []
+      tags: [],
+      categoryList: []
     }
   },
   computed: {
@@ -126,8 +128,15 @@ export default {
   },
   mounted () {
     this.recoShow = true
-    console.log(this)
     this._setPage(this._getStoragePage())
+    // 浅拷贝
+    this.categoryList = Array.from(this.$categories.list)
+    this.categoryList.sort((before, after) => {
+      if (before.pages.length > after.pages.length) {
+        return -1
+      }
+      return 1
+    })
   },
   methods: {
     // 获取当前页码
@@ -139,7 +148,7 @@ export default {
     },
     // 根据分类获取页面数据
     getPages () {
-      let pages = this.$site.pages
+      let pages = this.$myPosts
       pages = pages.filter(item => {
         const { home, date } = item.frontmatter
         return !(home == true || date === undefined)

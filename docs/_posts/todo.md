@@ -1,6 +1,6 @@
 ---
 title: to do list
-category:
+categories:
  - to do
 publish: false
 ---

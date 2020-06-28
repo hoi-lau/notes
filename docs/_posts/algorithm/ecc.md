@@ -1,6 +1,6 @@
 ---
 title: 公钥密码学常见算法
-category:
+categories:
  - 密码学
 tags:
  - ecc

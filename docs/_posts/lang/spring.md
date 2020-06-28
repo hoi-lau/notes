@@ -1,7 +1,7 @@
 ---
 title: spring框架学习
 date: 2020-05-12
-category:
+categories:
  - java
 tags:
  - spring

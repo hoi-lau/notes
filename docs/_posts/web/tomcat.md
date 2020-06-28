@@ -1,7 +1,7 @@
 ---
 title: tomcat配置
-category: 
- - web server
+categories: 
+ - utils
 tags:
  - tomcat
 ---

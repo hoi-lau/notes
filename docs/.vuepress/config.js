@@ -14,6 +14,7 @@ module.exports = {
     type: 'blog',
     mode: 'light',
     author: 'liukai',
+    startYear: '2019',
     nav: [
       {text: 'Home', link: '/', icon: 'icon-home_n'},
       {text: 'Category', link: '/categories/', icon: 'icon-icon-goodscategory'},

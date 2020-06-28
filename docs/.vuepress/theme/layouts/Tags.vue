@@ -13,7 +13,7 @@
       <note-abstract
         v-show="recoShowModule"
         class="list"
-        :data="$recoPosts"
+        :data="$myPosts"
         :currentPage="currentPage"
         :currentTag="currentTag"
         @currentTag="getCurrentTag"></note-abstract>
@@ -21,11 +21,11 @@
 
     <!-- 分页 -->
     <ModuleTransition delay="0.16">
-      <pagation
+      <Pagination
         class="pagation"
-        :total="$recoPosts.length"
+        :total="$myPosts.length"
         :currentPage="currentPage"
-        @getCurrentPage="getCurrentPage"></pagation>
+        @getCurrentPage="getCurrentPage"></Pagination>
     </ModuleTransition>
   </Common>
 </template>
@@ -34,13 +34,15 @@
 import Common from '../components/Common'
 import TagList from '../components/TagList'
 import NoteAbstract from '../components/NoteAbstract'
+import Pagination from '../components/Pagetion'
+import posts from '../mixins/posts'
 import pagination from '../mixins/pagination'
 import ModuleTransition from '../components/ModuleTransition'
 import moduleTransitonMixin from '../mixins/moduleTransiton'
 
 export default {
-  mixins: [pagination, moduleTransitonMixin],
-  components: { Common, NoteAbstract, TagList, ModuleTransition },
+  mixins: [moduleTransitonMixin, pagination, posts],
+  components: { Common, NoteAbstract, TagList, ModuleTransition, Pagination },
   data () {
     return {
       tags: [],

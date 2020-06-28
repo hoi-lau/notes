@@ -1,6 +1,6 @@
 ---
 title: js tips
-category:
+categories:
  - js
 tags:
  - tips

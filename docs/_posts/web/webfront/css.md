@@ -1,6 +1,6 @@
 ---
 title: css常用布局
-category: 
+categories: 
  - css
 tags:
  - layout

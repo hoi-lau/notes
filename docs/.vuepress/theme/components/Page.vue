@@ -81,9 +81,9 @@ import { resolvePage, outboundRE, endingSlashRE } from '../util'
 import ModuleTransition from './ModuleTransition'
 import moduleTransitonMixin from '../mixins/moduleTransiton'
 import Comments from './comments/Comments'
-
+import posts from '../mixins/posts'
 export default {
-  mixins: [moduleTransitonMixin],
+  mixins: [moduleTransitonMixin, posts],
   components: { PageInfo, ModuleTransition, Comments},
 
   props: ['sidebarItems'],
@@ -130,7 +130,7 @@ export default {
       if (prev === false) {
         return
       } else if (prev) {
-        return resolvePage(this.$site.pages, prev, this.$route.path)
+        return resolvePage(this.$myPosts, prev, this.$route.path)
       } else {
         return resolvePrev(this.$page, this.sidebarItems)
       }
@@ -140,7 +140,7 @@ export default {
       if (next === false) {
         return
       } else if (next) {
-        return resolvePage(this.$site.pages, next, this.$route.path)
+        return resolvePage(this.$myPosts, next, this.$route.path)
       } else {
         return resolveNext(this.$page, this.sidebarItems)
       }

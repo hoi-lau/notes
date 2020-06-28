@@ -6,7 +6,7 @@
       </ModuleTransition>
       <ModuleTransition
         :delay="String(0.08 * (index + 1))"
-        v-for="(item, index) in $recoPostsForTimeline"
+        v-for="(item, index) in $myPostsForTimeline"
         :key="index">
         <li v-show="recoShowModule">
           <h3 class="year">{{item.year}}</h3>

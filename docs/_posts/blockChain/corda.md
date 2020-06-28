@@ -1,7 +1,7 @@
 ---
 title: corda
 date: 2020-03-03
-category:
+categories:
  - 区块链
 tags:
  - corda

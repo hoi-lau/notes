@@ -1,6 +1,6 @@
 ---
 title: solidity
-category:
+categories:
  - 区块链
 tags:
  - solidity

@@ -1,6 +1,6 @@
 ---
 title: web安全
-category:
+categories:
  - web
 tags:
  - security

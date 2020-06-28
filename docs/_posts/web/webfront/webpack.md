@@ -1,6 +1,6 @@
 ---
 title: webpack学习笔记
-category:
+categories:
  - js
  - utils
 tags:

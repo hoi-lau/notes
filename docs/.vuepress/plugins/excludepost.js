@@ -17,6 +17,6 @@ module.exports = (options, ctx) => {
     },
     async generated (pagePaths) {
     },
-    clientRootMixin: path.resolve(__dirname, '../theme/mixins/posts.js')
+    // clientRootMixin: path.resolve(__dirname, '../theme/mixins/posts.js')
   }
 }

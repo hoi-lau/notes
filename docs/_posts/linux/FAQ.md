@@ -1,6 +1,6 @@
 ---
 title: linux学习
-category: 
+categories: 
  - linux
 tags:
  - FAQ

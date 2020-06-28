@@ -1,7 +1,7 @@
 ---
 title: shell
 date: 2020-04-25
-category:
+categories:
  - linux
 tags:
  - shell
