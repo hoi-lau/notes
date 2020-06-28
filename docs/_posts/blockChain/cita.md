@@ -1,7 +1,7 @@
 ---
 title: cita
 date: 2020-05-20
-category:
+categories:
  - 区块链
 tags: 
  - cita

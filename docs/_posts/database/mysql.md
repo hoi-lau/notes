@@ -1,6 +1,6 @@
 ---
 title: mysql & FAQ
-category:
+categories:
  - database
 tags:
  - mysql

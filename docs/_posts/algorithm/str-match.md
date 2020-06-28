@@ -1,7 +1,7 @@
 ---
 title: 字符串匹配算法
 date: 2019-04-10
-category:
+categories:
  - algorithm
 ---
 

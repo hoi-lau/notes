@@ -14,7 +14,7 @@
   </h3>
   <div class="num">
     <div>
-      <h3>{{$site.pages.length}}</h3>
+      <h3>{{$myPosts.length}}</h3>
       <h6>Article</h6>
     </div>
     <div>
@@ -27,14 +27,15 @@
 </template>
 
 <script>
+import posts from '../mixins/posts'
 export default {
+  mixins: [posts],
   computed: {
     homeBlogCfg () {
       return this.$recoLocales.homeBlog
     }
   },
   mounted() {
-    console.log(this)
   }
 }
 </script>

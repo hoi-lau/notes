@@ -1,10 +1,10 @@
 ---
 title: json web token
-category: 
+categories: 
  - web
- - token
 tags:
  - jwt
+ - token
  - security
 ---
 

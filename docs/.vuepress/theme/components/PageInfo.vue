@@ -1,10 +1,10 @@
 <template>
   <div>
-    <i
+    <!-- <i
       class="iconfont reco-account"
       v-if="pageInfo.frontmatter.author || $themeConfig.author || $site.title">
       <span>{{ pageInfo.frontmatter.author || $themeConfig.author || $site.title }}</span>
-    </i>
+    </i> -->
     <i
       v-if="pageInfo.frontmatter.date"
       class="iconfont reco-date">

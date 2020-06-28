@@ -1,6 +1,6 @@
 ---
 title: 设计模式
-category:
+categories:
  - 设计模式
 publish: false
 ---

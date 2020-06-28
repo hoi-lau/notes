@@ -1,7 +1,7 @@
 ---
 title: git常用命令
-category:
- - util
+categories:
+ - utils
 tags:
  - git
 ---

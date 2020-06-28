@@ -17,8 +17,8 @@ export default {
   props: ['data', 'currentPage', 'currentTag'],
   computed: {
     currentPageData () {
-      const start = this.currentPage * 10 - 10
-      const end = this.currentPage * 10
+      const start = this.currentPage * 7 - 7
+      const end = this.currentPage * 7
       return this.data.slice(start, end)
     }
   }

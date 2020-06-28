@@ -164,7 +164,6 @@ export default {
     this.hasKey()
     this.hasPageKey()
     this.handleLoading()
-    console.log(this)
   },
 
   methods: {

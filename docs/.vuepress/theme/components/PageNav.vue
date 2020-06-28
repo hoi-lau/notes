@@ -61,12 +61,12 @@
 import { resolvePage } from '../util'
 import isString from 'lodash/isString'
 import isNil from 'lodash/isNil'
+import posts from '../mixins/posts'
 
 export default {
   name: 'PageNav',
-
+  mixins: [posts],
   props: ['sidebarItems'],
-
   computed: {
     prev () {
       return resolvePageLink(LINK_TYPES.PREV, this)
@@ -117,7 +117,7 @@ function resolvePageLink (
   if (link === false) {
     return
   } else if (isString(link)) {
-    return resolvePage($site.pages, link, $route.path)
+    return resolvePage($myPosts, link, $route.path)
   } else {
     return resolveLink($page, sidebarItems)
   }

@@ -1,6 +1,6 @@
 ---
 title: postgresql
-category:
+categories:
  - database
 tags:
  - postgresql

@@ -1,6 +1,6 @@
 ---
 title: shiro学习
-category: 
+categories: 
  - java
 tags: 
  - shiro

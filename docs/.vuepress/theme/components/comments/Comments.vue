@@ -2,7 +2,7 @@
   <div
     class="comments-wrapper"
     v-show="isShowComments">
-    lala
+    this is Comments
     <!-- <ClientOnly>
       <component
         :is="componentName"

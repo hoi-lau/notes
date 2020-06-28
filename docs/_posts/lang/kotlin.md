@@ -1,8 +1,7 @@
 ---
 title: kotlin学习
-category:
+categories:
  - java
- - kotlin
 date: 2020-02-15
 ---
 
