@@ -5,6 +5,7 @@ categories:
 tags:
  - solidity
  - 以太坊
+publish: false
 ---
 
 > Solidity 是一门面向合约的、为实现智能合约而创建的高级编程语言 

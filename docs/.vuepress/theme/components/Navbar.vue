@@ -10,10 +10,10 @@
         v-if="$themeConfig.logo"
         :src="$withBase($themeConfig.logo)"
         :alt="$siteTitle">
-      <span
+      <!-- <span
         ref="siteName"
         class="site-name"
-        v-if="$siteTitle">{{ $siteTitle }}</span>
+        v-if="$siteTitle">{{ $siteTitle }}</span> -->
     </router-link>
 
     <div

@@ -48,17 +48,17 @@ module.exports = (options, ctx) => {
             {
               id: "categories",
               keys: ["categories"],
-              path: "/categories/",
-              layout: "Categories",
+              path: "/category/",
+              layout: "Category",
               scopeLayout: "Category",
-            },
-            {
-              id: "timeline",
-              keys: ["timeline"],
-              path: "/timeline/",
-              layout: "TimeLines",
-              scopeLayout: "TimeLine",
-            },
+            }
+            // {
+            //   id: "timeline",
+            //   keys: ["timeline"],
+            //   path: "/timeline/",
+            //   layout: "TimeLines",
+            //   scopeLayout: "TimeLine",
+            // },
           ],
         },
       ],

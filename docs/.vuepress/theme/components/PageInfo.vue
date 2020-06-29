@@ -7,7 +7,7 @@
     </i> -->
     <i
       v-if="pageInfo.frontmatter.date"
-      class="iconfont reco-date">
+      class="iconfont icon-shijian">
       <span>{{ pageInfo.frontmatter.date | formatDateValue }}</span>
     </i>
     <i

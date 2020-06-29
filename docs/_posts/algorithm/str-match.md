@@ -3,6 +3,8 @@ title: 字符串匹配算法
 date: 2019-04-10
 categories:
  - algorithm
+tags:
+ - 字符串搜索
 ---
 
 ## KMP算法

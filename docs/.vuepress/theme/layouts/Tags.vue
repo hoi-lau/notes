@@ -13,7 +13,7 @@
       <note-abstract
         v-show="recoShowModule"
         class="list"
-        :data="$myPosts"
+        :data="filterPosts"
         :currentPage="currentPage"
         :currentTag="currentTag"
         @currentTag="getCurrentTag"></note-abstract>
@@ -23,7 +23,7 @@
     <ModuleTransition delay="0.16">
       <Pagination
         class="pagation"
-        :total="$myPosts.length"
+        :total="filterPosts.length"
         :currentPage="currentPage"
         @getCurrentPage="getCurrentPage"></Pagination>
     </ModuleTransition>
@@ -48,11 +48,13 @@ export default {
       tags: [],
       currentTag: '全部',
       currentPage: 1,
-      allTagName: '全部'
+      allTagName: '全部',
+      filterPosts: []
     }
   },
 
-  created () {
+  beforeMount () {
+    this.filterPosts = Array.from(this.$myPosts)
     if (this.$tags.list.length > 0) {
       this.currentTag = this.$route.query.tag ? this.$route.query.tag : this.currentTag
     }
@@ -65,6 +67,25 @@ export default {
   methods: {
 
     tagClick (tagInfo) {
+      this.currentTag = tagInfo.name
+      // 每次点击tag重置为第一页
+      this.currentPage = 1
+      if (this.$route.path !== tagInfo.path) {
+        while (this.filterPosts.length > 0) {
+          this.filterPosts.splice(0, 1)
+        }
+        if (this.currentTag === '全部') {
+          this.$myPosts.forEach(item => {
+            this.filterPosts.push(item)
+          })
+        } else {
+          this.$myPosts.forEach(item => {
+            if (item.frontmatter.tags.includes(this.currentTag)) {
+              this.filterPosts.push(item)
+            }
+          })
+        }
+      }
       if (this.$route.path !== tagInfo.path) {
         this.$router.push({ path: tagInfo.path })
       }

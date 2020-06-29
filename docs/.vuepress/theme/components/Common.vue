@@ -4,7 +4,6 @@
     :class="pageClasses"
     @touchstart="onTouchStart"
     @touchend="onTouchEnd">
-    <!-- 是否首次加载 -->
     <div v-if="!absoluteEncryption">
       <transition name="fade">
         <LoadingPage v-show="firstLoad" class="loading-wrapper" />
@@ -78,11 +77,12 @@ import Sidebar from './Sidebar'
 import { resolveSidebarItems } from '../helpers/utils'
 import LoadingPage from './LoadingPage'
 // import Password from './Password'
+import posts from '../mixins/posts'
 import { setTimeout } from 'timers'
 import moduleTransitonMixin from '../mixins/moduleTransiton'
 
 export default {
-  mixins: [moduleTransitonMixin],
+  mixins: [moduleTransitonMixin, posts],
 
   components: { Sidebar, Navbar, LoadingPage },
 

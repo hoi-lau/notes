@@ -6,7 +6,7 @@
         <li
           class="category-item"
           :class="title == item.name ? 'active': ''"
-          v-for="(item, index) in this.$categories.list"
+          v-for="(item, index) in myCategories"
           :key="index">
           <router-link :to="item.path">
             <span class="category-name">{{ item.name }}</span>
@@ -17,7 +17,7 @@
     </ModuleTransition>
 
     <!-- 博客列表 -->
-    <ModuleTransition delay="0.08">
+    <ModuleTransition delay="0.08" v-if="title !== 'all'">
       <note-abstract
         v-show="recoShowModule"
         class="list"
@@ -28,11 +28,11 @@
 
     <!-- 分页 -->
     <ModuleTransition delay="0.16">
-      <pagation
+      <Pagination
         class="pagation"
         :total="posts.length"
         :currentPage="currentPage"
-        @getCurrentPage="getCurrentPage"></pagation>
+        @getCurrentPage="getCurrentPage"></Pagination>
     </ModuleTransition>
   </Common>
 </template>
@@ -41,37 +41,52 @@
 import Common from '../components/Common'
 import NoteAbstract from '../components/NoteAbstract'
 import ModuleTransition from '../components/ModuleTransition'
+import Pagination from '../components/Pagetion'
 import pagination from '../mixins/pagination'
 import { sortPostsByStickyAndDate, filterPosts } from '../helpers/postData'
 import { getOneColor } from '../helpers/other'
 import moduleTransitonMixin from '../mixins/moduleTransiton'
 
 export default {
-  mixins: [pagination, moduleTransitonMixin],
-  components: { Common, NoteAbstract, ModuleTransition },
+  mixins: [moduleTransitonMixin, pagination],
+  components: { Common, NoteAbstract, ModuleTransition, Pagination },
 
   data () {
     return {
-      currentPage: 1
+      currentPage: 1,
+      myCategories: []
     }
   },
 
   computed: {
     // 时间降序后的博客列表
     posts () {
-      let posts = this.$currentCategories.pages
-      posts = filterPosts(posts)
-      sortPostsByStickyAndDate(posts)
-      return posts
+      if (this.$currentCategories) {
+        let posts = this.$currentCategories.pages
+        posts = filterPosts(posts)
+        sortPostsByStickyAndDate(posts)
+        return posts
+      }
+      return this.myCategories
     },
     // 标题只显示分类名称
     title () {
-      return this.$currentCategories.key
+      if (this.$currentCategories) {
+        return this.$currentCategories.key
+      }
+      return 'all'
     }
   },
 
   mounted () {
     this._setPage(this._getStoragePage())
+    this.myCategories = Array.from(this.$categories.list)
+    this.myCategories.sort((before, after) => {
+      if (before.pages.length - after.pages.length > 0) {
+        return -1
+      }
+      return 1
+    })
   },
 
   methods: {
