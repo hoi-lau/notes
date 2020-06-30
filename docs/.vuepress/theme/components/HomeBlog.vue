@@ -157,7 +157,7 @@ export default {
       this.pages = pages.length == 0 ? [] : pages
     },
     getPagesByTags (tagInfo) {
-      this.$router.push({ path: tagInfo.path })
+      this.$router.push({ path: tagInfo.path, query: { tag: tagInfo.name } })
     },
     _setPage (page) {
       this.currentPage = page

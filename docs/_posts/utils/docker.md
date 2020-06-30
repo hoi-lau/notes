@@ -285,18 +285,18 @@ RUN ["可执行文件", "参数1", "参数2"]
 
 镜像维护者的姓名邮箱
 
-## 实操
+## 使用docker
 
 ### 安装mysql
 
-```shell
+```sh
 docker search mysql
 # 在dockerhub上查找版本
 docker pull mysql:$version
 # -p 端口映射 --name 容器别名 -v 挂载卷
-docker run -p 3306:3306 --name mymysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+docker run -p 3306:3306 --name mysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql
 # 进入交互式终端
-docker exec -it dc2c72c8f961 /bin/bash
+docker exec -it mysql /bin/bash
 mysql -uroot -p
 #123456
 GRANT ALL ON *.* TO 'root'@'%';
@@ -307,85 +307,13 @@ flush privileges;
 
 ```
 
-### jenkins
-
-使用`docker`安装
-
-```sh
-# 先拉取镜像, 推荐使用这个镜像
-docker pull jenkinsci/blueocean
-
-# 创建容器卷
-sudo docker volume create jenkins-docker-certs
-sudo docker volume create jenkins-data
-
-# 可选
-# 为了在Jenkins节点内执行Docker命令，请docker:dind使用以下docker container run 命令下载并运行Docker映像
-# 关闭容器后删除容器 --rm \
-docker network create jenkins
-docker container run \
-  --rm \
-  --name jenkins-docker \
-  --detach \
-  --privileged \
-  --network jenkins \
-  --network-alias docker \
-  --env DOCKER_TLS_CERTDIR=/certs \
-  --volume jenkins-docker-certs:/certs/client \
-  --volume jenkins-data:/var/jenkins_home \
-  --publish 2376:2376 \
-  docker:dind
-# 运行Jenkins容器 --env DOCKER_HOST=tcp://docker:2376 \  --publish 50000:50000 \ --network jenkins \
-docker container run \
-  -u root \
-  --rm \
-  --name jenkins-blueocean \
-  --detach \
-  --env DOCKER_CERT_PATH=/certs/client \
-  --env DOCKER_TLS_VERIFY=1 \
-  --publish 8011:8080 \
-  --volume jenkins-data:/var/jenkins_home \
-  --volume jenkins-docker-certs:/certs/client:ro \
-  jenkinsci/blueocean
-```
-
-#### 安装插件过慢
-
-解决办法: 更改Jenkins 插件源为国内的镜像源 
-
-jenkins->系统管理->管理插件->高级--> 升级站点
-
-http://mirror.esuni.jp/jenkins/updates/update-center.json
-
-镜像源查询网址: http://mirrors.jenkins-ci.org/status.html#cn
-
-#### ssh remote & invalid privatekey
-
-可能是密钥格式问题
-
-生成Jenkins容器密钥
-
-```sh
-ssh-keygen -t rsa -b 4096 -m PEM
-```
-
-如果你的私钥有如下开头
-
-> -----BEGIN OPENSSH PRIVATE KEY-----
-
-它意味着` newer OpenSSH format `, Jenkins 无法识别这种格式私钥.
-
-正确的格式应该是这样
-
-> -----BEGIN RSA PRIVATE KEY-----
-
-[issue]( https://issues.jenkins-ci.org/browse/JENKINS-57495 )
-
 ## docker网络
 
 ## 遇到过的问题
 
-### docker: Error response from daemon: driver failed programming external connectivity on endpoint
+### docker: Error response from daemon...
+
+docker: Error response from daemon: driver failed programming external connectivity on endpoint
 
 启动一个容器时报错.原因:
 

@@ -54,9 +54,17 @@ export default {
   },
 
   beforeMount () {
-    this.filterPosts = Array.from(this.$myPosts)
     if (this.$tags.list.length > 0) {
-      this.currentTag = this.$route.query.tag ? this.$route.query.tag : this.currentTag
+      if (this.$route.query.tag && this.$route.query.tag !== this.currentTag) {
+        this.currentTag = this.$route.query.tag
+        this.$myPosts.forEach(item => {
+          if (item.frontmatter.tags.includes(this.currentTag)) {
+            this.filterPosts.push(item)
+          }
+        })
+      } else {
+        this.filterPosts = Array.from(this.$myPosts)
+      }
     }
   },
 
