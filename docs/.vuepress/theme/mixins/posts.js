@@ -3,6 +3,8 @@ import { filterPosts, sortPostsByStickyAndDate, sortPostsByDate } from '../helpe
 export default {
   computed: {
     $myPosts () {
+      console.log('---')
+      console.log(this)
       const {
         $categories: { list: articles }
       } = this

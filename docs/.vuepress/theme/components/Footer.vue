@@ -11,9 +11,9 @@
     <span>
       <i class="iconfont reco-copyright"></i>
       <a>
-        <span v-if="$themeConfig.author">© {{ $themeConfig.author }}</span>
+        <span>© {{ $themeConfig.author }}</span>
         &nbsp;&nbsp;
-        <span v-if="$themeConfig.startYear && $themeConfig.startYear != (new Date().getFullYear())">{{ $themeConfig.startYear }} - </span>
+        <span>{{ $themeConfig.startYear }} - </span>
         {{ new Date().getFullYear() }}
       </a>
     </span>
@@ -21,25 +21,14 @@
       <i class="iconfont reco-eye"></i>
       <AccessNumber idVal="/" />
     </span>
-    <p class="cyber-security" v-if="$themeConfig.cyberSecurityRecord">
-      <img src="https://img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png" alt="">
-      <a :href="$themeConfig.cyberSecurityLink || '#'">{{ $themeConfig.cyberSecurityRecord }}</a>
-    </p>
-    <!-- <Comments :isShowComments="false"/> -->
   </div>
 </template>
 
 <script>
 import AccessNumber from './comments/AccessNumber'
-import Comments from './comments/Comments'
 export default {
   components: {
-    AccessNumber, Comments
-  },
-  data () {
-    return {
-      version: '1.0.0'
-    }
+    AccessNumber
   },
   computed: {
     showAccessNumber () {

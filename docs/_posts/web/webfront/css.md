@@ -1,7 +1,7 @@
 ---
 title: css常用布局
 categories: 
- - css
+ - web
 tags:
  - layout
 publish: false

@@ -1,10 +1,8 @@
 @require './mode'
 @require './code'
 @require './custom-blocks'
-@require './arrow'
 @require './wrapper'
-@require './toc'
-@require 'mobile.styl'
+@require './mobile.styl'
 
 
 html, body
@@ -21,6 +19,31 @@ body
 .page, .password-wrapper-in
   overflow-x: hidden
   margin-left $sidebarWidth
+
+.table-of-contents
+  .badge
+    vertical-align middle
+
+.arrow
+  display inline-block
+  width 0
+  height 0
+  &.up
+    border-left 4px solid transparent
+    border-right 4px solid transparent
+    border-bottom 6px solid var(--text-color-sub)
+  &.down
+    border-left 4px solid transparent
+    border-right 4px solid transparent
+    border-top 6px solid var(--text-color-sub)
+  &.right
+    border-top 4px solid transparent
+    border-bottom 4px solid transparent
+    border-left 6px solid var(--text-color-sub)
+  &.left
+    border-top 4px solid transparent
+    border-bottom 4px solid transparent
+    border-right 6px solid var(--text-color-sub)
 
 .navbar
   position fixed

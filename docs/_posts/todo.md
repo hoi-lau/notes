@@ -8,7 +8,7 @@ publish: false
 - java io nio
 - java io nio ManagementFactory
 - Spring*,[springAOP之代理模式](https://www.cnblogs.com/teach/p/10763845.html)
-- RN
+- react RN
 - Linux shell
 - 数据结构,算法
 - mysql
@@ -23,6 +23,7 @@ publish: false
 - 发布,订阅者模式
 -  electron  typescript
 -  seo UI库
+-  首屏优化,骨架屏,小恐龙,nginx gzip
 
  https://juejin.im/post/5ebd283be51d454da74186f1?utm_source=gold_browser_extension 
 

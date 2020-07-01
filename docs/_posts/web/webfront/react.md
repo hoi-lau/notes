@@ -1,7 +1,7 @@
 ---
 title: react
 categories:
- - js
+ - web
 tags:
  - react
 publish: false

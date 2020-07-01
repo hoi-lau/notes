@@ -1,7 +1,7 @@
 ---
 title: js tips
 categories:
- - js
+ - web
 tags:
  - tips
 publish: false

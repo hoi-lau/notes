@@ -72,8 +72,8 @@
 </template>
 
 <script>
-import Navbar from './Navbar'
-import Sidebar from './Sidebar'
+// import Navbar from './Navbar'
+// import Sidebar from './Sidebar'
 import { resolveSidebarItems } from '../helpers/utils'
 import LoadingPage from './LoadingPage'
 // import Password from './Password'
@@ -84,7 +84,11 @@ import moduleTransitonMixin from '../mixins/moduleTransiton'
 export default {
   mixins: [moduleTransitonMixin, posts],
 
-  components: { Sidebar, Navbar, LoadingPage },
+  components: { 
+    'Sidebar': () => import('./Sidebar'),
+    'Navbar': () => import('./Navbar'),
+    LoadingPage
+  },
 
   props: {
     sidebar: {
