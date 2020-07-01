@@ -28,7 +28,7 @@ mybatis:
 
 ### application-dev.yml 示例
 
-```yml
+```yaml
 server:
   port: 8009
 #logback配置文件

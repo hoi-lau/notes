@@ -90,7 +90,9 @@ export default {
 
   data () {
     return {
-      isHasKey: true
+      isHasKey: true,
+      zIndex: 1000,
+      exsitCount: 0
     }
   },
 
@@ -214,26 +216,46 @@ export default {
     copyCode(e) {
       if (e.srcElement.textContent === 'copy' && e.srcElement.parentNode.classList.contains('line-numbers-mode')) {
         const index = e.srcElement.dataset.index
-        if (!window.getSelection) {
+        if (window.getSelection) {
           const range = document.createRange()
           range.selectNode(e.srcElement.parentNode.firstChild)
           window.getSelection().addRange(range)
           try {
             const successful = document.execCommand('copy')
-            const msg = successful ? 'successful' : 'unsuccessful'
-          } catch(err) {}
+            successful ? this.showMessage('copy success!', 'success') : this.showMessage('copy failed!', 'warn')
+          } catch(err) {
+            console.log(err)
+          }
           window.getSelection().removeAllRanges();
         } else if (navigator.clipboard) {
           const range = document.createRange()
           range.selectNode(e.srcElement.parentNode.firstChild)
           // window.getSelection().addRange(range)
-          const promise = navigator.clipboard.write([new ClipboardItem(e.srcElement.parentNode.firstChild)])
-          // const promise = navigator.clipboard.write(e.srcElement.parentNode.firstChild.textContent)
+          // const promise = navigator.clipboard.write([new ClipboardItem({'text/plain': e.srcElement.parentNode.firstChild})])
+          const promise = navigator.clipboard.writeText(e.srcElement.parentNode.firstChild.textContent)
           promise.then(res => {
           }).catch(error => {
           })
         }
       }
+    },
+    showMessage(text = 'success', type = 'success') {
+      const map = {
+        success: 'icon-chenggong',
+        warn: 'icon-jinggao-copy'
+      }
+      const node = document.createElement('div')
+      node.style.cssText = `z-index: ${this.zIndex};top: ${(this.exsitCount + 1) * 64}px`
+      node.classList.add('el-message')
+      node.classList.add(`el-message-${type}`)
+      node.innerHTML = `<i class="iconfont ${map[type]} message-status"></i><p style="margin: 0">${text}</p>`
+      document.body.appendChild(node)
+      this.exsitCount++
+      const timer = setTimeout(() => {
+        document.body.removeChild(node)
+        this.exsitCount--
+        clearTimeout(timer)
+      }, 2000)
     }
   }
 }
@@ -271,6 +293,33 @@ function flatten (items, res) {
 
 <style lang="stylus">
 @require '../styles/wrapper.styl'
+.el-message
+  min-width: 380px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid #ebeef5;
+  position: fixed;
+  left: 50%;
+  top: 4rem;
+  transform: translateX(-50%);
+  background-color: #edf2fc;
+  transition: opacity .3s,transform .4s,top .4s;
+  overflow: hidden;
+  padding: 15px 15px 15px 20px;
+  display: flex;
+  align-items: center;
+
+.el-message-warn
+  background-color: #fdf6ec;
+  border-color: #faecd8;
+
+.el-message-success
+  background-color: #f0f9eb;
+  border-color: #e1f3d8;
+
+.message-status
+  margin-right: 1rem
+
 div[class*="language-"] .copy
   position: absolute
   z-index: 3

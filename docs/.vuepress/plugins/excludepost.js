@@ -11,8 +11,6 @@ module.exports = (options, ctx) => {
           i--
         }
       }
-      console.log('--')
-      console.log(this)
       // ...
     },
     updated() {
