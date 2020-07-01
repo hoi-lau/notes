@@ -71,12 +71,10 @@ for (c in str) {
 
 ``` kotlin
 val i = 10
-println("i = $i") // 输出“i = 10”
+println("i = $i") // 输出"i = 10"
 
 val s = "123"
-println("$s.length is ${s.length}") // 输出“abc.length is 3”
-
-val price = """${'$'}9.99""" // 如果想要打印$
+println("$s.length is ${s.length}") // 输出"abc.length is 3"
 ```
 
 ## 基本语法

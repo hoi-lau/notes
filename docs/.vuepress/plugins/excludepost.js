@@ -11,12 +11,14 @@ module.exports = (options, ctx) => {
           i--
         }
       }
+      console.log('--')
+      console.log(this)
       // ...
     },
     updated() {
     },
     async generated (pagePaths) {
-    },
+    }
     // clientRootMixin: path.resolve(__dirname, '../theme/mixins/posts.js')
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <main class="page">
+  <main class="page" @click="copyCode($event)">
     <ModuleTransition>
       <div v-show="recoShowModule && $page.title" class="page-title">
         <h1>{{$page.title}}</h1>
@@ -9,7 +9,7 @@
     </ModuleTransition>
 
     <ModuleTransition delay="0.08">
-      <Content v-show="recoShowModule" class="theme-reco-content" />
+      <Content v-show="recoShowModule" class="theme-reco-content"/>
     </ModuleTransition>
 
     <ModuleTransition delay="0.16">
@@ -169,6 +169,20 @@ export default {
     }
   },
 
+  mounted() {
+    if (navigator.clipboard) {
+      const preList = Array.from(document.querySelectorAll('div[class*="language-"] pre'))
+      preList.forEach((el, index) => {
+        const span = document.createElement('span')
+        span.classList.add('copy')
+        span.textContent = 'copy'
+        span.title = 'copy code to clipboard'
+        span.dataset['index'] = index
+        el.parentNode.appendChild(span)
+      })
+    }
+  },
+
   methods: {
     createEditLink (repo, docsRepo, docsDir, docsBranch, path) {
       const bitbucket = /bitbucket.org/
@@ -196,6 +210,30 @@ export default {
         (docsDir ? docsDir.replace(endingSlashRE, '') + '/' : '') +
         path
       )
+    },
+    copyCode(e) {
+      if (e.srcElement.textContent === 'copy' && e.srcElement.parentNode.classList.contains('line-numbers-mode')) {
+        const index = e.srcElement.dataset.index
+        if (!window.getSelection) {
+          const range = document.createRange()
+          range.selectNode(e.srcElement.parentNode.firstChild)
+          window.getSelection().addRange(range)
+          try {
+            const successful = document.execCommand('copy')
+            const msg = successful ? 'successful' : 'unsuccessful'
+          } catch(err) {}
+          window.getSelection().removeAllRanges();
+        } else if (navigator.clipboard) {
+          const range = document.createRange()
+          range.selectNode(e.srcElement.parentNode.firstChild)
+          // window.getSelection().addRange(range)
+          const promise = navigator.clipboard.write([new ClipboardItem(e.srcElement.parentNode.firstChild)])
+          // const promise = navigator.clipboard.write(e.srcElement.parentNode.firstChild.textContent)
+          promise.then(res => {
+          }).catch(error => {
+          })
+        }
+      }
     }
   }
 }
@@ -233,6 +271,14 @@ function flatten (items, res) {
 
 <style lang="stylus">
 @require '../styles/wrapper.styl'
+div[class*="language-"] .copy
+  position: absolute
+  z-index: 3
+  top: 0.8em
+  right: 1em
+  font-size: 0.75rem
+  cursor pointer
+  color: #fff
 
 .page
   padding-top 5rem

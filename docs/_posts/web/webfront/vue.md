@@ -1,5 +1,7 @@
 ---
 title: vue
+categories:
+ - web
 publish: false
 ---
 
@@ -33,3 +35,4 @@ https://www.iteye.com/blog/globeeip-1236167
 ### 基于token认证
 
 ### 基于session认证
+
