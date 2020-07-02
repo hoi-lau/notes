@@ -174,14 +174,17 @@ export default {
     this.$nextTick(() => {
       if (navigator.clipboard) {
         const preList = Array.from(document.querySelectorAll('div[class*="language-"] pre'))
-        preList.forEach((el, index) => {
-          const span = document.createElement('span')
-          span.classList.add('copy')
-          span.textContent = 'copy'
-          span.title = 'copy code to clipboard'
-          span.dataset['index'] = index
-          el.parentNode.appendChild(span)
-        })
+        try {
+          preList.forEach((el, index) => {
+            const span = document.createElement('span')
+            span.classList.add('copy')
+            span.textContent = 'copy'
+            span.title = 'copy code to clipboard'
+            span.dataset['index'] = index
+            el.parentNode.appendChild(span)
+          })
+        } catch (error) {
+        }
       }
     })
   },
@@ -218,6 +221,7 @@ export default {
       if (e.srcElement.textContent === 'copy' && e.srcElement.parentNode.classList.contains('line-numbers-mode')) {
         const index = e.srcElement.dataset.index
         if (document.queryCommandSupported('copy')) {
+          window.getSelection().removeAllRanges();
           const range = document.createRange()
           range.selectNode(e.srcElement.parentNode.firstChild)
           window.getSelection().addRange(range)
@@ -229,8 +233,6 @@ export default {
           }
           window.getSelection().removeAllRanges();
         } else if (navigator.clipboard) {
-          const range = document.createRange()
-          range.selectNode(e.srcElement.parentNode.firstChild)
           const promise = navigator.clipboard.writeText(e.srcElement.parentNode.firstChild.textContent)
           promise.then(res => {
             this.showMessage('copy success!', 'success')

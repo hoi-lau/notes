@@ -17,6 +17,8 @@ tags:
 ```js
 // 判断是否支持copy
 if (document.queryCommandSupported('copy')) {
+    // 移除所有的range
+    window.getSelection().removeAllRanges();
     const range = document.createRange()
     // 要复制的内容dom节点
     range.selectNode(document.getElementById('target'))
@@ -32,7 +34,9 @@ if (document.queryCommandSupported('copy')) {
 
 **功能强大,可以复制链接,表格,样式,图片...而不仅仅是纯文本**
 
-> 点击上方代码块右上角'copy',粘贴到类markdown软件中
+点击上方代码块右上角'copy',粘贴到类markdown软件中,效果如图:
+
+<img src="http://81.68.94.4/images/web/test-execCommand.png">
 
 ## navigator.clipboard
 
@@ -72,9 +76,11 @@ clipboard有两个api可以将数据写入到剪切板
 >
 > Uncaught (in promise) DOMException: Document is not focused.
 >
->  如异常消息所述，使文档处于主动集中状态才能使用此API。 关掉F12就不会有这个错误了如果成功,这个canvas已经复制到了剪切板,粘贴到类word文档软件:
+>  如异常消息所述，使文档处于主动集中状态才能使用此API。 关掉F12就不会有这个错误了
 
-<img src="http://81.68.94.4/images/web/test-clipboard.png">
+如果成功,这个canvas已经复制到了剪切板,粘贴到类word文档软件,如图:
+
+<img src="http://81.68.94.4/images/web/test-clipboard.png" alt="效果图">
 
 ### writeText
 
@@ -87,8 +93,6 @@ navigator.permissions.query({ name: 'clipboard-write' }).then(result => {
     }
 }).catch(err => {})
 ```
-
-
 
 参考链接
 
