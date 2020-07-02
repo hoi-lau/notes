@@ -4,7 +4,6 @@
     :class="pageClasses"
     @touchstart="onTouchStart"
     @touchend="onTouchEnd">
-    <div v-if="!absoluteEncryption">
       <transition name="fade">
         <LoadingPage v-show="firstLoad" class="loading-wrapper" />
       </transition>
@@ -21,6 +20,7 @@
           @click="toggleSidebar(false)"></div>
 
         <Sidebar
+          v-if="sidebar"
           :items="sidebarItems"
           @toggle-sidebar="toggleSidebar">
           <slot
@@ -36,38 +36,6 @@
           <slot></slot>
         </div>
       </div>
-    </div>
-    <div v-else>
-      <transition name="fade">
-        <LoadingPage v-if="firstLoad" />
-        <!-- <Password v-else-if="!isHasKey" /> -->
-        <div v-else>
-          <Navbar
-          v-if="shouldShowNavbar"
-          @toggle-sidebar="toggleSidebar"/>
-
-          <div
-            class="sidebar-mask"
-            @click="toggleSidebar(false)"></div>
-
-          <Sidebar
-            :items="sidebarItems"
-            @toggle-sidebar="toggleSidebar">
-            <slot
-              name="sidebar-top"
-              slot="top"/>
-            <slot
-              name="sidebar-bottom"
-              slot="bottom"/>
-          </Sidebar>
-
-          <!-- <Password v-if="!isHasPageKey" :isPage="true"></Password> -->
-          <!-- <div v-else> -->
-          <slot></slot>
-          <!-- </div> -->
-        </div>
-      </transition>
-    </div>
   </div>
 </template>
 
@@ -107,9 +75,6 @@ export default {
   },
 
   computed: {
-    absoluteEncryption () {
-      return false
-    },
 
     shouldShowNavbar () {
       const { themeConfig } = this.$site

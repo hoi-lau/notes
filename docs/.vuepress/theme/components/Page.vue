@@ -174,17 +174,14 @@ export default {
     this.$nextTick(() => {
       if (navigator.clipboard) {
         const preList = Array.from(document.querySelectorAll('div[class*="language-"] pre'))
-        try {
-          preList.forEach((el, index) => {
-            const span = document.createElement('span')
-            span.classList.add('copy')
-            span.textContent = 'copy'
-            span.title = 'copy code to clipboard'
-            span.dataset['index'] = index
-            el.parentNode.appendChild(span)
-          })
-        } catch (error) {
-        }
+        preList.forEach((el, index) => {
+          const span = document.createElement('span')
+          span.classList.add('copy')
+          span.textContent = 'copy'
+          span.title = 'copy code to clipboard'
+          span.dataset['index'] = index
+          el.parentNode.appendChild(span)
+        })
       }
     })
   },

@@ -1,5 +1,5 @@
 <template>
-  <Common>
+  <Common :sidebar="!$frontmatter.home">
     <HomeBlog v-if="$frontmatter.home"/>
     <Page v-else :sidebar-items="sidebarItems"/>
     <Footer v-if="$frontmatter.home" class="footer" />
