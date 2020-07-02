@@ -68,7 +68,6 @@
         </p>
       </div>
     </ModuleTransition>
-
     <ModuleTransition delay="0.32">
       <Comments v-if="recoShowModule" :isShowComments="shouldShowComments"/>
     </ModuleTransition>
@@ -172,17 +171,19 @@ export default {
   },
 
   mounted() {
-    if (navigator.clipboard) {
-      const preList = Array.from(document.querySelectorAll('div[class*="language-"] pre'))
-      preList.forEach((el, index) => {
-        const span = document.createElement('span')
-        span.classList.add('copy')
-        span.textContent = 'copy'
-        span.title = 'copy code to clipboard'
-        span.dataset['index'] = index
-        el.parentNode.appendChild(span)
-      })
-    }
+    this.$nextTick(() => {
+      if (navigator.clipboard) {
+        const preList = Array.from(document.querySelectorAll('div[class*="language-"] pre'))
+        preList.forEach((el, index) => {
+          const span = document.createElement('span')
+          span.classList.add('copy')
+          span.textContent = 'copy'
+          span.title = 'copy code to clipboard'
+          span.dataset['index'] = index
+          el.parentNode.appendChild(span)
+        })
+      }
+    })
   },
 
   methods: {
@@ -216,7 +217,7 @@ export default {
     copyCode(e) {
       if (e.srcElement.textContent === 'copy' && e.srcElement.parentNode.classList.contains('line-numbers-mode')) {
         const index = e.srcElement.dataset.index
-        if (window.getSelection) {
+        if (document.queryCommandSupported('copy')) {
           const range = document.createRange()
           range.selectNode(e.srcElement.parentNode.firstChild)
           window.getSelection().addRange(range)
@@ -230,11 +231,11 @@ export default {
         } else if (navigator.clipboard) {
           const range = document.createRange()
           range.selectNode(e.srcElement.parentNode.firstChild)
-          // window.getSelection().addRange(range)
-          // const promise = navigator.clipboard.write([new ClipboardItem({'text/plain': e.srcElement.parentNode.firstChild})])
           const promise = navigator.clipboard.writeText(e.srcElement.parentNode.firstChild.textContent)
           promise.then(res => {
+            this.showMessage('copy success!', 'success')
           }).catch(error => {
+            this.showMessage('copy failed!', 'warn')
           })
         }
       }
@@ -255,7 +256,7 @@ export default {
         document.body.removeChild(node)
         this.exsitCount--
         clearTimeout(timer)
-      }, 2000)
+      }, 2200)
     }
   }
 }
@@ -301,14 +302,36 @@ function flatten (items, res) {
   position: fixed;
   left: 50%;
   top: 4rem;
-  transform: translateX(-50%);
   background-color: #edf2fc;
-  transition: opacity .3s,transform .4s,top .4s;
   overflow: hidden;
   padding: 15px 15px 15px 20px;
   display: flex;
   align-items: center;
+  animation:mymove 2.5s 1;
+  -moz-animation:mymove 2.5s 1; /* Firefox */
+  -webkit-animation:mymove 2.5s 1; /* Safari and Chrome */
+  -o-animation:mymove 2.5s 1; 
 
+@keyframes mymove {
+  0% {
+    opacity: 0;
+    transform:translateY(-40px);
+  }
+  20% {
+    opacity: 1;
+    transform:translateY(0);
+  }
+  80% {
+    opacity: 1;
+    transform:translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform:translateY(-64px);
+  }
+}
+.icon-chenggong
+  color #67c23a;
 .el-message-warn
   background-color: #fdf6ec;
   border-color: #faecd8;
