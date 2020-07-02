@@ -171,19 +171,14 @@ export default {
   },
 
   mounted() {
-    this.$nextTick(() => {
-      if (navigator.clipboard) {
-        const preList = Array.from(document.querySelectorAll('div[class*="language-"] pre'))
-        preList.forEach((el, index) => {
-          const span = document.createElement('span')
-          span.classList.add('copy')
-          span.textContent = 'copy'
-          span.title = 'copy code to clipboard'
-          span.dataset['index'] = index
-          console.log(el.parentNode)
-          el.parentNode.appendChild(span)
-        })
-      }
+    const preList = Array.from(document.querySelectorAll('div[class*="language-"] pre'))
+    preList.forEach((el, index) => {
+      const span = document.createElement('span')
+      span.classList.add('copy')
+      span.textContent = 'copy'
+      span.title = 'copy code to clipboard'
+      span.dataset['index'] = index
+      el.parentNode.appendChild(span)
     })
   },
 
@@ -216,27 +211,30 @@ export default {
       )
     },
     copyCode(e) {
-      if (e.srcElement.textContent === 'copy' && e.srcElement.parentNode.classList.contains('line-numbers-mode')) {
+      if (e.srcElement.textContent === 'copy' && e.srcElement.parentElement.classList.contains('line-numbers-mode')) {
         const index = e.srcElement.dataset.index
         if (document.queryCommandSupported('copy')) {
-          window.getSelection().removeAllRanges();
+          // window.getSelection().removeAllRanges()
+          const selection = window.getSelection()
+          selection.removeAllRanges()
           const range = document.createRange()
-          range.selectNode(e.srcElement.parentNode.firstChild)
-          window.getSelection().addRange(range)
+          // 为什么不是e.srcElement.parentElement.firstChild?思考一下(copy出来多了一个1)
+          range.selectNode(e.srcElement.parentElement.firstChild.firstChild)
+          selection.addRange(range)
           try {
             const successful = document.execCommand('copy')
             successful ? this.showMessage('copy success!', 'success') : this.showMessage('copy failed!', 'warn')
-          } catch(err) {
-            console.log(err)
-          }
-          window.getSelection().removeAllRanges();
+          } catch(err) {}
+          selection.removeAllRanges()
         } else if (navigator.clipboard) {
-          const promise = navigator.clipboard.writeText(e.srcElement.parentNode.firstChild.textContent)
+          const promise = navigator.clipboard.writeText(e.srcElement.parentElement.firstChild.textContent)
           promise.then(res => {
             this.showMessage('copy success!', 'success')
           }).catch(error => {
             this.showMessage('copy failed!', 'warn')
           })
+        } else {
+          this.showMessage('copy failed!', 'warn')
         }
       }
     },
@@ -331,7 +329,7 @@ function flatten (items, res) {
   }
 }
 .icon-chenggong
-  color #67c23a;
+  color: #67c23a!important;
 .el-message-warn
   background-color: #fdf6ec;
   border-color: #faecd8;

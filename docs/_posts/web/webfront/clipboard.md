@@ -40,7 +40,9 @@ if (document.queryCommandSupported('copy')) {
 
 ## navigator.clipboard
 
-> ie浏览器不支持clipboard
+> ie浏览器不支持clipboard.
+>
+> 为了安全,域名必须是127.0.0.1(localhost) 或者 https
 
 clipboard有两个api可以将数据写入到剪切板
 
