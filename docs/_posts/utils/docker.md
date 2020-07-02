@@ -307,6 +307,16 @@ flush privileges;
 
 ```
 
+### 安装nginx
+
+```sh
+# 宿主机如果nginx配置文件与容器nginx不一致将无法挂载配置文件
+# 所以要先将容器内/etc/nginx/nginx.conf 拷贝到宿主机/data/nginx/nginx.conf
+docker run -p 80:80 --name nginx -v /data/nginx/www:/usr/share/nginx/html -v /data/nginx/nginx.conf:/etc/nginx/nginx.conf -v /data/nginx/logs:/var/log/nginx -d nginx
+```
+
+
+
 ## docker网络
 
 ## 遇到过的问题

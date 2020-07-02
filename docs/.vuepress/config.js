@@ -3,7 +3,7 @@ const conf = process.env.NODE_ENV === 'development' ? require('./dev.themeConfig
 module.exports = {
   base: '/',
   title: 'im.liukai',
-  description: 'personal blog',
+  description: '只争朝夕,不负韶华',
   head: [
     ['link', { rel: 'icon', href: conf.faviconIco }]
   ],
