@@ -180,6 +180,7 @@ export default {
           span.textContent = 'copy'
           span.title = 'copy code to clipboard'
           span.dataset['index'] = index
+          console.log(el.parentNode)
           el.parentNode.appendChild(span)
         })
       }
