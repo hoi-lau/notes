@@ -21,6 +21,8 @@ gradle/
 /build/
 !gradle/wrapper/gradle-wrapper.jar
 
+# vscode
+.vscode/
 # IntelliJ IDEA
 .idea/
 *.iws
