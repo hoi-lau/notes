@@ -20,6 +20,7 @@ module.exports = {
     author: 'liukai',
     startYear: '2018',
     sidebar: 'auto',
+    email: 'im.liukai2333@gmail.com',
     logo: conf.faviconIco,
     bgImg: conf.bgImg,
     nav: [
