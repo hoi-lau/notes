@@ -44,6 +44,3 @@ node_modules/
 
 # MacOS folder file
 .DS_Store
-
-# 自定义文件
-favicon.ico

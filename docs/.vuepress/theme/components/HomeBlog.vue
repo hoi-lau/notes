@@ -60,7 +60,7 @@
     </ModuleTransition>
 
     <ModuleTransition delay="0.24">
-      <Content v-show="recoShowModule" class="home-center" custom/>
+      <Content v-show="recoShowModule && !$page.frontmatter" class="home-center" custom/>
     </ModuleTransition>
   </div>
 </template>

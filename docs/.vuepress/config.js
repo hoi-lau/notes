@@ -2,7 +2,7 @@ const conf = process.env.NODE_ENV === 'development' ? require('./dev.themeConfig
 // console.log(conf)
 module.exports = {
   base: '/',
-  title: 'im.liuk | 关注web技术的个人博客',
+  title: 'im.liuk | 关注web技术',
   description: '只争朝夕,不负韶华',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }]

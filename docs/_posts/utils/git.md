@@ -55,7 +55,7 @@ tags:
 
 ##### git clone时提示不支持https:删除clone后的空格然后补全
 
-## .gitignore
+## .gitignore示例
 
 ```
 # package files
