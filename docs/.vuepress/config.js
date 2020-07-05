@@ -2,10 +2,10 @@ const conf = process.env.NODE_ENV === 'development' ? require('./dev.themeConfig
 // console.log(conf)
 module.exports = {
   base: '/',
-  title: 'im.liukai',
+  title: 'im.liuk | 关注web技术的个人博客',
   description: '只争朝夕,不负韶华',
   head: [
-    ['link', { rel: 'icon', href: conf.faviconIco }]
+    ['link', { rel: 'icon', href: '/favicon.ico' }]
   ],
   port: 4000,
   dest: '.vuepress/dist',
@@ -20,8 +20,8 @@ module.exports = {
     author: 'liukai',
     startYear: '2018',
     sidebar: 'auto',
-    logo: conf.faviconIco,
-    bgImg: conf.bgImg,
+    bgImg: 'https://s1.ax1x.com/2020/07/05/USrh1P.jpg',
+    logo: '/favicon.ico',
     nav: [
       {text: 'Home', link: '/', icon: 'icon-home_n'},
       {text: 'Category', link: '/category/', icon: 'icon-icon-goodscategory'},

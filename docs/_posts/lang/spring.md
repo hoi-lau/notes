@@ -5,6 +5,7 @@ categories:
  - java
 tags:
  - spring
+publish: false
 ---
 
 ## springboot initializr

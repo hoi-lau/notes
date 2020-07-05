@@ -293,12 +293,12 @@ function flatten (items, res) {
 <style lang="stylus">
 @require '../styles/wrapper.styl'
 .el-message
-  min-width: 380px;
+  min-width: 200px;
   box-sizing: border-box;
   border-radius: 4px;
   border: 1px solid #ebeef5;
   position: fixed;
-  left: 50%;
+  left: calc(50% - 100px);
   top: 4rem;
   background-color: #edf2fc;
   overflow: hidden;

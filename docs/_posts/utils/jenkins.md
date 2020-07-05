@@ -8,7 +8,7 @@ tags:
  - docker
 ---
 
-> 每次写完博客后都要打包手动上传到服务器,当修改过于频繁时,费时费力还容易出错,为了解放我的双手👐,花了两天时间研究了一下自动部署,旨在提交代码后自动完成测试,打包,部署,以及反馈结果.
+> 日常开发完后都要打包手动上传到服务器,当修改过于频繁时,费时费力还容易出错,为了解放我的双手👐,花了两天时间研究了一下自动部署,旨在提交代码后自动完成测试,打包,部署,以及反馈结果.
 
 ## Jenkins是什么
 
@@ -87,7 +87,7 @@ cat ~/.ssh/id_rsa
 
 manage Jenkins->configure system->找到 Publish over SSH
 
-<img src="http://81.68.94.4/images/jenkins/jenkins-ssh-server.png">
+<img src="https://s1.ax1x.com/2020/07/05/UShWV0.png" alt="jenkins ssh server" border="0">
 
 > 配置ssh server完成后测试连接出现错误: ssh remote & invalid privatekey
 >
@@ -97,7 +97,7 @@ manage Jenkins->configure system->找到 Publish over SSH
 
 manage jenkins-> global tool configuration
 
-<img src="http://81.68.94.4/images/jenkins/jenkins-nodejs.png">
+<img src="https://s1.ax1x.com/2020/07/05/UShfaV.png" alt="jenkins nodejs" border="0">
 
 jenkins会自动配置nodejs环境
 
@@ -111,7 +111,7 @@ jenkins会自动配置nodejs环境
 
 选择freestyle project-> 配置源码管理 ->
 
-<img src="http://81.68.94.4/images/jenkins/jenkins-build-triggers.png">
+<img src="https://s1.ax1x.com/2020/07/05/USh2bq.png" alt="jenkins build triggers" border="0">
 
 -> 配置github webhook(项目->settings->add webhooks->payload填上jenkins服务器地址).配置后每次push代码到github,github都会发送一个post请求到jenkins服务器,jenkins服务器就会去构建job,所以jenkins服务器必须是外网可以访问的(或者是git服务器可以访问到的).
 
