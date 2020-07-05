@@ -12,30 +12,6 @@
       <Content v-show="recoShowModule" class="theme-reco-content"/>
     </ModuleTransition>
 
-    <ModuleTransition delay="0.16">
-      <footer v-show="recoShowModule" class="page-edit">
-        <div
-          class="edit-link"
-          v-if="editLink"
-        >
-          <a
-            :href="editLink"
-            target="_blank"
-            rel="noopener noreferrer"
-          >{{ editLinkText }}</a>
-          <OutboundLink/>
-        </div>
-
-        <div
-          class="last-updated"
-          v-if="lastUpdated"
-        >
-          <span class="prefix">{{ lastUpdatedText }}: </span>
-          <span class="time">{{ lastUpdated }}</span>
-        </div>
-      </footer>
-    </ModuleTransition>
-
     <ModuleTransition delay="0.24">
       <div class="page-nav" v-if="recoShowModule && (prev || next)">
         <p class="inner">
@@ -49,7 +25,7 @@
               class="prev"
               :to="prev.path"
             >
-              {{ prev.title || prev.path }}
+              {{ prev.title }}
             </router-link>
           </span>
 
@@ -61,7 +37,7 @@
               v-if="next"
               :to="next.path"
             >
-              {{ next.title || next.path }}
+              {{ next.title }}
             </router-link>
             →
           </span>
@@ -76,7 +52,6 @@
 
 <script>
 import PageInfo from './PageInfo'
-import { resolvePage, outboundRE, endingSlashRE } from '../util'
 import ModuleTransition from './ModuleTransition'
 import moduleTransitonMixin from '../mixins/moduleTransiton'
 import Comments from './comments/Comments'
@@ -84,9 +59,7 @@ import posts from '../mixins/posts'
 export default {
   mixins: [moduleTransitonMixin, posts],
   components: { PageInfo, ModuleTransition, Comments},
-
   props: ['sidebarItems'],
-
   data () {
     return {
       isHasKey: true,
@@ -114,59 +87,19 @@ export default {
       }
       return false
     },
-    lastUpdated () {
-      return this.$page.lastUpdated
-    },
-    lastUpdatedText () {
-      if (typeof this.$themeLocaleConfig.lastUpdated === 'string') {
-        return this.$themeLocaleConfig.lastUpdated
-      }
-      if (typeof this.$themeConfig.lastUpdated === 'string') {
-        return this.$themeConfig.lastUpdated
-      }
-      return 'Last Updated'
-    },
     prev () {
-      const prev = this.$frontmatter.prev
-      if (prev === false) {
+      const index = this.$myPosts.indexOf(this.$page)
+      if (index === 0)  {
         return
-      } else if (prev) {
-        return resolvePage(this.$myPosts, prev, this.$route.path)
-      } else {
-        return resolvePrev(this.$page, this.sidebarItems)
       }
+      return this.$myPosts[index - 1]
     },
     next () {
-      const next = this.$frontmatter.next
-      if (next === false) {
+      const index = this.$myPosts.indexOf(this.$page)
+      if (index === this.$myPosts.length - 1) {
         return
-      } else if (next) {
-        return resolvePage(this.$myPosts, next, this.$route.path)
-      } else {
-        return resolveNext(this.$page, this.sidebarItems)
       }
-    },
-    editLink () {
-      if (this.$frontmatter.editLink === false) {
-        return false
-      }
-      const {
-        repo,
-        editLinks,
-        docsDir = '',
-        docsBranch = 'master',
-        docsRepo = repo
-      } = this.$themeConfig
-
-      if (docsRepo && editLinks && this.$page.relativePath) {
-        return this.createEditLink(repo, docsRepo, docsDir, docsBranch, this.$page.relativePath)
-      }
-      return ''
-    },
-    editLinkText () {
-      return (
-        this.$themeLocaleConfig.editLinkText || this.$themeConfig.editLinkText || `Edit this page`
-      )
+      return this.$myPosts[index + 1]
     }
   },
 
@@ -183,33 +116,6 @@ export default {
   },
 
   methods: {
-    createEditLink (repo, docsRepo, docsDir, docsBranch, path) {
-      const bitbucket = /bitbucket.org/
-      if (bitbucket.test(repo)) {
-        const base = outboundRE.test(docsRepo)
-          ? docsRepo
-          : repo
-        return (
-          base.replace(endingSlashRE, '') +
-           `/src` +
-           `/${docsBranch}/` +
-           (docsDir ? docsDir.replace(endingSlashRE, '') + '/' : '') +
-           path +
-           `?mode=edit&spa=0&at=${docsBranch}&fileviewer=file-view-default`
-        )
-      }
-
-      const base = outboundRE.test(docsRepo)
-        ? docsRepo
-        : `https://github.com/${docsRepo}`
-      return (
-        base.replace(endingSlashRE, '') +
-        `/edit` +
-        `/${docsBranch}/` +
-        (docsDir ? docsDir.replace(endingSlashRE, '') + '/' : '') +
-        path
-      )
-    },
     copyCode(e) {
       if (e.srcElement.textContent === 'copy' && e.srcElement.parentElement.classList.contains('line-numbers-mode')) {
         const index = e.srcElement.dataset.index

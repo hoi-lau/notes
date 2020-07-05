@@ -26,7 +26,7 @@
         :class="open ? 'down' : 'right'">
       </span>
     </router-link>
-
+    
     <p
       v-else
       class="sidebar-heading"
@@ -40,7 +40,7 @@
         :class="open ? 'down' : 'right'">
       </span>
     </p>
-
+ 
     <DropdownTransition>
       <SidebarLinks
         class="sidebar-group-items"

@@ -1,5 +1,5 @@
 <template>
-  <Common  class="tags-wrapper" :sidebar="false">
+  <Common  class="tags-wrapper">
     <!-- 标签集合 -->
     <ModuleTransition>
       <TagList

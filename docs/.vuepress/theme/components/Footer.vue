@@ -1,21 +1,18 @@
 <template>
   <div class="footer-wrapper">
     <span>
-      <!-- <i class="iconfont reco-theme"></i> -->
-      <a target="blank" href="https://www.vuepress.cn/">powered by vuepress.</a>
-    </span>
-    <span v-if="$themeConfig.record">
-      <i class="iconfont reco-beian"></i>
-      <a :href="$themeConfig.recordLink || '#'">{{ $themeConfig.record }}</a>
+      <a target="_blank" href="https://www.vuepress.cn/">powered by vuepress.</a>
     </span>
     <span>
-      <i class="iconfont reco-copyright"></i>
       <a>
         <span>© {{ $themeConfig.author }}</span>
         &nbsp;&nbsp;
         <span>{{ $themeConfig.startYear }} - </span>
         {{ new Date().getFullYear() }}
       </a>
+    </span>
+    <span>
+      <a :href="'mailto:' + $themeConfig.email">{{ $themeConfig.email }}</a>
     </span>
     <span v-show="showAccessNumber">
       <i class="iconfont reco-eye"></i>
@@ -33,11 +30,9 @@ export default {
   computed: {
     showAccessNumber () {
       const {
-        $themeConfig: { valineConfig },
-        $themeLocaleConfig: { valineConfig: valineLocalConfig }
+        $themeConfig: { valineConfig }
       } = this
-
-      const vc = valineLocalConfig || valineConfig
+      const vc = valineConfig
       if (vc && vc.visitor != false) {
         return true
       }

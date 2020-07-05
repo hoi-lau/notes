@@ -22,3 +22,9 @@ publish: false
 ### grid(网格布局)
 
 兼容性太差!!!
+
+## 让滚动更丝滑
+
+scroll-behavior smooth
+
+scrollIntoView

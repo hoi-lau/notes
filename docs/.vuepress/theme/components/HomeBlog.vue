@@ -176,6 +176,9 @@ export default {
 
   .hero {
     position relative
+    display flex
+    justify-content center
+    flex-direction column
     .mask {
       position absolute
       top 0
@@ -202,7 +205,6 @@ export default {
     }
 
     h1 {
-      margin:7rem auto 1.8rem;
       font-size: 2.5rem;
     }
 
@@ -211,7 +213,7 @@ export default {
     }
 
     .description {
-      margin: 1.8rem auto;
+      margin 0
       font-size: 1.6rem;
       line-height: 1.3;
     }
@@ -288,19 +290,14 @@ export default {
     padding-right: 1.5rem;
     .hero {
       margin 0 -1.5rem
-      height 450px
+      height 250px!important
       img {
         max-height: 210px;
         margin: 2rem auto 1.2rem;
       }
 
       h1 {
-        margin: 6rem auto 1.8rem ;
         font-size: 2rem;
-      }
-
-      h1, .description, .action {
-        // margin: 1.2rem auto;
       }
 
       .description {
@@ -327,19 +324,14 @@ export default {
 
     .hero {
       margin 0 -1.5rem
-      height 350px
+      height 150px!important
       img {
         max-height: 210px;
         margin: 2rem auto 1.2rem;
       }
 
       h1 {
-        margin: 6rem auto 1.8rem ;
         font-size: 2rem;
-      }
-
-      h1, .description, .action {
-        // margin: 1.2rem auto;
       }
 
       .description {

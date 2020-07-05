@@ -1,10 +1,5 @@
 <template>
   <div>
-    <!-- <i
-      class="iconfont reco-account"
-      v-if="pageInfo.frontmatter.author || $themeConfig.author || $site.title">
-      <span>{{ pageInfo.frontmatter.author || $themeConfig.author || $site.title }}</span>
-    </i> -->
     <i
       v-if="pageInfo.frontmatter.date"
       class="iconfont icon-shijian">

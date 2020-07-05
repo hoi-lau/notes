@@ -12,8 +12,7 @@ export default {
         $page,
         $site,
         $route,
-        $themeConfig,
-        $themeLocaleConfig
+        $themeConfig
       },
       props: {
         item,
@@ -32,13 +31,11 @@ export default {
 
     const configDepth = $page.frontmatter.sidebarDepth ||
       sidebarDepth ||
-      $themeLocaleConfig.sidebarDepth ||
       $themeConfig.sidebarDepth
 
     const maxDepth = configDepth == null ? 1 : configDepth
 
-    const displayAllHeaders = $themeLocaleConfig.displayAllHeaders ||
-      $themeConfig.displayAllHeaders
+    const displayAllHeaders = $themeConfig.displayAllHeaders
 
     if (item.type === 'auto') {
       return [link, renderChildren(h, item.children, item.basePath, $route, maxDepth)]

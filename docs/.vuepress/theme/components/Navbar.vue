@@ -23,24 +23,20 @@
       } : {}">
 
       <Mode />
-      <AlgoliaSearchBox
-        v-if="isAlgoliaSearch"
-        :options="algolia"/>
-      <SearchBox v-else-if="$themeConfig.search !== false && $frontmatter.search !== false"/>
+      <SearchBox />
       <NavLinks class="can-hide"/>
     </div>
   </header>
 </template>
 
 <script>
-import AlgoliaSearchBox from './AlgoliaSearchBox'
 import SearchBox from './SearchBox'
 import SidebarButton from './SidebarButton'
 import NavLinks from './NavLinks'
 import Mode from './mode'
 
 export default {
-  components: { SidebarButton, NavLinks, SearchBox, AlgoliaSearchBox, Mode },
+  components: { SidebarButton, NavLinks, SearchBox, Mode },
 
   data () {
     return {
@@ -61,17 +57,8 @@ export default {
     }
     handleLinksWrapWidth()
     window.addEventListener('resize', handleLinksWrapWidth, false)
-  },
-
-  computed: {
-    algolia () {
-      return this.$themeLocaleConfig.algolia || this.$themeConfig.algolia || {}
-    },
-
-    isAlgoliaSearch () {
-      return this.algolia && this.algolia.apiKey && this.algolia.indexName
-    }
   }
+
 }
 
 function css (el, property) {

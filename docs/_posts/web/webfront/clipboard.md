@@ -63,11 +63,13 @@ clipboard有两个api可以将数据写入到剪切板
        // 判断是否可以使用
        if (result.state === 'granted') {
            canvas.toBlob(blob => {
+               // blob
+               // clipboarditem: https://w3c.github.io/clipboard-apis/#clipboarditem
                navigator.clipboard.write([
                    new ClipboardItem({
                        [blob.type]: blob
                    })
-               ])
+               ]).then().catch()
            })
        }
    }).catch(err => {})
@@ -80,7 +82,7 @@ clipboard有两个api可以将数据写入到剪切板
 >
 >  如异常消息所述，使文档处于主动集中状态才能使用此API。 关掉F12就不会有这个错误了
 
-如果成功,这个canvas已经复制到了剪切板,可以将此图片粘贴到类word文档软件中.
+如果成功,这个canvas已经复制到了剪切板,可以粘贴到类word文档软件.
 
 ### writeText
 
@@ -94,6 +96,13 @@ navigator.permissions.query({ name: 'clipboard-write' }).then(result => {
 }).catch(err => {})
 ```
 
+## window.clipboardData
+
+**仅ie支持**
+
+window.clipboardData.clearData()
+window.clipboardData.setData('Text', 'txt')
+
 参考链接
 
 1. [w3.org](https://www.w3.org/TR/clipboard-apis/)
@@ -101,4 +110,3 @@ navigator.permissions.query({ name: 'clipboard-write' }).then(result => {
 2. [mdn web docs]( https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/)
 
 3. [google developers](https://developers.google.com/web/updates/2015/04/cut-and-copy-commands )
-
