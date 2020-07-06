@@ -36,7 +36,7 @@ if (document.queryCommandSupported('copy')) {
 
 点击上方代码块右上角'copy',粘贴到类markdown软件中,效果如图:
 
-<img src="http://81.68.94.4/images/web/test-execCommand.png">
+<img src="https://s1.ax1x.com/2020/07/05/UShdVP.png">
 
 ## navigator.clipboard
 
@@ -82,9 +82,7 @@ clipboard有两个api可以将数据写入到剪切板
 >
 >  如异常消息所述，使文档处于主动集中状态才能使用此API。 关掉F12就不会有这个错误了
 
-如果成功,这个canvas已经复制到了剪切板,粘贴到类word文档软件,如图:
-
-<img src="http://81.68.94.4/images/web/test-clipboard.png" alt="效果图">
+如果成功,这个canvas已经复制到了剪切板,可以粘贴到类word文档软件.
 
 ### writeText
 
@@ -112,4 +110,3 @@ window.clipboardData.setData('Text', 'txt')
 2. [mdn web docs]( https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/)
 
 3. [google developers](https://developers.google.com/web/updates/2015/04/cut-and-copy-commands )
-

@@ -2,7 +2,7 @@
 title: corda
 date: 2020-03-03
 categories:
- - 区块链
+ - block chain
 tags:
  - corda
  - kotlin
@@ -103,7 +103,9 @@ public static class Initiator extends FlowLogic<T> {}
 
 ## transaction
 
-交易是原子的.
+交易是原子的.一笔完整的交易:
+
+<img src="https://s1.ax1x.com/2020/07/05/USDvee.png" alt="transaction" border="0" />
 
 两种类型:
 

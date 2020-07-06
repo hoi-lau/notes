@@ -4,7 +4,7 @@
       <div
         class="mask"
         :style="{
-      background: `url(${$frontmatter.bgImage ? $withBase($frontmatter.bgImage) : 'http://81.68.94.4/images/home.jpg'}) center/cover no-repeat`}"></div>
+      background: `url(${$frontmatter.bgImage ? $withBase($frontmatter.bgImage) : 'https://s1.ax1x.com/2020/07/05/USrh1P.jpg'}) center/cover no-repeat`}"></div>
       <ModuleTransition>
         <img
           v-if="recoShowModule && $frontmatter.heroImage"
@@ -60,7 +60,7 @@
     </ModuleTransition>
 
     <ModuleTransition delay="0.24">
-      <Content v-show="recoShowModule" class="home-center" custom/>
+      <Content v-show="recoShowModule && !$page.frontmatter" class="home-center" custom/>
     </ModuleTransition>
   </div>
 </template>

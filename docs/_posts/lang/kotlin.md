@@ -5,6 +5,7 @@ categories:
 tags:
  - kotlin
 date: 2020-02-15
+publish: false
 ---
 
 ## 基本类型

@@ -5,9 +5,8 @@ categories:
  - linux
 tags:
  - FAQ
+publish: false
 ---
-
-
 
 ## 网络启动失败
 

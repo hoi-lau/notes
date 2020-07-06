@@ -9,7 +9,7 @@
         class="logo"
         v-if="$themeConfig.logo"
         :src="$withBase($themeConfig.logo)"
-        :alt="$siteTitle">
+        alt="im.liuk">
       <!-- <span
         ref="siteName"
         class="site-name"
