@@ -1,5 +1,5 @@
 ---
-title: corda
+title: corda使用总结
 date: 2020-03-03
 categories:
  - block chain
@@ -12,7 +12,7 @@ tags:
 
 Corda 是一个分布式账本平台，用于记录，管理和自动化业务合作伙伴之间的法律协议。由世界上最大的金融机构设计，并且在多个行业都有应用。
 
-经过一段时间的使用,我认为corda仅适用于金融行业,而且corda部署极其复杂,踩过太多的坑.
+经过一段时间的使用,我认为corda仅适用于金融行业,而且corda生产环境部署有太多的坑.
 
 corda内核使用kotlin开发,官方也仅提供了java/kotlin SDK.
 

@@ -3,9 +3,8 @@ const conf = process.env.NODE_ENV === 'development' ? require('./dev.themeConfig
 module.exports = {
   base: '/',
   title: 'im.liuk | 关注web技术',
-  description: '只争朝夕,不负韶华',
+  description: '亦余心之所向兮,虽九死其犹未悔',
   head: [
-    ['link', { rel: 'icon', href: '/favicon.ico' }]
   ],
   port: 4000,
   dest: '.vuepress/dist',
