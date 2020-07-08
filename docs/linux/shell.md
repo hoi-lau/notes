@@ -1,5 +1,5 @@
 ---
-title: shell
+title: shell入门总结
 date: 2020-04-25
 categories:
  - linux

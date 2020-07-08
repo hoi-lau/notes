@@ -3,7 +3,7 @@ const conf = process.env.NODE_ENV === 'development' ? require('./dev.themeConfig
 module.exports = {
   base: '/',
   title: 'im.liuk | 关注web技术',
-  description: '亦余心之所向兮,虽九死其犹未悔',
+  // description: '亦余心之所向兮，虽九死其尤未悔',
   head: [
   ],
   port: 4000,
@@ -21,6 +21,7 @@ module.exports = {
     sidebar: 'auto',
     bgImg: 'https://s1.ax1x.com/2020/07/05/USrh1P.jpg',
     logo: '/favicon.ico',
+    email: 'im.liukai2333@gmail.com',
     nav: [
       {text: 'Home', link: '/', icon: 'icon-home_n'},
       {text: 'Category', link: '/category/', icon: 'icon-icon-goodscategory'},
