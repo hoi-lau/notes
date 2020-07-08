@@ -18,11 +18,11 @@
         </h1>
       </ModuleTransition>
 
-      <ModuleTransition delay="0.08">
+      <!-- <ModuleTransition delay="0.08">
         <p v-if="recoShowModule && $frontmatter.tagline !== null" class="description">
           {{ $frontmatter.tagline || $description }}
         </p>
-      </ModuleTransition>
+      </ModuleTransition> -->
     </div>
 
     <ModuleTransition delay="0.16">

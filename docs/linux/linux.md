@@ -5,26 +5,10 @@ categories:
  - linux
 tags: 
  - linux
+publish: false
 ---
 
 ## 安装
-
-```
-// 阿里镜像地址
-https://developer.aliyun.com/mirror
-```
-
-> U盘  >  16G
-
-> 写入镜像
-
-> 安装系统
-
-> 选择功能
-
-> 启用网络
-
-> 设置管理员
 
 ### yum换源
 

@@ -103,9 +103,40 @@ tx decode-unverifiedTransaction --content 0x0ab101122064356565386436313239333634
 scm PermissionManagement setAuthorizations --permissions '[ffffffffffffffffffffffffffffffffff021000,ffffffffffffffffffffffffffffffffff021001]' --account 0xd11b05f21aa5d1d7aa077a9ecc2e606e8a4afb3a --private-key 0xd3a89700672d97b51cac1c5d82fb377913cf3efae44555dc0b94dd74fc8e8931
 ```
 
+### re-birth
+
+**缓存服务器**
+
+如果前端直接与`cita server`交互,会严重影响到server性能,由于链上数据不可篡改, 因此 ReBirth 缓存 block 列表，tx 列表，event logs ，ERC20 列表，前端与 ReBirth 交互，不影响性能 
+
+```sh
+git clone https://github.com/citahub/re-birth.git
+cd re-birth
+# 修改.env.local文件 
+# 修改 CITA_URL 为cita server地址
+# 使用 rails secret 生成secret覆盖 SECRET_KEY_BASE 
+
+# 第一次运行需要执行 make setup
+# 运行 re-birth
+make up
+# 更新
+make update
+# 停止 re-birth
+make down
+```
+
 ### microscope
 
-### re-birth
+web端应用,可用于查询所有 CITA 链上信息
+
+```sh
+git clone https://github.com/citahub/microscope-v2/
+yarn install
+# 修改serverList为本地 cita server or rebirth server
+vim src/utils/config.ts
+yarn build
+# 部署到nginx
+```
 
 ## 智能合约支持
 
