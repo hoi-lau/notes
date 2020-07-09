@@ -179,3 +179,4 @@ export default {
       float none
       text-align left
 </style>
+<style src="prismjs/themes/prism-tomorrow.css"></style>

@@ -28,5 +28,5 @@ export default {
   }
 }
 </script>
-
+<style src="prismjs/themes/prism-tomorrow.css"></style>
 <!-- scoped,只在当前组件生效,不会影响到子组件 -->

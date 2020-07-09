@@ -104,18 +104,27 @@ export default {
   },
 
   mounted() {
-    const preList = Array.from(document.querySelectorAll('div[class*="language-"] pre'))
-    preList.forEach((el, index) => {
-      const span = document.createElement('span')
-      span.classList.add('copy')
-      span.textContent = 'copy'
-      span.title = 'copy code to clipboard'
-      span.dataset['index'] = index
-      el.parentNode.appendChild(span)
-    })
+  },
+
+  watch: {
+    '$route'(to, from) {
+      this.initCodeCopy()
+    }
   },
 
   methods: {
+    initCodeCopy() {
+      const preList = Array.from(document.querySelectorAll('div[class*="language-"] pre'))
+      preList.forEach((el, index) => {
+        const span = document.createElement('span')
+        span.classList.add('copy')
+        span.textContent = 'copy'
+        span.title = 'copy code to clipboard'
+        span.dataset['index'] = index
+        el.parentNode.appendChild(span)
+      })
+    },
+
     copyCode(e) {
       if (e.srcElement.textContent === 'copy' && e.srcElement.parentElement.classList.contains('line-numbers-mode')) {
         const index = e.srcElement.dataset.index
