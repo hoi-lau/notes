@@ -4,7 +4,11 @@ module.exports = {
   base: '/',
   title: 'im.liuk | 关注web技术',
   // description: '亦余心之所向兮，虽九死其尤未悔',
+  // <meta name="applicable-device" content="pc,mobile">
   head: [
+    ['link', {name: 'applicable-device', content: 'pc,mobile'}],
+    ['meta', {name: 'description', content: '刘凯的个人站点'}],
+    ['meta', {name: 'viewport', content: 'initial-scale=1.0,width=device-width'}]
   ],
   port: 4000,
   dest: '.vuepress/dist',
