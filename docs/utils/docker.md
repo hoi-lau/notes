@@ -294,7 +294,7 @@ docker search mysql
 # 在dockerhub上查找版本
 docker pull mysql:$version
 # -p 端口映射 --name 容器别名 -v 挂载卷
-docker run -p 3306:3306 --name mysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+docker run -p 3306:3306 --name mysql -v $PWD/mysql/conf:/etc/mysql/conf.d -v $PWD/mysql/logs:/logs -v $PWD/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql
 # 进入交互式终端
 docker exec -it mysql /bin/bash
 mysql -uroot -p
