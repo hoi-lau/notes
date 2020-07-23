@@ -298,7 +298,7 @@ docker run -p 3306:3306 --name mysql -v $PWD/mysql/conf:/etc/mysql/conf.d -v $PW
 # 进入交互式终端
 docker exec -it mysql /bin/bash
 mysql -uroot -p
-#123456
+#123456 agQBD1^Hq
 GRANT ALL ON *.* TO 'root'@'%';
 flush privileges;
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'password' PASSWORD EXPIRE NEVER;
