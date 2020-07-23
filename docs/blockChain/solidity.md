@@ -8,7 +8,7 @@ tags:
 publish: false
 ---
 
-> Solidity 是一门面向合约的、为实现智能合约而创建的高级编程语言 ,https://solidity-cn.readthedocs.io/zh/develop/index.html
+> Solidity 是一门面向合约的、为实现智能合约而创建的高级编程语言, 运行于以太坊虚拟机EVM上. solidity官方文档 https://solidity-cn.readthedocs.io/zh/develop/index.html
 
 ## 类型
 
@@ -54,8 +54,10 @@ contract SimpleStorage {
 
 ## 版本声明
 
-表示编译器版本不得低于0.4.0
+ 为了避免未来被可能引入不兼容变更的编译器所编译, 每一个合约第一行应该指明合约版本.
+
+表示编译器版本不得低于0.4.24.
 
 ```solidity
-pragma solidity ^0.4.0;
+pragma solidity ^0.4.24;
 ```
