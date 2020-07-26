@@ -113,7 +113,7 @@ jenkins会自动配置nodejs环境
 
 ## 配置job
 
-### freestyle project
+### 配置一个freestyle project
 
 配置一个简单的`freestyle project`大致步骤:
 
@@ -127,7 +127,7 @@ jenkins会自动配置nodejs环境
 
 最后配置要执行的 shell
 
-### pipeline
+### 配置一个pipeline
 
 `jenkins pipeline`是一套插件，将持续交付的实现和实施集成到 `Jenkins` 中。 在项目根目录中新建文件`Jenkinsfile`,
 
