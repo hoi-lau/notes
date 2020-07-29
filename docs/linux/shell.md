@@ -319,7 +319,7 @@ SHELL_PATH=$(dirname $(readlink -f "$0"))
 | \v       | 垂直制表             |
 | \0nnn    | ACSII码              |
 
-## cut
+### cut
 
 字段提取命令,常用选项
 

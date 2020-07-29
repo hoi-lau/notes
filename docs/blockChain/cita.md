@@ -163,7 +163,8 @@ contract Test {
 ### 部署solidity合约
 
 ```sh
-# step 1 编译合约以及获取函数hash
+# step 1 编译合约以及获取函数hash 注意编译器版本. 
+# docker run --rm -v $(pwd):/root ethereum/solc:0.4.24  --bin --hashes /root/PictureContract.sol
 solc Test.sol --bin --hashes
 # step 2 通过发送交易部署合约,不管是否成功都会返回交易hash
 # 如果启用了权限系统, 发送交易的账户必须有创建合约的权限
@@ -220,6 +221,7 @@ cita-cli scm PermissionManagement setAuthorizations --permissions '[ffffffffffff
 # contracts: 上面Demo.sol生成的合约地址
 # function-hashes: 函数签名
 # private-key: 管理员私钥
+# 生成权限(权限的表现形式是一个地址)
 cita-cli scm PermissionManagement newPermission --name 0000000000000000000000000000000000000000000000000000000060f22221  --contracts '[00f8d426df8f7b1461440d9c966d51771a828637]' --function-hashes '[24b8ba5f]'  --private-key 0x0b9f750954a2c89637d86f3b645c311615101d69eab671ea4051f62fe8c0db4c --url http://127.0.0.1:1337
 
 # 查看交易回执

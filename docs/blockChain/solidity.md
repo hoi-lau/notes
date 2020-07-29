@@ -1,5 +1,5 @@
 ---
-title: solidity
+title: solidity tips
 categories:
  - block chain
 tags:
@@ -8,47 +8,25 @@ tags:
 publish: false
 ---
 
-> Solidity 是一门面向合约的、为实现智能合约而创建的高级编程语言, 运行于以太坊虚拟机EVM上. solidity官方文档 https://solidity-cn.readthedocs.io/zh/develop/index.html
+> Solidity 是一门面向合约的、为实现智能合约而创建的高级编程语言, 运行于以太坊虚拟机EVM上. solidity官方文档 https://solidity.readthedocs.io
 
-## 类型
+1. 使用循环时注意范围,防止死循环.
+2. 可以获取`view`函数返回结果,但是无法获取`change state`类函数结果(异步),变通方法: 通过事件回调结果,或者将结果存储在状态变量中,然后通过`view`函数获取
 
-### 值类型
+## 字符串拼接
 
-**这些类型的变量将始终按值来传递**
-
-#### 布尔 
-
- `bool` ：可能的取值为字面常数值 `true` 和 `false` .
-
-运算符：
-
-- `!` （逻辑非）
-- `&&` （逻辑与， "and" ）
-- `||` （逻辑或， "or" ）
-- `==` （等于）
-- `!=` （不等于）
-
-运算符 `||` 和 `&&` 都遵循同样的短路（ short-circuiting ）规则。就是说在表达式 `f(x) || g(y)` 中， 如果 `f(x)` 的值为 `true` ，那么 `g(y)` 就不会被执行，即使会出现一些副作用。
-
-#### 整型
-
-## 语法
-
-简单的合约,存储一个数字:
+原生并不支持字符串拼接,需要自己实现,思路: **将`string`转化为`bytes`**.
 
 ```solidity
-pragma solidity ^0.4.0;
-
-contract SimpleStorage {
-    uint storedData;
-
-    function set(uint x) public {
-        storedData = x;
-    }
-
-    function get() public view returns (uint) {
-        return storedData;
-    }
+function strConcat(string _a, string _b) internal pure returns (string){
+    bytes memory _ba = bytes(_a);
+    bytes memory _bb = bytes(_b);
+    string memory ret = new string(_ba.length + _bb.length);
+    bytes memory bret = bytes(ret);
+    uint k = 0;
+    for (uint256 i = 0; i < _ba.length; i++)bret[k++] = _ba[i];
+    for (i = 0; i < _bb.length; i++) bret[k++] = _bb[i];
+    return string(ret);
 }
 ```
 
