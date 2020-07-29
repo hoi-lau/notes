@@ -52,6 +52,7 @@ docker container run \
   --env DOCKER_TLS_VERIFY=1 \
   --network jenkins \
   --publish 8011:8080 \
+  --volume /data/jenkins_ssh:/root \
   --volume jenkins-data:/var/jenkins_home \
   --volume /var/run/docker.sock:/var/run/docker.sock \
   --volume jenkins-docker-certs:/certs/client:ro \
