@@ -10,7 +10,7 @@
       <!-- <transition name="fade">
         <Password v-show="!isHasKey" class="password-wrapper-out" key="out" />
       </transition> -->
-      <div :class="{ 'hide': firstLoad || !isHasKey }">
+      <div :class="{ 'hide': firstLoad }">
         <Navbar
         v-if="shouldShowNavbar"
         @toggle-sidebar="toggleSidebar"/>
@@ -32,7 +32,7 @@
         </Sidebar>
 
         <!-- <Password v-show="!isHasPageKey" :isPage="true" class="password-wrapper-in" key="in"></Password> -->
-        <div :class="{ 'hide': !isHasPageKey }">
+        <div>
           <slot></slot>
         </div>
       </div>
@@ -40,14 +40,13 @@
 </template>
 
 <script>
-// import Navbar from './Navbar'
-// import Sidebar from './Sidebar'
 import { resolveSidebarItems } from '../helpers/utils'
 import LoadingPage from './LoadingPage'
-// import Password from './Password'
 import posts from '../mixins/posts'
 import { setTimeout } from 'timers'
 import moduleTransitonMixin from '../mixins/moduleTransiton'
+import http from '../util/api'
+import globalData from '../util/store'
 
 export default {
   mixins: [moduleTransitonMixin, posts],
@@ -68,8 +67,6 @@ export default {
   data () {
     return {
       isSidebarOpen: false,
-      isHasKey: true,
-      isHasPageKey: true,
       firstLoad: true
     }
   },
@@ -79,12 +76,10 @@ export default {
     shouldShowNavbar () {
       const { themeConfig } = this.$site
       const { frontmatter } = this.$page
-
       if (
         frontmatter.navbar === false ||
         themeConfig.navbar === false
       ) return false
-
       return (
         this.$title ||
         themeConfig.logo ||
@@ -130,34 +125,23 @@ export default {
     this.$router.afterEach(() => {
       this.isSidebarOpen = false
     })
-    this.hasKey()
-    this.hasPageKey()
     this.handleLoading()
+    this.fetchData()
   },
 
   methods: {
-    hasKey () {
-      const keyPage = this.$themeConfig.keyPage
-      if (!keyPage || !keyPage.keys || keyPage.keys.length === 0) {
-        this.isHasKey = true
-        return
-      }
-
-      let { keys } = keyPage
-      keys = keys.map(item => item.toLowerCase())
-      this.isHasKey = keys && keys.indexOf(sessionStorage.getItem('key')) > -1
+    fetchData() {
+      if (globalData.length > 0) return
+      http({
+        url: 'records'
+      }).then(res => {
+        globalData.views = res.data
+        window.postMessage('initDone', location.origin)
+      }).catch(error => {
+        
+      })
     },
-    hasPageKey () {
-      let pageKeys = this.$frontmatter.keys
-      if (!pageKeys || pageKeys.length === 0) {
-        this.isHasPageKey = true
-        return
-      }
 
-      pageKeys = pageKeys.map(item => item.toLowerCase())
-
-      this.isHasPageKey = pageKeys.indexOf(sessionStorage.getItem(`pageKey${window.location.pathname}`)) > -1
-    },
     toggleSidebar (to) {
       this.isSidebarOpen = typeof to === 'boolean' ? to : !this.isSidebarOpen
     },
@@ -191,12 +175,6 @@ export default {
     }
   },
 
-  watch: {
-    $frontmatter (newVal, oldVal) {
-      this.hasKey()
-      this.hasPageKey()
-    }
-  }
 }
 </script>
 
@@ -210,21 +188,6 @@ export default {
     left 0
     right 0
     margin auto
-  .password-wrapper-out
-    position absolute
-    z-index 21
-    top 0
-    bottom 0
-    left 0
-    right 0
-    margin auto
-  .password-wrapper-in
-    position absolute
-    z-index 8
-    top 0
-    bottom 0
-    left 0
-    right 0
   .hide
     height 100vh
     overflow hidden

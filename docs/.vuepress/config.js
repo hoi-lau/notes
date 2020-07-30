@@ -17,6 +17,13 @@ module.exports = {
     lineNumbers: true
   },
   plugins: [],
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8089'
+      }
+    }
+  },
   themeConfig: {
     type: 'blog',
     mode: 'light',

@@ -1,8 +1,8 @@
 <template>
   <div class="footer-wrapper">
-    <span>
+    <!-- <span>
       <a target="_blank" href="https://www.vuepress.cn/">powered by vuepress.</a>
-    </span>
+    </span> -->
     <span>
       <a>
         <span>© {{ $themeConfig.author }}</span>
@@ -14,35 +14,41 @@
     <span>
       <a :href="'mailto:' + $themeConfig.email">{{ $themeConfig.email }}</a>
     </span>
-    <span v-show="showAccessNumber">
-      <i class="iconfont reco-eye"></i>
-      <AccessNumber idVal="/" />
+    <span v-show="showViewNumber" class="pointer" :title="'浏览量:' + viewNumber">
+      <a>
+        <i class="iconfont icon-eye" style="color: #3eaf7c;"></i>
+        <span>{{viewNumber}}</span>
+      </a>
     </span>
   </div>
 </template>
 
 <script>
-import AccessNumber from './comments/AccessNumber'
+import globalData from '../util/store'
+import { numberFormat } from '../util/index'
 export default {
-  components: {
-    AccessNumber
-  },
-  computed: {
-    showAccessNumber () {
-      const {
-        $themeConfig: { valineConfig }
-      } = this
-      const vc = valineConfig
-      if (vc && vc.visitor != false) {
-        return true
-      }
-      return false
+  data() {
+    return {
+      showViewNumber: false,
+      viewNumber: 0
     }
+  },
+  mounted() {
+    window.addEventListener('message', (e) => {
+      if (e.data === 'initDone') {
+        this.showViewNumber = true
+        const index = globalData.views.findIndex(item => item.path === '/')
+        this.viewNumber = numberFormat(globalData.views[index].totalViews)
+      }
+    }, false)
   }
 }
 </script>
 
 <style lang="stylus" scoped>
+  .pointer
+    cursor pointer
+
   .footer-wrapper {
     padding: 1.5rem 2.5rem;
     border-top: 1px solid var(--border-color);

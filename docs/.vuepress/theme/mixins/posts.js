@@ -13,33 +13,33 @@ export default {
       posts = filterPosts(posts, false)
       sortPostsByStickyAndDate(posts)
       return posts
-    },
-    $myPostsForTimeline () {
-      let pages = this.$myPosts
-      const formatPages = {}
-      const formatPagesArr = []
-      pages = filterPosts(pages, true)
-      this.pages = pages.length == 0 ? [] : pages
-      for (let i = 0, length = pages.length; i < length; i++) {
-        const page = pages[i]
-        const pageDateYear = dateFormat(page.frontmatter.date, 'year')
-        if (formatPages[pageDateYear]) formatPages[pageDateYear].push(page)
-        else {
-          formatPages[pageDateYear] = [page]
-        }
-      }
-
-      for (const key in formatPages) {
-        const data = formatPages[key]
-        sortPostsByDate(data)
-        formatPagesArr.unshift({
-          year: key,
-          data
-        })
-      }
-
-      return formatPagesArr
     }
+    // $myPostsForTimeline () {
+    //   let pages = this.$myPosts
+    //   const formatPages = {}
+    //   const formatPagesArr = []
+    //   pages = filterPosts(pages, true)
+    //   this.pages = pages.length == 0 ? [] : pages
+    //   for (let i = 0, length = pages.length; i < length; i++) {
+    //     const page = pages[i]
+    //     const pageDateYear = dateFormat(page.frontmatter.date, 'year')
+    //     if (formatPages[pageDateYear]) formatPages[pageDateYear].push(page)
+    //     else {
+    //       formatPages[pageDateYear] = [page]
+    //     }
+    //   }
+
+    //   for (const key in formatPages) {
+    //     const data = formatPages[key]
+    //     sortPostsByDate(data)
+    //     formatPagesArr.unshift({
+    //       year: key,
+    //       data
+    //     })
+    //   }
+
+    //   return formatPagesArr
+    // }
   }
 }
 

@@ -76,7 +76,6 @@ import ModuleTransition from './ModuleTransition'
 import PersonalInfo from './PersonalInfo'
 import { getOneColor } from '../helpers/other'
 import moduleTransitonMixin from '../mixins/moduleTransiton'
-
 export default {
   mixins: [pagination, moduleTransitonMixin, posts],
   // FriendLink
@@ -137,6 +136,7 @@ export default {
       }
       return 1
     })
+
   },
   methods: {
     // 获取当前页码

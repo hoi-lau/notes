@@ -56,6 +56,7 @@ import ModuleTransition from './ModuleTransition'
 import moduleTransitonMixin from '../mixins/moduleTransiton'
 import Comments from './comments/Comments'
 import posts from '../mixins/posts'
+import http from '../util/api'
 export default {
   mixins: [moduleTransitonMixin, posts],
   components: { PageInfo, ModuleTransition, Comments},
@@ -105,11 +106,17 @@ export default {
 
   mounted() {
     this.initCodeCopy()
+    this.fetchData()
   },
 
   watch: {
     '$route'(to, from) {
-      this.initCodeCopy()
+      if (to.path !== from.path) {
+        this.$nextTick(() => {
+          this.initCodeCopy()
+          this.fetchData()
+        })
+      }
     }
   },
 
@@ -126,6 +133,14 @@ export default {
       })
     },
 
+    fetchData() {
+      http({
+        url: 'records'
+      }).then(res => {
+      }).catch(error => {
+      })
+    },
+
     copyCode(e) {
       if (e.srcElement.textContent === 'copy' && e.srcElement.parentElement.classList.contains('line-numbers-mode')) {
         const index = e.srcElement.dataset.index
@@ -134,7 +149,7 @@ export default {
           const selection = window.getSelection()
           selection.removeAllRanges()
           const range = document.createRange()
-          // 为什么不是e.srcElement.parentElement.firstChild?思考一下(copy出来多了一个1)
+          // 为什么不是e.srcElement.parentElement.firstChild?(copy出来多了一个1)
           range.selectNode(e.srcElement.parentElement.firstChild.firstChild)
           selection.addRange(range)
           try {

@@ -1,5 +1,5 @@
 ---
-title: corda使用总结
+title: 分布式账本corda
 date: 2020-03-03
 categories:
  - block chain
@@ -12,9 +12,7 @@ tags:
 
 Corda 是一个分布式账本平台，用于记录，管理和自动化业务合作伙伴之间的法律协议。由世界上最大的金融机构设计，并且在多个行业都有应用。
 
-经过一段时间的使用,我认为corda仅适用于金融行业,而且corda生产环境部署有太多的坑.
-
-corda内核使用kotlin开发,官方也仅提供了java/kotlin SDK.
+corda内核使用kotlin开发,官方提供了java/kotlin SDK.
 
 ## 核心概念
 
@@ -23,8 +21,8 @@ corda内核使用kotlin开发,官方也仅提供了java/kotlin SDK.
   - 节点通信点对点,不依赖全局广播,并在传输层加密,corda使用持久队列(像email),节点可脱机
   - 每个节点有一个身份证书,该证书将其网络身份映射到实际的法律身份
 - ledger(分类账) --  分类帐以及分类帐上的事实如何在节点之间共享 
-  - corda没有数据中心,需要自己实现
-  - corda节点只能看到自己参与的事实,或他人共享的事实
+  - **corda没有数据中心,需要自己实现**
+  - **corda节点只能看到自己参与的事实,或他人共享的事实**
 - states -- 代表ledger上事实状态
   - 历史状态不可改变,需要创建新的状态去更新状态
 - contracts -- 合约决定 state的发展方向
@@ -39,7 +37,7 @@ corda内核使用kotlin开发,官方也仅提供了java/kotlin SDK.
 
 ## flow
 
-Flow,可以理解为合约,这将是我们要编写的核心部分.一个flow有2个部分
+Flow,可以理解为**智能合约**,这将是我们要编写的核心部分,根据`flow` 编写业务逻辑.一个flow有2个部分
 
 -  Initiator  发起人
 -  Responder   响应人
@@ -142,6 +140,8 @@ public static class Initiator extends FlowLogic<T> {}
 ## corda network
 
 https://docs.corda.net/permissioning.html
+
+## 共识机制
 
 ## 证书层次结构
 
