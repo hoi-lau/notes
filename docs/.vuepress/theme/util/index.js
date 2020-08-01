@@ -239,3 +239,16 @@ function resolveItem (item, pages, base, groupDepth = 1) {
     }
   }
 }
+
+export function numberFormat(num) {
+  let source = num + ''
+  let len = Math.floor(source.length / 3)
+  let model = source.length % 3
+  let ret = ''
+  // while 
+  for (let i = len - 1; i >= 0; i--) {
+    ret =  ret + ',' + source.substring(source.length - i * 3 - 3, source.length - i * 3)
+  }
+  model !== 0 ? ret = source.substring(0, model) + ret : ret = ret.substring(1, ret.length)
+  return ret
+}

@@ -5,6 +5,7 @@ categories:
  - linux
 tags:
  - shell
+publish: false
 ---
 
 ## start
