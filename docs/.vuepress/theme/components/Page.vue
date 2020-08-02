@@ -106,7 +106,7 @@ export default {
 
   mounted() {
     this.initCodeCopy()
-    this.fetchData()
+    this.fetchCommentsData()
   },
 
   watch: {
@@ -114,7 +114,7 @@ export default {
       if (to.path !== from.path) {
         this.$nextTick(() => {
           this.initCodeCopy()
-          this.fetchData()
+          this.fetchCommentsData()
         })
       }
     }
@@ -133,9 +133,12 @@ export default {
       })
     },
 
-    fetchData() {
+    fetchCommentsData() {
       http({
-        url: 'records'
+        url: 'comments',
+        data: {
+          path: 'ss'
+        }
       }).then(res => {
       }).catch(error => {
       })
