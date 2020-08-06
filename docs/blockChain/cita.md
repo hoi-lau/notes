@@ -1,10 +1,13 @@
 ---
-title: 国产开元区块链cita
+title: 国产开源区块链cita
 date: 2020-05-20
 categories:
  - block chain
 tags: 
  - cita
+meta:
+ - name: description
+   content: 
 ---
 
 >  CITA 是一个支持智能合约的开源高性能区块链内核(可跨链).[官网简介](https://docs.citahub.com/zh-CN/cita/cita-intro)

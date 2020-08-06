@@ -23,7 +23,10 @@ export default {
     return {
     }
   },
-  computed: {
+  watch: {
+    '$route': (to, from) => {
+
+    }
   }
 }
 </script>

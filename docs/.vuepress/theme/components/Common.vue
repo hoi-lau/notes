@@ -131,7 +131,7 @@ export default {
 
   methods: {
     fetchData() {
-      if (globalData.length > 0) return
+      if (globalData.views.length > 0) return
       http({
         url: 'records'
       }).then(res => {
