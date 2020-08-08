@@ -17,11 +17,11 @@ publish: false
 context: path.resolve(__dirname, "../")
 ```
 
-### entry(入口):  string | [string] | object { [key]: string | [string] } | (function: () => string | [string] | object { [key]: string | [string] })
+### entry(入口)
 
 起点或是应用程序的起点入口。从这个起点开始，应用程序启动执行。如果传递一个数组，那么数组的每一项都会执行
 
-### output(出口):  指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」
+### output(出口)
 
 ```js
 /** 只用于 target 是 web，使用了通过 script 标签的 JSONP 来按需加载 chunk。
@@ -78,7 +78,7 @@ type: 'string'
 // 生产一般用 'source-map' | none
 ```
 
-### externals:`externals` 配置选项提供了「从输出的 bundle 中排除依赖」的方法
+### externals
 
 ## 常用loader ##
 
