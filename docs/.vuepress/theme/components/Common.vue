@@ -137,8 +137,7 @@ export default {
       }).then(res => {
         globalData.views = res.data
         window.postMessage('initDone', location.origin)
-      }).catch(error => {
-        
+      }).catch(error => {  
       })
     },
 
