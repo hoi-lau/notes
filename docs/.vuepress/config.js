@@ -2,13 +2,12 @@ const conf = process.env.NODE_ENV === 'development' ? require('./dev.themeConfig
 // console.log(conf)
 module.exports = {
   base: '/',
-  title: 'im.liuk | 关注web技术',
-  // description: '亦余心之所向兮，虽九死其尤未悔',
-  // <meta name="applicable-device" content="pc,mobile">
+  title: 'im.liuk | now is never too late',
   head: [
     ['link', {name: 'applicable-device', content: 'pc,mobile'}],
     ['meta', {name: 'description', content: '刘凯的个人站点'}],
-    ['meta', {name: 'viewport', content: 'initial-scale=1.0,width=device-width'}]
+    ['meta', {name: 'viewport', content: 'initial-scale=1.0,width=device-width'}],
+    ['meta', {'http-equiv': 'Content-Type', content: 'text/html; charset=utf-8'}]
   ],
   port: 4000,
   dest: '.vuepress/dist',

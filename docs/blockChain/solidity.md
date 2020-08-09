@@ -2,6 +2,7 @@
 title: solidity 不完全指南
 categories:
  - block chain
+date: 2020-06-30
 tags:
  - solidity
  - 以太坊

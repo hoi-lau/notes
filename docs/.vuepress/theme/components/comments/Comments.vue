@@ -3,11 +3,11 @@
     class="comments-wrapper"
     v-show="isShowComments">
     <!-- this is Comments -->
-    <!-- <ClientOnly>
+    <ClientOnly>
       <component
         :is="componentName"
         :options="options" />
-    </ClientOnly> -->
+    </ClientOnly>
   </div>
 </template>
 
@@ -21,6 +21,7 @@ export default {
   },
   data () {
     return {
+      emojiList: '😀😁😂😃😄😅😆😉😊😋😎😍😘😗😙😚☺😇😐😑😶😏😣😥😮😯😪😫😴😌😛😜😝😒😓😔😕😲😷😖😞😟😤😢😭😦😧😨😬😰😱😳😵😡😠💪👈👉☝👆👇✌✋👌👍👎✊👊👋👏👐✍'
     }
   },
   watch: {

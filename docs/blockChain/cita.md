@@ -7,7 +7,8 @@ tags:
  - cita
 meta:
  - name: description
-   content: 
+   content: 区块链cita
+lang: zh-CN
 ---
 
 >  CITA 是一个支持智能合约的开源高性能区块链内核(可跨链).[官网简介](https://docs.citahub.com/zh-CN/cita/cita-intro)
