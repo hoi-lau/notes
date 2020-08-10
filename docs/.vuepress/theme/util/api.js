@@ -4,7 +4,8 @@ const http = ({data, url, method = 'get'}) => {
     const xhr = new XMLHttpRequest()
     xhr.open(method, origin + url)
     xhr.timeout = 15000
-    xhr.setRequestHeader('content-type', 'application/json')
+    xhr.setRequestHeader('Content-Type', 'application/json')
+    // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send(data)
     xhr.onreadystatechange = (e) => {
       if (xhr.readyState === 4) {

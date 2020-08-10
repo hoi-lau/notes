@@ -5,6 +5,7 @@ categories:
  - algorithm
 tags:
  - 字符串搜索
+lang: zh-CN
 publish: false
 ---
 

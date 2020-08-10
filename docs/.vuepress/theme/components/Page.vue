@@ -135,10 +135,7 @@ export default {
 
     fetchCommentsData() {
       http({
-        url: 'comments',
-        data: {
-          path: 'ss'
-        }
+        url: `comments?path=${location.pathname}`
       }).then(res => {
       }).catch(error => {
       })
