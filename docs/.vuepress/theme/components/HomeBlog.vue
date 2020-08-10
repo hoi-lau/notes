@@ -7,26 +7,26 @@
       background: `url(${$frontmatter.bgImage ? $withBase($frontmatter.bgImage) : 'https://s1.ax1x.com/2020/07/05/USrh1P.jpg'}) center/cover no-repeat`}"></div>
       <ModuleTransition>
         <img
-          v-if="recoShowModule && $frontmatter.heroImage"
+          v-if="showModule && $frontmatter.heroImage"
           :style="heroImageStyle || {}"
           :src="$withBase($frontmatter.heroImage)"
           alt="hero">
       </ModuleTransition>
       <ModuleTransition delay="0.04">
-        <h1 v-if="recoShowModule && $frontmatter.heroText !== null">
+        <h1 v-if="showModule && $frontmatter.heroText !== null">
           {{ $frontmatter.heroText || $title }}
         </h1>
       </ModuleTransition>
 
       <!-- <ModuleTransition delay="0.08">
-        <p v-if="recoShowModule && $frontmatter.tagline !== null" class="description">
+        <p v-if="showModule && $frontmatter.tagline !== null" class="description">
           {{ $frontmatter.tagline || $description }}
         </p>
       </ModuleTransition> -->
     </div>
 
     <ModuleTransition delay="0.16">
-      <div v-show="recoShowModule" class="home-blog-wrapper">
+      <div v-show="showModule" class="home-blog-wrapper">
         <div class="blog-list">
           <!-- 博客列表 -->
           <note-abstract
@@ -60,7 +60,7 @@
     </ModuleTransition>
 
     <ModuleTransition delay="0.24">
-      <Content v-show="recoShowModule && !$page.frontmatter" class="home-center" custom/>
+      <Content v-show="showModule && !$page.frontmatter" class="home-center" custom/>
     </ModuleTransition>
   </div>
 </template>

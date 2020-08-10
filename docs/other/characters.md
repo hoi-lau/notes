@@ -7,11 +7,11 @@ tags:
  - other
 ---
 
-> 前段时间被一堆字符编码搞得晕头转向,还是没有理解透彻,一次性搞个明白.
+> 前段时间被一堆字符编码搞得晕头转向,一次性搞个明白.
 
 -  字符集: 就是字符的集合，收录了一定数量的字符。每个字符有对应的ID值，叫码点（code point）。
-
 - 编码方式: 实际存储的时候，不一定是直接存储字符串的码点（比如，为了节约空间），要进行转换。这个转换规则就是编码 
+- 代码页: 是字符编码的别名，也称内码表，是特定语言的字符集的一张表。(windows cmd中输入 chcp可以查看当前使用的代码页,936表示GBK)
 
 ## 字符集
 
@@ -123,7 +123,29 @@ tags:
 
 `utf16` 需要1个或者2个16位长的码元来表示，是一个变长表示 .
 
+ **代理项**，是一种在 UTF-16 中用来表示补充字符的方法 .当码点超过BMP平面时,需要用2个16位长码元来表示这个字符.
+
+**代理对**
+
+**高代理项代码点**（High-Surrogate Code Point）：在 U+D800 到 U+DBFF 范围内的 `Unicode`代码点。
+
+**低代理项代码点**（Low-Surrogate Code Point）：在 U+DC00 到 U+DFFF 范围内的 `Unicode` 代码点。
+
+计算公式:
+
+```javascript
+// c表示unicode码点
+// **高代理项代码点**
+high = Math.floor((c-0x10000) / 0x400)+0xD800
+// **低代理项代码点**
+low = (c - 0x10000) % 0x400 + 0xDC00
+```
+
 ### utf32
+
+UTF-32`使用32位长(4字节),定长.
+
+`UTF-32`的主要缺点是每个码位使用四个字节，空间浪费较多。在大多数文本中，非基本多文种平面的字符非常罕见，这使得UTF-32所需空间接近UTF-16的两倍和UTF-8的四倍（具体取决于文本中ASCII字符的比例）。
 
 ## 附
 
@@ -138,12 +160,58 @@ console.log('\u{4e00}' === '一')
 // true 汉字 '一' 的码点是 4e00
 ```
 
+### emoji
+
+`unicode`支持`emoji`表情.  搜索emoji: https://emojipedia.org/ 
+
+```js
+console.log('\u{262F}')
+// "☯" 阴阳八卦
+```
+
+### unicode组合字符
+
+ 组合字符( Combining character )是用来改变其它字符所用的字符 .
+
+ 常的用法为：将组合字符 **置于需要修饰的目标字符后边**，使目标字符被渲染（或打印）成相应结果 
+
+```js
+console.log('\u{0041}\u{0361}')
+// A͡
+console.log('\u{2764}\u{FE0F}')
+// ❤️   \u{FE0F}作修饰
+```
+
 ### 关于ANSI
 
 `ANSI` 泛指最早每种国家语言各自实现的扩展编码方式，各个编码互相之间不兼容，比较省空间 .比如`GBK`.
 
-### emoji
-
 ### UCS-2与UTF-16
 
+ UCS-2对每一个Unicode码位使用16位长的码元来表示(定长).
+
 UTF-16可看成是UCS-2的父集。在没有辅助平面字符（surrogate code points）前，UTF-16与UCS-2所指的是同一的意思。但当引入辅助平面字符后，就称为UTF-16了。现在若有软件声称自己支持UCS-2编码，那其实是暗指它不能支持在UTF-16中超过2字节的字集。对于小于0x10000的UCS码，UTF-16编码就等于UCS码。
+
+### js默认编码方式
+
+- 对于js引擎: ` UCS-2 or UTF-16 `,大部分是`UTF-16`
+- 对于 ECMAScript : `UCS-2`
+
+```mermaid
+gantt
+        dateFormat  YYYY-MM-DD
+        title 快乐的生活
+        section 吃一把鸡就学习
+        学习            :done,    des1, 2014-01-06,2014-01-09
+        疯狂学习               :active,  des2, 2014-01-09, 3d
+        继续疯狂学习               :         des3, after des2, 5d
+        吃鸡！               :         des4, after des3, 4d
+        section 具体内容
+        学习Python :crit, done, 2014-01-06,72h
+        学习C++          :crit, done, after des1, 2d
+        学习Lisp             :crit, active, 3d
+        学习图形学        :crit, 4d
+        跳伞           :2d
+        打枪                      :2d
+```
+
