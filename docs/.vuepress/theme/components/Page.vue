@@ -1,7 +1,7 @@
 <template>
   <main class="page" @click="copyCode($event)">
     <ModuleTransition>
-      <div v-show="recoShowModule && $page.title" class="page-title">
+      <div v-show="showModule && $page.title" class="page-title">
         <h1>{{$page.title}}</h1>
         <hr>
         <PageInfo :pageInfo="$page" :showAccessNumber="showAccessNumber"></PageInfo>
@@ -9,11 +9,11 @@
     </ModuleTransition>
 
     <ModuleTransition delay="0.08">
-      <Content v-show="recoShowModule" class="theme-reco-content"/>
+      <Content v-show="showModule" class="theme-reco-content"/>
     </ModuleTransition>
 
     <ModuleTransition delay="0.24">
-      <div class="page-nav" v-if="recoShowModule && (prev || next)">
+      <div class="page-nav" v-if="showModule && (prev || next)">
         <p class="inner">
           <span
             v-if="prev"
@@ -45,7 +45,7 @@
       </div>
     </ModuleTransition>
     <ModuleTransition delay="0.32">
-      <Comments v-if="recoShowModule" :isShowComments="shouldShowComments"/>
+      <Comments v-if="showModule"/>
     </ModuleTransition>
   </main>
 </template>
@@ -70,12 +70,6 @@ export default {
   },
 
   computed: {
-    // 是否显示评论
-    shouldShowComments () {
-      const { isShowComments } = this.$frontmatter
-      const { showComment } = this.$themeConfig.valineConfig || { showComment: true }
-      return (showComment !== false && isShowComments !== false) || (showComment === false && isShowComments === true)
-    },
     showAccessNumber () {
       const {
         $themeConfig: { valineConfig },

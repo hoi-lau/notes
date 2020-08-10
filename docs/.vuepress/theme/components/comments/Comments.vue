@@ -4,9 +4,9 @@
     v-show="isShowComments">
     <!-- this is Comments -->
     <ClientOnly>
-      <component
+      <!-- <component
         :is="componentName"
-        :options="options" />
+        :options="options" /> -->
     </ClientOnly>
   </div>
 </template>
@@ -14,14 +14,14 @@
 <script>
 export default {
   props: {
-    isShowComments: {
-      type: Boolean,
-      default: true
+    commentsData: {
+      type: Array,
+      default: () => []
     }
   },
   data () {
     return {
-      emojiList: '😀😁😂😃😄😅😆😉😊😋😎😍😘😗😙😚☺😇😐😑😶😏😣😥😮😯😪😫😴😌😛😜😝😒😓😔😕😲😷😖😞😟😤😢😭😦😧😨😬😰😱😳😵😡😠💪👈👉☝👆👇✌✋👌👍👎✊👊👋👏👐✍'
+      emojiList: ['😀', '😁', '😂', '😃', '😄', '😅', '😆', '😉', '😊', '😋', '😎', '😍', '😘', '😗', '😚', '😙', '😇', '😐', '😑', '😶', '😏', '😣', '😥', '😮', '😯', '😪', '😫', '😴', '😌', '😛', '😜', '😝', '😒', '😓', '😔', '😕', '😲', '😷', '😖', '😞', '😟', '😤', '😢', '😭', '😦', '😧', '😨', '😬', '😰', '😱', '😳', '😵', '😡', '😠', '😭', '😢', '😔', '😱', '😌', '💛', '🙂', '😒', '😜', '👍︎', '👏', '💪', '👌', '❤️', '💕']
     }
   },
   watch: {

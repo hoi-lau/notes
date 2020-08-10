@@ -4,7 +4,7 @@ date: 2018-09-10
 categories:
  - utils
 tags:
- - webpack
+ - js
 publish: false
 ---
 
