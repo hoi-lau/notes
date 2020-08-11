@@ -45,7 +45,7 @@
       </div>
     </ModuleTransition>
     <ModuleTransition delay="0.32">
-      <Comments v-if="showModule"/>
+      <Comments v-if="showModule" :commentsData="commentsData"/>
     </ModuleTransition>
   </main>
 </template>
@@ -65,7 +65,8 @@ export default {
     return {
       isHasKey: true,
       zIndex: 1000,
-      exsitCount: 0
+      exsitCount: 0,
+      commentsData: []
     }
   },
 
@@ -82,6 +83,7 @@ export default {
       }
       return false
     },
+    // pre page
     prev () {
       const index = this.$myPosts.indexOf(this.$page)
       if (index === 0)  {
@@ -89,6 +91,7 @@ export default {
       }
       return this.$myPosts[index - 1]
     },
+    // next page
     next () {
       const index = this.$myPosts.indexOf(this.$page)
       if (index === this.$myPosts.length - 1) {
@@ -126,12 +129,14 @@ export default {
         el.parentNode.appendChild(span)
       })
     },
-
+    // pager...
     fetchCommentsData() {
       http({
         url: `comments?path=${location.pathname}`
       }).then(res => {
+        this.commentsData = res.data || []
       }).catch(error => {
+        console.error(error)
       })
     },
 
