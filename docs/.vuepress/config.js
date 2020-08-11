@@ -2,7 +2,7 @@ const conf = process.env.NODE_ENV === 'development' ? require('./dev.themeConfig
 // console.log(conf)
 module.exports = {
   base: '/',
-  title: 'im.liuk | now is never too late',
+  title: 'im.liuk | carry your world',
   head: [
     ['link', {name: 'applicable-device', content: 'pc,mobile'}],
     ['meta', {name: 'description', content: '刘凯的个人站点'}],

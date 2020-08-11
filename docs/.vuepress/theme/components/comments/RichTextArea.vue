@@ -1,7 +1,6 @@
 <template>
   <div class="text-area">
-    <!-- spellcheck -->
-    <textarea v-model="value" autocomplete maxlength="200" placeholder="支持markdown渲染" rows="10" class="rich-text"></textarea>
+    <textarea v-model="value" spellcheck autocomplete="on" maxlength="2048" placeholder="支持markdown" rows="8" class="rich-text"></textarea>
   </div>
 </template>
 
@@ -20,6 +19,9 @@ export default {
 .rich-text 
   width 100%
   box-sizing border-box
-  padding 0.5rem
+  padding .5rem
+  // border none
+  // outline none
+  resize none
 
 </style>
