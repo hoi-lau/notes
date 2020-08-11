@@ -1,18 +1,18 @@
 <template>
-  <div
-    class="comments-wrapper"
-    v-show="isShowComments">
+  <div class="comments-wrapper">
     <!-- this is Comments -->
     <ClientOnly>
-      <!-- <component
-        :is="componentName"
-        :options="options" /> -->
+      <RichTextArea />
     </ClientOnly>
   </div>
 </template>
 
 <script>
+import RichTextArea from './RichTextArea'
 export default {
+  components: {
+    RichTextArea
+  },
   props: {
     commentsData: {
       type: Array,
@@ -21,7 +21,6 @@ export default {
   },
   data () {
     return {
-      emojiList: ['😀', '😁', '😂', '😃', '😄', '😅', '😆', '😉', '😊', '😋', '😎', '😍', '😘', '😗', '😚', '😙', '😇', '😐', '😑', '😶', '😏', '😣', '😥', '😮', '😯', '😪', '😫', '😴', '😌', '😛', '😜', '😝', '😒', '😓', '😔', '😕', '😲', '😷', '😖', '😞', '😟', '😤', '😢', '😭', '😦', '😧', '😨', '😬', '😰', '😱', '😳', '😵', '😡', '😠', '😭', '😢', '😔', '😱', '😌', '💛', '🙂', '😒', '😜', '👍︎', '👏', '💪', '👌', '❤️', '💕']
     }
   },
   watch: {
