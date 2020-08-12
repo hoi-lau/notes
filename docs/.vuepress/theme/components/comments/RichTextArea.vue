@@ -2,7 +2,7 @@
   <div class="text-area">
     <textarea v-model="value" spellcheck autocomplete="on" maxlength="2048" placeholder="支持markdown" rows="10" class="rich-text"></textarea>
     <div @click="selectEmoji($event)">
-      <span v-for="(item, index) in emojiList" :key="index" class="emoji">{{ item }}</span>
+      <span v-for="(item, index) in emojiList" :key="index" :data-index="index" class="emoji">{{ item }}</span>
     </div>
   </div>
 </template>
@@ -16,7 +16,12 @@ export default {
     }
   },
   methods: {
-    selectEmoji(e) {}
+    selectEmoji(e) {
+      const index = e.srcElement.dataset['index']
+      if (index) {
+        this.value += this.emojiList[index]
+      }
+    }
   }
 }
 </script>
@@ -26,6 +31,7 @@ export default {
   position relative
   border 1px solid #eee
   border-radius 4px
+  padding 0.15rem
 .rich-text 
   width 100%
   box-sizing border-box
