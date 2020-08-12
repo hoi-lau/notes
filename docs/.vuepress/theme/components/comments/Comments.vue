@@ -2,6 +2,7 @@
   <div class="comments-wrapper">
     <!-- this is Comments -->
     <ClientOnly>
+      <div class="opinion">我要发表看法</div>
       <RichTextArea />
     </ClientOnly>
   </div>
@@ -30,3 +31,8 @@ export default {
   }
 }
 </script>
+<style lang="stylus" scoped>
+.opinion
+  font-size 1.2rem
+  padding 0.2rem
+</style>
