@@ -57,6 +57,7 @@ import moduleTransitonMixin from '../mixins/moduleTransiton'
 import Comments from './comments/Comments'
 import posts from '../mixins/posts'
 import http from '../util/api'
+import GlobalBus from './store'
 export default {
   mixins: [moduleTransitonMixin, posts],
   components: { PageInfo, ModuleTransition, Comments},
@@ -104,6 +105,9 @@ export default {
   mounted() {
     this.initCodeCopy()
     this.fetchCommentsData()
+    GlobalBus.subscribe('reFetchComment', () => {
+      this.fetchCommentsData()
+    })
   },
 
   watch: {
