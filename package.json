@@ -20,6 +20,7 @@
     "watchpack": "1.6.1"
   },
   "dependencies": {
+    "marked": "^1.1.1",
     "vue-click-outside": "^1.1.0"
   }
 }

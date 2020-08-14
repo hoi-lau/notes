@@ -26,7 +26,7 @@
       </div>
       <div class="align-right btn-wrapper">
         <button class="primary-btn preview" @click="parsePlain()">预览</button>
-        <button class="primary-btn submit" @click="submit()">提交</button>
+        <button class="primary-btn submit" @click="submit()">{{ submitText }}</button>
       </div>
       <ModuleTransition>
         <div class="preview-container" v-show="showPreview" v-html="parseResult"></div>
@@ -42,6 +42,12 @@ import http from '../../util/api'
 import GlobalBus from '../store'
 export default {
   components: {ModuleTransition},
+  props: {
+    submitText: {
+      type: String,
+      default: () => '提交'
+    }
+  },
   data() {
     return {
       parseResult: '',
