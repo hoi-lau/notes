@@ -18,7 +18,7 @@ Jenkins是基于java开发的一个免费而强大的持续集成工具，用于
 
 ```sh
 # 先拉取镜像, 推荐使用这个镜像
-docker pull jenkinsci/blueocean
+sudo docker pull jenkinsci/blueocean
 
 # 创建容器卷,数据持久化
 sudo docker volume create jenkins-docker-certs
@@ -27,8 +27,8 @@ sudo docker volume create jenkins-data
 # 可选
 # 为了在Jenkins节点内执行Docker命令，请docker:dind使用以下docker container run 命令下载并运行Docker映像
 # 关闭容器后删除容器 --rm \
-docker network create jenkins
-docker container run \
+sudo docker network create jenkins
+sudo docker run \
   -u root \
   --rm \
   --name jenkins-docker \
@@ -42,7 +42,7 @@ docker container run \
   --publish 2376:2376 \
   docker:dind
 # 运行Jenkins容器 --env DOCKER_HOST=tcp://docker:2376 \  --publish 50000:50000 \ --network jenkins \   
-docker container run \
+sudo docker run \
   -u root \
   --rm \
   --name jenkins-blueocean \
@@ -51,7 +51,7 @@ docker container run \
   --env DOCKER_CERT_PATH=/certs/client \
   --env DOCKER_TLS_VERIFY=1 \
   --network jenkins \
-  --publish 8011:8080 \
+  --publish 8080:8080 \
   --volume /data/jenkins_ssh:/root \
   --volume jenkins-data:/var/jenkins_home \
   --volume /var/run/docker.sock:/var/run/docker.sock \
@@ -83,7 +83,7 @@ http://mirror.esuni.jp/jenkins/updates/update-center.json
 ```sh
 docker exec -it jenkins-blueocean sh
 ssh-keygen -t rsa -b 4096 -m PEM
-cat ~/ssh/id_rsa.pub
+cat ~/.ssh/id_rsa.pub
 # 将公钥复制到目标服务器用户目录下authorized_keys文件中 ~/.ssh/authorized_keys
 # 目标服务器要支持私钥登录
 cat ~/.ssh/id_rsa

@@ -315,8 +315,6 @@ flush privileges;
 docker run -p 80:80 --name nginx -v /data/nginx/www:/usr/share/nginx/html -v /data/nginx/nginx.conf:/etc/nginx/nginx.conf -v /data/nginx/logs:/var/log/nginx -d nginx
 ```
 
-
-
 ## docker网络
 
 ## 遇到过的问题
