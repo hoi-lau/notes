@@ -23,8 +23,26 @@ publish: false
 
 兼容性太差!!!
 
-## 让滚动更丝滑
+## 滚动
 
-scroll-behavior smooth
+### 让滚动更丝滑
 
-scrollIntoView
+```css
+html,body {
+  scroll-behavior: smooth
+}
+```
+
+或者使用dom api`scrollIntoView`
+
+## 图片
+
+## element
+
+### 宽度
+
+element.scrollWidth  内容+内边距+溢出尺寸-----**不包括边框和外边距** ==实际内容
+
+element.offsetWidth 元素的宽度（**内容+内边距+边框+滚动条**）==整体，整个控件
+
+element.clientWidth  内容+内边距,-----**不包括边框和外边距、滚动条** == 可视内容
