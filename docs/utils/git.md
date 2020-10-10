@@ -5,6 +5,7 @@ categories:
  - utils
 tags:
  - git
+publish: false
 ---
 
 > 生成公私钥: ssh-keygen -o -t rsa -b 4096 -C "im.liukai2333@gmail.com"
@@ -37,15 +38,13 @@ tags:
 
 *14* . ` git push --set-upstream origin dev-liuk `第一次提交分支
 
-*15*. 生成公钥`  ssh-keygen -t rsa -C  "im.liukai2333@gmail.com" `
+*15*. 为commit加上标签 ` git tag -a v1.0 -m "ababa"`, 标签默认打在最新的commit上,为某次commit打标签 `git tag v0.9 f52c633`, 将标签推送,` git push origin v1.0(--tags 推送全部标签)`
 
-*16*. 为commit加上标签 ` git tag -a v1.0 -m "ababa"`, 标签默认打在最新的commit上,为某次commit打标签 `git tag v0.9 f52c633`, 将标签推送,` git push origin v1.0(--tags 推送全部标签)`
+*16*. 生成ssh key`ssh-keygen -t rsa -b 4096 -C "your_email@example.com"`
 
-*17*. 生成ssh key`ssh-keygen -t rsa -b 4096 -C "your_email@example.com"`
+*17*. 查看分支图` git log --oneline --decorate --graph --all `
 
-*18*. 查看分支图` git log --oneline --decorate --graph --all `
-
-*19*.  `git merge --no-ff FETCH_HEAD`
+*18*.  `git merge --no-ff FETCH_HEAD`
 
 ## git分支
 
@@ -53,7 +52,9 @@ tags:
 
 `git push --set-upstream origin dev`
 
-##### git clone时提示不支持https:删除clone后的空格然后补全
+git clone时提示不支持https:删除clone后的空格然后补全
+
+常用技巧
 
 ## .gitignore示例
 

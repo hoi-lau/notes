@@ -8,6 +8,7 @@ date: 2020-07-31
 
 ```sh
 sudo docker volume create nexus-repo
+sudo docker volume create nexus-data
 sudo docker run --rm -d -p 7777:8081  --name=nexus --privileged=true  -v nexus-data:/nexus-data sonatype/nexus3:latest
 ```
 

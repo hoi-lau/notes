@@ -24,6 +24,8 @@ publish: false
 -  electron  typescript
 -  seo UI库
 -  首屏优化,骨架屏,小恐龙,nginx gzip
+-  人工智能+前端?
+-  node ppt
 
  https://juejin.im/post/5ebd283be51d454da74186f1?utm_source=gold_browser_extension 
 

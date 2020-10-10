@@ -143,6 +143,8 @@ module.exports = {
 
 ```
 
+### cache-loader
+
 ## 代码分割
 
 ### [配置externals ](<https://www.webpackjs.com/configuration/externals/#externals>)
@@ -212,6 +214,12 @@ module.exports = {
 作用: 从js中抽离css
 
 ` npm i mini-css-extract-plugin -D `
+
+## module
+
+### `noParse` 
+
+防止`webpack`解析指定文件或库, 可以加快打包速度.
 
 
 

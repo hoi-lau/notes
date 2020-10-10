@@ -75,6 +75,8 @@ docker search node
 docker pull node
 # 删除镜像
 docker rmi image-id
+# 删除<none>镜像
+docker rmi $(docker images | grep "none" | awk '{print $3}')
 # 如果删除镜像已经被其他镜像依赖,则无法删除
 # 查看依赖项since=images_id
 docker image inspect --format='{{.RepoTags}} {{.Id}} {{.Parent}}' $(docker image ls -q --filter since=a02c9f46f94a)
