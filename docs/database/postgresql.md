@@ -7,25 +7,51 @@ tags:
 publish: false
 ---
 
-## postgresql
-
-### 安装
+## 安装
 
 ``` shell
-brew install postgresql
+# brew install postgresql
+docker volume create postgre
+docker run --rm --name postgres -v postgre:/var/lib/postgresql/data -p 3366:5432 -e POSTGRES_PASSWORD=A,ad17OlqaLBnh -d postgres
 ```
 
-安装成功后会自动初始化
+## 服务器管理
 
-### createdb
+### psql
 
-创建名为` test`的数据库
+使用`psql`客户端管理`postgresql`数据库
 
-```shell
-createdb test
+```sh
+# 进入容器
+docker exec -it postgres bash
+psql -U postgres
+# help
+\h
 ```
 
-### 允许远程访问
+### database
+
+```sh
+# 创建test数据库
+create database test;
+# 查询所有的数据库
+SELECT datname FROM pg_database;
+# 删除test数据库
+drop database test;
+```
+
+
+
+### 用户管理
+
+```sh
+# 创建一个带有LOGIN属性的角色
+create user liuk password '123456';
+```
+
+## tips
+
+### 手动安装允许远程访问
 
 修改data目录下的pg_hba.conf和postgresql.conf配置文件
 

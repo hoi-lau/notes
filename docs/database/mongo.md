@@ -1,5 +1,5 @@
 ---
-db.createUser({ user: "liukai", pwd: "123456", roles: [{ role: "readWrite", db: "meteor" }] })title: mongo
+title: mongo
 categories:
  - database
 tags:
