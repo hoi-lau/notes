@@ -1,4 +1,4 @@
-const http = ({data, url, method = 'get'}) => {
+const http = ({data={}, url, method = 'get'}) => {
   return new Promise((resolve, reject) => {
     const origin = location.origin + '/api/'
     const xhr = new XMLHttpRequest()
