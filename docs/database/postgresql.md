@@ -40,8 +40,6 @@ SELECT datname FROM pg_database;
 drop database test;
 ```
 
-
-
 ### 用户管理
 
 ```sh

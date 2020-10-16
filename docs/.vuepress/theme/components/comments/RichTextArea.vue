@@ -153,6 +153,7 @@ export default {
       const form = Object.assign({}, this.form)
       form.path = location.pathname
       form.nickname = this.form.nickname || 'Anonymous'
+      form.parentId = 0
       http({
         url: 'comment',
         method: 'post',
