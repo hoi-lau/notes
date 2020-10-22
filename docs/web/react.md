@@ -7,6 +7,19 @@ tags:
 publish: false
 ---
 
+## init
+
+使用`create-react-app`快速搭建
+
+```sh
+npm i create-react-app -g 
+npx create-react-app app --typescript 
+cd app
+npm run start
+# 暴露配置文件
+npm run eject
+```
+
 ## start
 
 ```jsx
@@ -18,8 +31,6 @@ ReactDOM.render(
 ```
 
 ## jsx
-
-` eg: `
 
 ```jsx
 const name = 'world'
