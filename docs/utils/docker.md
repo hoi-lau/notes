@@ -317,6 +317,13 @@ flush privileges;
 docker run -p 80:80 --name nginx -v /data/nginx/www:/usr/share/nginx/html -v /data/nginx/nginx.conf:/etc/nginx/nginx.conf -v /data/nginx/logs:/var/log/nginx -d nginx
 ```
 
+### 安装redis
+
+```sh
+docker volume create redis
+docker run --rm -d -v redis:/data --name redis -p 6379:6379 redis --requirepass 123456
+```
+
 ## docker网络
 
 ## 遇到过的问题
