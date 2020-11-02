@@ -9,8 +9,14 @@ const http = ({data={}, url, method = 'get'}) => {
     xhr.send(data)
     xhr.onreadystatechange = (e) => {
       if (xhr.readyState === 4) {
-        const data = JSON.parse(xhr.responseText)
-        data.code === 0 ? resolve(data) : reject(data)
+        try {
+          const data = JSON.parse(xhr.responseText)
+          data.code === 0 ? resolve(data) : reject(data)
+        } catch (error) {
+          reject({
+            msg: error
+          })          
+        }
       }
     }
   })

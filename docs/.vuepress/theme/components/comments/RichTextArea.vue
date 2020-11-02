@@ -244,4 +244,6 @@ export default {
   margin-left: 1.5rem
 .preview-container
   padding 0.5rem
+  overflow hidden
+  word-break break-all
 </style>

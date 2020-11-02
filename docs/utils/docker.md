@@ -39,7 +39,7 @@ sudo systemctl restart docker
 跟随系统启动
 
 ```shell
-$ systemctl enable docker
+sudo systemctl enable docker
 ```
 
 ## concept

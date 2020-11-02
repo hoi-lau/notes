@@ -252,3 +252,14 @@ export function numberFormat(num) {
   model !== 0 ? ret = source.substring(0, model) + ret : ret = ret.substring(1, ret.length)
   return ret
 }
+
+export function date2Str(originDate) {
+  let result = ''
+  try {
+    let date = new Date(originDate)
+    result = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} `
+  } catch (error) {
+    console.error(error)
+  }
+  return result
+}
