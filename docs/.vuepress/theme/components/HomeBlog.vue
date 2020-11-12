@@ -4,7 +4,7 @@
       <div
         class="mask"
         :style="{
-      background: `url(${$frontmatter.bgImage ? $withBase($frontmatter.bgImage) : 'https://s1.ax1x.com/2020/07/05/USrh1P.jpg'}) center/cover no-repeat`}"></div>
+      background: `url(${bgLoadDown ? 'https://s1.ax1x.com/2020/11/11/BXnViT.jpg' : 'https://s1.ax1x.com/2020/11/11/BXnAoV.jpg'}) center/cover no-repeat`}"></div>
       <ModuleTransition>
         <img
           v-if="showModule && $frontmatter.heroImage"
@@ -85,7 +85,8 @@ export default {
       recoShow: false,
       currentPage: 1,
       tags: [],
-      categoryList: []
+      categoryList: [],
+      bgLoadDown: false
     }
   },
   computed: {
@@ -136,7 +137,7 @@ export default {
       }
       return 1
     })
-
+    this.loadBgImg()
   },
   methods: {
     // 获取当前页码
@@ -163,6 +164,16 @@ export default {
       this.currentPage = page
       this.$page.currentPage = page
       this._setStoragePage(page)
+    },
+    loadBgImg() {
+      const imgNode = document.createElement('img')
+      imgNode.classList.add('hidden')
+      imgNode.src = 'https://s1.ax1x.com/2020/11/11/BXnViT.jpg'
+      document.body.appendChild(imgNode)
+      imgNode.onload = e => {
+        this.bgLoadDown = true
+        document.body.removeChild(imgNode)
+      }
     },
     getOneColor
   }

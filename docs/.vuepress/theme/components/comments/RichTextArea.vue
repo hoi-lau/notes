@@ -1,12 +1,13 @@
 <template>
   <ModuleTransition>
     <div class="text-area">
+      <div></div>
       <textarea
         v-model="form.comment"
+        :placeholder="placeholderText"
         spellcheck
         autocomplete="on"
         maxlength="2048"
-        placeholder="支持markdown"
         rows="10"
         class="rich-text"
       ></textarea>
@@ -46,6 +47,10 @@ export default {
     submitText: {
       type: String,
       default: () => '提交'
+    },
+    placeholderText: {
+      type: String,
+      default: () => '支持markdown'
     }
   },
   data() {
@@ -171,9 +176,10 @@ export default {
 <style scoped lang="stylus">
 .text-area
   position relative
-  border 1px solid #eee
+  // border 1px solid #eee
   border-radius 4px
   padding 0.15rem
+  box-shadow 0 1px 3px rgb(18 18 18 / 10%)
 .rich-text
   width 100%
   box-sizing border-box
@@ -186,8 +192,9 @@ export default {
   padding 0 0.2rem
   font-size 1.3rem
   cursor pointer
+  user-select none
   &:hover
-    outline auto
+    outline 1px solid #409eff
 
 .input-wrapper
   padding 1rem
@@ -199,13 +206,14 @@ export default {
   border none
   outline none
   height 2rem
-
+button.preview
+  margin-right 1.5rem
 @media screen and (max-width: 540px){
   .input-wrapper>input{
     width: 100%
   }
   button.preview {
-    margin-left: 0
+    margin-left 0
   }
 }
 .align-right
@@ -246,4 +254,18 @@ export default {
   padding 0.5rem
   overflow hidden
   word-break break-all
+
+.reply-tags
+  background-color: #ecf5ff;
+  display: inline-block;
+  height: 32px;
+  padding: 0 10px;
+  line-height: 30px;
+  font-size: 12px;
+  color: #409eff;
+  border: 1px solid #d9ecff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  cursor pointer
 </style>

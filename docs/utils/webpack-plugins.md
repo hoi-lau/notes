@@ -5,6 +5,7 @@ categories:
  - utils
 tags:
  - webpack
+publish: false
 ---
 
 ## clean-webpack-plugin
