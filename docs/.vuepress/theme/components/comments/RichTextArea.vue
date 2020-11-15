@@ -51,6 +51,10 @@ export default {
     placeholderText: {
       type: String,
       default: () => '支持markdown'
+    },
+    replyId: {
+      type: Number,
+      default: () => 0
     }
   },
   data() {
@@ -141,7 +145,21 @@ export default {
       if (this.showPreview) this.parseResult = Marked(this.form.comment)
     }
   },
+  mounted() {
+    this.init()
+  },
   methods: {
+    init() {
+      if (localStorage.getItem('website')) {
+        this.form.website = localStorage.getItem('website')
+      }
+      if (localStorage.getItem('email')) {
+        this.form.email = localStorage.getItem('email')
+      }
+      if (localStorage.getItem('nickname')) {
+        this.form.nickname = localStorage.getItem('nickname')
+      }
+    },
     selectEmoji(e) {
       const index = e.srcElement.dataset['index']
       if (index) {
@@ -158,7 +176,7 @@ export default {
       const form = Object.assign({}, this.form)
       form.path = location.pathname
       form.nickname = this.form.nickname || 'Anonymous'
-      form.parentId = 0
+      form.parentId = this.replyId
       http({
         url: 'comment',
         method: 'post',
@@ -166,8 +184,19 @@ export default {
       }).then(res => {
         if (res.code === 0) {
           GlobalBus.publish('reFetchComment')
+          GlobalBus.publish('msg', '评论发布成功.')
+        } else {
+          GlobalBus.publish('msg', `评论发布失败: ${res.msg}.`)
         }
+        this.clearContent()
       }).catch(error => {console.log(error)})
+    },
+    clearContent() {
+      this.form.comment = ''
+      this.$emit('resetReplyId')
+      if (this.form.nickname) localStorage.setItem('nickname', this.form.nickname)
+      if (this.form.website) localStorage.setItem('website', this.form.website)
+      if (this.form.email) localStorage.setItem('email', this.form.email)
     }
   }
 }

@@ -3,7 +3,7 @@
     <!-- this is Comments -->
     <ClientOnly>
       <div id="comments" class="opinion">发表评论</div>
-      <RichTextArea :placeholder-text="placeholderText" />
+      <RichTextArea :placeholder-text="placeholderText" :reply-id="replyId" @resetReplyId="resetReplyId"/>
       <!-- render comment list -->
       <div class="comments-list-wrapper">
         <template v-if="commentsData.length > 0">
@@ -38,7 +38,7 @@
                   <div class="header-main">
                     <div class="font-bold nick-name">
                       <span>{{ child.nickname || 'anonymous'}}</span>
-                      <span>回复</span>
+                      <span class="comment-item-reply">回复</span>
                       <span>{{ getParentNickName(child.parentId) || 'anonymous' }}</span>
                     </div>
                     <div class="human-bottom">
@@ -78,7 +78,8 @@ export default {
   },
   data() {
     return {
-      placeholderText: "支持markdown"
+      placeholderText: "支持markdown",
+      replyId: 0
     };
   },
   watch: {
@@ -100,7 +101,12 @@ export default {
       const replyId = e.srcElement.dataset["replyId"];
       // this.
       this.placeholderText = `@ ${this.getParentNickName(replyId)}`;
+      this.replyId = parseInt(replyId)
       // return
+    },
+    resetReplyId() {
+      this.replyId = 0
+      this.placeholderText = '支持markdown'
     },
     getParentNickName(id) {
       let res = "";
@@ -210,7 +216,9 @@ export default {
     border-color: #2c3e50;
   }
 }
-
+.comment-item-reply
+  color #8590a6
+  margin 0 .25rem
 @media (max-width: 400px) {
 }
 </style>
