@@ -18,8 +18,8 @@ class EventBus {
     this.eventInstances.splice(index, 1)
     delete this.sub[str]
   }
-  publish(str) {
-    if (this.sub[str]) this.sub[str].forEach(item => item())
+  publish(str, args) {
+    if (this.sub[str]) this.sub[str].forEach(item => item(args))
   }
   subscribe(str, cb) {
     this.create(str)

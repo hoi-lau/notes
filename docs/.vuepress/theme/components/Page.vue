@@ -108,6 +108,9 @@ export default {
     GlobalBus.subscribe('reFetchComment', () => {
       this.fetchCommentsData()
     })
+    GlobalBus.subscribe('msg', msg => {
+      this.showMessage(msg)
+    })
   },
 
   watch: {

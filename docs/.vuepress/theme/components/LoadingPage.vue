@@ -1,12 +1,10 @@
 <template>
   <div id="loader-wrapper">
-    <div class="loader-main">
+    <!-- <div class="loader-main">
       <div v-for="item in 6" :key="`out${item}`">
       </div>
-    </div>
-    <!-- <p class="title">loading...</p> -->
-    <!-- <h3 class="title" v-if="$frontmatter.home">{{$site.title || $localeConfig.title}}</h3> -->
-    <!-- <p class="description" v-if="$frontmatter.home">{{$site.description || $localeConfig.description}}</p> -->
+    </div> -->
+    <div class="loading-main"></div>
   </div>
 </template>
 
@@ -29,32 +27,33 @@
     z-index:555;
     transform:translate(-50%,0);
     div
-      &:nth-child(2){ animation:pacman-balls 1s 0s infinite linear; }
-      &:nth-child(3){ animation:pacman-balls 1s 0.33s infinite linear; }
-      &:nth-child(4){ animation:pacman-balls 1s 0.66s infinite linear; }
-      &:nth-child(5){ animation:pacman-balls 1s 0.99s infinite linear; }
-      &:first-of-type
-        width:0px;
-        height:0px;
-        display none
-        border-right:25px solid transparent;
-        border-top:25px solid $accentColor;
-        border-left:25px solid $accentColor;
-        border-bottom:25px solid $accentColor;
-        border-radius:25px;
-        animation:rotate_pacman_half_up 0.5s 0s infinite;
-      &:nth-child(2)
-        width:0px;
-        display none
-        height:0px;
-        border-right:25px solid transparent;
-        border-top:25px solid $accentColor;
-        border-left:25px solid $accentColor;
-        border-bottom:25px solid $accentColor;
-        border-radius:25px;
-        animation:rotate_pacman_half_down 0.5s 0s infinite;
-        margin-top:-50px;
-      &:nth-child(3),&:nth-child(4),&:nth-child(5),&:nth-child(6)
+      &:nth-child(1){ animation:pacman-balls 1s 0s infinite linear; }
+      &:nth-child(2){ animation:pacman-balls 1s 0.2s infinite linear; }
+      &:nth-child(3){ animation:pacman-balls 1s 0.4s infinite linear; }
+      &:nth-child(4){ animation:pacman-balls 1s 0.6s infinite linear; }
+      &:nth-child(5){ animation:pacman-balls 1s 0.8s infinite linear; }
+      // &:first-of-type
+      //   width:0px;
+      //   height:0px;
+      //   display none
+      //   border-right:25px solid transparent;
+      //   border-top:25px solid $accentColor;
+      //   border-left:25px solid $accentColor;
+      //   border-bottom:25px solid $accentColor;
+      //   border-radius:25px;
+      //   animation:rotate_pacman_half_up 0.5s 0s infinite;
+      // &:nth-child(2)
+      //   width:0px;
+      //   display none
+      //   height:0px;
+      //   border-right:25px solid transparent;
+      //   border-top:25px solid $accentColor;
+      //   border-left:25px solid $accentColor;
+      //   border-bottom:25px solid $accentColor;
+      //   border-radius:25px;
+      //   animation:rotate_pacman_half_down 0.5s 0s infinite;
+      //   margin-top:-50px;
+      &:nth-child(1),&:nth-child(2),&:nth-child(3),&:nth-child(4),&:nth-child(5),&:nth-child(6)
         background-color:$accentColor;
         width:15px;
         height:15px;
@@ -68,26 +67,6 @@
         left:100px;
       &:nth-child(6)
         display none
-  .title
-    position fixed
-    top 35%
-    // margin 8rem auto 2rem
-    text-align center
-    color $textColor
-    color var(--text-color)
-    font-size 30px
-    box-sizing: border-box;
-    padding: 0 10px;
-    text-shadow 0 2px 10px rgba(0,0,0,0.2)
-  .description
-    margin auto
-    text-align center
-    color $textColor
-    color var(--text-color)
-    font-size 22px
-    box-sizing: border-box;
-    padding: 0 10px;
-    text-shadow 0 2px 10px rgba(0,0,0,0.2);
   @keyframes pacman-balls
     75%{opacity:0.7;}
     100%{-webkit-transform:translate(-100px,-6.25px);transform:translate(-100px,-6.25px);}
@@ -99,4 +78,70 @@
     0%{-webkit-transform:rotate(90deg);transform:rotate(90deg);}
     50%{-webkit-transform:rotate(0deg);transform:rotate(0deg);}
     100%{-webkit-transform:rotate(90deg);transform:rotate(90deg);}
+
+.loading-main
+  position absolute
+  top calc(50% - 1.25em)
+  left calc(50% - 1.25em)
+  width 2.5em
+  height 2.5em
+  transform rotate(165deg)
+  &::before
+    animation before 2s infinite
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 0.25em;
+    transform: translate(-50%, -50%);
+  &::after
+    animation: after 2s infinite;
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 0.25em;
+    transform: translate(-50%, -50%);
+
+@keyframes before {
+  0% {
+    width: 0.5em;
+    box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75), -1em 0.5em rgba(111, 202, 220, 0.75);
+  }
+  35% {
+      width: 2.5em;
+      box-shadow: 0 -0.5em rgba(225, 20, 98, 0.75), 0 0.5em rgba(111, 202, 220, 0.75);
+  }
+  70% {
+      width: 0.5em;
+      box-shadow: -1em -0.5em rgba(225, 20, 98, 0.75), 1em 0.5em rgba(111, 202, 220, 0.75);
+  }
+  100% {
+      box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75), -1em 0.5em rgba(111, 202, 220, 0.75);
+  }
+}
+
+@keyframes after {
+  0% {
+    height: 0.5em;
+    box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75), -0.5em -1em rgba(233, 169, 32, 0.75);
+  }
+  35% {
+      height: 2.5em;
+      box-shadow: 0.5em 0 rgba(61, 184, 143, 0.75), -0.5em 0 rgba(233, 169, 32, 0.75);
+  }
+  70% {
+      height: 0.5em;
+      box-shadow: 0.5em -1em rgba(61, 184, 143, 0.75), -0.5em 1em rgba(233, 169, 32, 0.75);
+  }
+  100% {
+      box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75), -0.5em -1em rgba(233, 169, 32, 0.75);
+  }
+}
 </style>

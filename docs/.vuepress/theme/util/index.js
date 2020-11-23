@@ -252,3 +252,45 @@ export function numberFormat(num) {
   model !== 0 ? ret = source.substring(0, model) + ret : ret = ret.substring(1, ret.length)
   return ret
 }
+
+export function date2Str(originDate) {
+  let result = ''
+  try {
+    let date = new Date(originDate)
+    result = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} `
+  } catch (error) {
+    console.error(error)
+  }
+  return result
+}
+
+const commonDate = {
+  validHours: 24 * 60 * 60 * 1000,
+  validDays: 30 * 24 * 60 * 60 * 1000,
+  hour(h) {
+    return `${h}小时前`
+  },
+  day(d) {
+    return `${d}天前`
+  }
+}
+
+export function humanfulDate(originDate) {
+  let result = ''
+  try {
+    const date = new Date(originDate)
+    const distance = Date.now() - date.getTime()
+    if (distance <= commonDate.validHours) {
+      result = commonDate.hour(Math.ceil(distance / 60 / 60 / 1000))
+    } else if (distance <= commonDate.validDays) {
+      result = commonDate.day(Math.ceil(distance / 24 / 60 / 60 / 1000))
+    } else if (new Date().getFullYear() === date.getFullYear()) {
+      result = `${date.getMonth() + 1}-${date.getDate()} `
+    } else {
+      result = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} `
+    }
+  } catch (error) {
+    console.error(error)
+  }
+  return result
+}

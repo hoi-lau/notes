@@ -12,7 +12,7 @@ publish: false
 ``` shell
 # brew install postgresql
 docker volume create postgre
-docker run --rm --name postgres -v postgre:/var/lib/postgresql/data -p 3366:5432 -e POSTGRES_PASSWORD=A,ad17OlqaLBnh -d postgres
+docker run --rm --name postgres -v postgre:/var/lib/postgresql/data -p 5431:5432 -e POSTGRES_PASSWORD=A,ad17OlqaLBnh -d postgres
 ```
 
 ## 服务器管理

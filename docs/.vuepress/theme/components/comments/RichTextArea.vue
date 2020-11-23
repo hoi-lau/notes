@@ -1,12 +1,13 @@
 <template>
   <ModuleTransition>
     <div class="text-area">
+      <div></div>
       <textarea
         v-model="form.comment"
+        :placeholder="placeholderText"
         spellcheck
         autocomplete="on"
         maxlength="2048"
-        placeholder="支持markdown"
         rows="10"
         class="rich-text"
       ></textarea>
@@ -46,6 +47,14 @@ export default {
     submitText: {
       type: String,
       default: () => '提交'
+    },
+    placeholderText: {
+      type: String,
+      default: () => '支持markdown'
+    },
+    replyId: {
+      type: Number,
+      default: () => 0
     }
   },
   data() {
@@ -136,7 +145,21 @@ export default {
       if (this.showPreview) this.parseResult = Marked(this.form.comment)
     }
   },
+  mounted() {
+    this.init()
+  },
   methods: {
+    init() {
+      if (localStorage.getItem('website')) {
+        this.form.website = localStorage.getItem('website')
+      }
+      if (localStorage.getItem('email')) {
+        this.form.email = localStorage.getItem('email')
+      }
+      if (localStorage.getItem('nickname')) {
+        this.form.nickname = localStorage.getItem('nickname')
+      }
+    },
     selectEmoji(e) {
       const index = e.srcElement.dataset['index']
       if (index) {
@@ -153,7 +176,7 @@ export default {
       const form = Object.assign({}, this.form)
       form.path = location.pathname
       form.nickname = this.form.nickname || 'Anonymous'
-      form.parentId = 0
+      form.parentId = this.replyId
       http({
         url: 'comment',
         method: 'post',
@@ -161,8 +184,19 @@ export default {
       }).then(res => {
         if (res.code === 0) {
           GlobalBus.publish('reFetchComment')
+          GlobalBus.publish('msg', '评论发布成功.')
+        } else {
+          GlobalBus.publish('msg', `评论发布失败: ${res.msg}.`)
         }
+        this.clearContent()
       }).catch(error => {console.log(error)})
+    },
+    clearContent() {
+      this.form.comment = ''
+      this.$emit('resetReplyId')
+      if (this.form.nickname) localStorage.setItem('nickname', this.form.nickname)
+      if (this.form.website) localStorage.setItem('website', this.form.website)
+      if (this.form.email) localStorage.setItem('email', this.form.email)
     }
   }
 }
@@ -171,9 +205,10 @@ export default {
 <style scoped lang="stylus">
 .text-area
   position relative
-  border 1px solid #eee
+  // border 1px solid #eee
   border-radius 4px
   padding 0.15rem
+  box-shadow 0 1px 3px rgb(18 18 18 / 10%)
 .rich-text
   width 100%
   box-sizing border-box
@@ -186,8 +221,9 @@ export default {
   padding 0 0.2rem
   font-size 1.3rem
   cursor pointer
+  user-select none
   &:hover
-    outline auto
+    outline 1px solid #409eff
 
 .input-wrapper
   padding 1rem
@@ -199,13 +235,14 @@ export default {
   border none
   outline none
   height 2rem
-
+button.preview
+  margin-right 1.5rem
 @media screen and (max-width: 540px){
   .input-wrapper>input{
     width: 100%
   }
   button.preview {
-    margin-left: 0
+    margin-left 0
   }
 }
 .align-right
@@ -244,4 +281,20 @@ export default {
   margin-left: 1.5rem
 .preview-container
   padding 0.5rem
+  overflow hidden
+  word-break break-all
+
+.reply-tags
+  background-color: #ecf5ff;
+  display: inline-block;
+  height: 32px;
+  padding: 0 10px;
+  line-height: 30px;
+  font-size: 12px;
+  color: #409eff;
+  border: 1px solid #d9ecff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  cursor pointer
 </style>
