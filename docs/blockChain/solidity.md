@@ -207,12 +207,16 @@ contract OracleUser {
 
 类似`hash`表, 但是无法获取`key or value`的集合,可以自己实现.
 
+`key `可以是除了映射、变长数组、合约、枚举以及结构体以外的几乎所有类型 .
+
 ```solidity
 // address 映射到 uint
 mapping(address => uint) public balances;
 ```
 
-## 字符串拼接
+## 常用工具
+
+### 字符串拼接
 
 原生并不支持字符串拼接,需要自己实现,思路: **将`string`转化为`bytes`**.
 
@@ -229,7 +233,7 @@ function strConcat(string _a, string _b) internal pure returns (string){
 }
 ```
 
-## uint转string
+### uint转string
 
 ```solidity
 function uint2str(uint i) internal pure returns (string) {
@@ -237,20 +241,30 @@ function uint2str(uint i) internal pure returns (string) {
     uint j = i;
     uint length;
     while (j != 0){
-    length++;
-    j /= 10;
+        length++;
+        j /= 10;
     }
     bytes memory bstr = new bytes(length);
     uint k = length - 1;
     while (i != 0){
-    bstr[k--] = byte(48 + i % 10);
-    i /= 10;
+        bstr[k--] = byte(48 + i % 10);
+        i /= 10;
     }
     return string(bstr);
 }
 ```
 
+### 固定长度的bytes转化为string
 
+```solidity
+function byte32ToString(bytes32 b) internal pure returns (string) {
+    bytes memory ret = new bytes(b.length);
+    for(uint i = 0; i < b.length; i++) {
+    	ret[i] = b[i];
+    }
+    return string(ret);
+}
+```
 
 ## 编译合约
 

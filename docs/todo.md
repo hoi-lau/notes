@@ -12,7 +12,6 @@ publish: false
 - Linux shell
 - 数据结构,算法
 - mysql
-- kotlin
 - shiro
 - docker & k8s
 - Tcp
@@ -25,7 +24,7 @@ publish: false
 -  seo UI库
 -  首屏优化,骨架屏,小恐龙,nginx gzip
 -  人工智能+前端?
--  node ppt
+-  mock-server, （websocket(number)?httpmethod?utils?docker?{trash,explorers,analysis,export,import,sync other,password,electron,settings,multip-server?memory?lang?})
 
  https://juejin.im/post/5ebd283be51d454da74186f1?utm_source=gold_browser_extension 
 
