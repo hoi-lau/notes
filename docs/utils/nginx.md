@@ -7,7 +7,7 @@ publish: false
 
 ## 配置白名单
 
-```shell
+```conf
 http {
   geo $remote_addr $geo {
     default 0;# 0禁止访问
@@ -22,5 +22,13 @@ http {
     }
   }
 }
+```
+
+## 解析客户端真实ip
+
+```conf
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Real-Port $remote_port;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 ```
 

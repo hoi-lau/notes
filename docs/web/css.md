@@ -81,3 +81,36 @@ element.clientWidth  内容+内边距,-----**不包括边框和外边距、滚�
 思路: clone一份文本并设置` visibility `为 `hidden`,如果该文本高度高于原来的,那么文本溢出了
 
 ## 居中
+
+## 响应式
+
+/ *大屏幕* /
+ @media (min-width: 1200px) { ... }
+
+/ *平板电脑和小屏电脑之间的分辨率* /
+ @media (min-width: 768px) and (max-width: 979px) { ... }
+
+/ *横向放置的手机和竖向放置的平板之间的分辨率* /
+ @media (max-width: 767px) { ... }
+ / *横向放置的手机及分辨率更小的设备* /
+ @media (max-width: 480px) { ... }
+
+## 移动端
+
+禁止缩放
+
+```javascript
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+```
+
+### ios
+
+调出软键盘搜索按钮
+
+```html
+<form action="javascript:return true">
+    <input size="mini" type="search"/>
+</form>
+```
+
