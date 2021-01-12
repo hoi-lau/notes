@@ -27,7 +27,8 @@
       </div>
       <div class="align-right btn-wrapper">
         <button class="primary-btn preview" @click="parsePlain()">预览</button>
-        <button class="primary-btn submit" @click="submit()">{{ submitText }}</button>
+        <!-- 节流 -->
+        <button class="primary-btn submit" :class="loading" @click="submit()">{{ submitText }}</button>
       </div>
       <ModuleTransition>
         <div class="preview-container" v-show="showPreview" v-html="parseResult"></div>
