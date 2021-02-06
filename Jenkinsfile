@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo '---building---'
-                sh 'docker run --rm -v npm-repo:/root/.npm -v $(pwd):/root/app node:alpine sh -c "cd /root/app&&npm i --registry https://registry.npm.taobao.org&&npm run build"'
+                sh 'docker run --rm -v npm-repo:/root/.npm -v $(pwd):/root/app node:alpine sh -c "cd /root/app&&npm i --registry https://registry.npm.taobao.org&&rm -f package-lock.json&&npm run build"'
             }
         }
         stage('Test') {
