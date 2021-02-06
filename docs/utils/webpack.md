@@ -1,6 +1,6 @@
 ---
 title: 从0开始配置webpack
-date: 2018-09-10
+date: 2021-01-10
 categories:
  - utils
 tags:
@@ -22,7 +22,7 @@ mkdir src build public
 # build文件夹下放置webpack配置文件
 ```
 
-## 安装webpack
+## 配置webpack
 
 ```sh
 npm i webpack webpack-cli -D
@@ -37,7 +37,7 @@ npm i html-webpack-plugin@next clean-webpack-plugin copy-webpack-plugin mini-css
 - `html-webpack-plugin@next`:  捆绑js bundle
 - `clean-webpack-plugin`:  每次成功构建后清除旧的构建
 - `copy-webpack-plugin`:  构建时赋值整个目录
-- `mini-css-extract-plugin`:  拆分css文件
+- `mini-css-extract-plugin`:  将css文件从js中分离
 - `css-minimizer-webpack-plugin`:  优化.压缩css
 - `webpack-merge`:  合并webpack配置
 
@@ -51,6 +51,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 module.exports = {
+    // webpack5 需要设置target
+    target: 'web',
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
@@ -69,12 +71,17 @@ module.exports = {
           ]
         }),
         // define global variable
-        new webpack.DefinePlugin(readEnv('.env'))
+        new webpack.DefinePlugin(readEnv('.env')),
+        new MiniCssExtractPlugin({
+          filename: 'css/[name].[contenthash].css'
+        })
   ],
 }
 ```
 
 ### 安装一些关键的loader
+
+> loader的执行顺序是从后到前
 
 ```sh
 npm i style-loader css-loader postcss-loader file-loader url-loader babel-loader -D
@@ -118,6 +125,10 @@ module.exports = webpackMerge.merge(commonConfig, {
 })
 ```
 
+### 关于热更新
+
+> vue-loader, react hot loader, angular HMR 已经实现了热更新, 开发时只需要开启webpack的热更新
+
 ## 添加postcss
 
  autoprefixer可以自动在样式中添加浏览器厂商前缀，避免手动处理样式兼容问题 
@@ -135,11 +146,44 @@ npm install  postcss-loader postcss autoprefixer  -D
 }
 ```
 
+`package.json`新增`browserslist`
+
+```json
+"browserslist": [
+    "> 1%",
+    "last 3 versions",
+    "not ie <= 8"
+]
+```
+
 项目根目录新增`postcss.config.js`
 
 ```js
 module.exports = {
   plugins: [require('autoprefixer')()]
 }
+```
+
+## 添加css预处理器
+
+以`stylus`为例
+
+```sh
+npm install stylus stylus-loader --save-dev
+```
+
+添加`rules`
+
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+// ...
+module: {
+    rules: [
+      {
+        test: /\.(styl|stylus|css)$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'stylus-loader']
+      }
+    ]
+  }
 ```
 
