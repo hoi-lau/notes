@@ -7,7 +7,7 @@ module.exports = {
     ['link', {name: 'applicable-device', content: 'pc,mobile'}],
     ['meta', {name: 'google', content: 'notranslate'}],
     ['meta', {name: 'description', content: '刘凯的个人站点'}],
-    ['meta', {name: 'viewport', content: 'initial-scale=1.0,width=device-width'}],
+    ['meta', {name: 'viewport', content: 'initial-scale=1.0,width=device-width,,user-scalable=no,viewport-fit=cover'}],
     ['meta', {'http-equiv': 'Content-Type', content: 'text/html; charset=utf-8'}]
   ],
   port: 4000,
