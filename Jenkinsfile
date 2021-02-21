@@ -16,10 +16,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo '---Deploying---'
-                // sh 'scp Dockerfile blog.sh root@172.17.0.9:/data/blog-backend;'
-                // sh 'scp target/blog-0.0.1-SNAPSHOT.jar root@172.17.0.9:/data/blog-backend/target;'
-                sh 'ssh root@43.128.10.242 "cd /data/nginx/www; rm -rf ./*"'
-                sh 'scp -r .vuepress/dist/* root@43.128.10.242:/data/nginx/www'
+                sh 'ssh root@43.128.10.242 "cd /data/nginx/imliuk; rm -rf ./*"'
+                sh 'scp -r .vuepress/dist/* root@43.128.10.242:/data/nginx/imliuk'
             }
         }
     }
