@@ -1,16 +1,18 @@
 ---
-title: 从0开始配置webpack
+title: (webpack5)从0开始配置webpack
 date: 2021-01-10
 categories:
  - utils
 tags:
- - js
+ - webpack
 publish: false
 ---
 
-> 本文基于webpack5.x. 
+> 基于webpack5.x. 
 
-完整代码: 
+完整代码: <a href="https://github.com/imLiukai/webpack-template" target="_blank">github</a>
+
+## 目录结构
 
 ## 新建一个项目
 
@@ -127,7 +129,73 @@ module.exports = webpackMerge.merge(commonConfig, {
 
 ### 关于热更新
 
-> vue-loader, react hot loader, angular HMR 已经实现了热更新, 开发时只需要开启webpack的热更新
+`vue-loader`, `react hot loader`, `angular HMR` 已经实现了热更新, 开发时只需要开启webpack的热更新, 无需手动实现
+
+## 处理文件
+
+### 图片
+
+```js
+{
+    test: /\.(jpg|png|gif|bmp|jpeg)$/,
+        use: [
+            {
+                loader: 'url-loader',
+                options: {
+                    limit: 8 * 1024,
+                    name: '[hash:8]-[name].[ext]',
+                    outputPath: 'image',
+                    esModule: false
+                }
+            }
+        ]
+},
+```
+
+### 字体
+
+```js
+{
+    test: /\.(ttf|woff2|svg|eot|svg|woff)$/,
+        use: [
+            {
+                loader: 'url-loader',
+                options: {
+                    outputPath: 'font',
+                    esModule: false
+                }
+            }
+        ]
+}
+```
+
+## 配置babel
+
+> bebel只会转换语法,不会转换API. 
+
+```sh
+npm i babel-loader @babel/core @babel/preset-env -D
+```
+
+### 配置rule
+
+```js
+{
+    test: /\.m?js$/,
+    exclude: /node_modules/,
+    use: {
+        loader: "babel-loader",
+        options: {
+        	presets: ['@babel/preset-env']
+        }
+    }
+}
+```
+
+### 两种转换到es5的方式
+
+- polyfill 配合useBuiltIns，常用于web应用的构建；
+- transform-runtime 配合corejs，常用于组件方法类库的开发
 
 ## 添加postcss
 
@@ -180,6 +248,20 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 module: {
     rules: [
       {
+        test: /\.(styl|stylus)$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'stylus-loader'
+          }
+        ]
+      },
+      {
         test: /\.(styl|stylus|css)$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'stylus-loader']
       }
@@ -187,3 +269,77 @@ module: {
   }
 ```
 
+## 配置eslint
+
+使用`eslint`的好处
+
+-  静态分析代码以快速发现问题 
+- 自动修复问题
+- 有利于团队协作
+
+### 安装eslint
+
+```sh
+npm i eslint -D
+# 初始化eslint,根据项目类型选择对应的选项
+npx eslint --init
+
+npx eslint src/**/*.{js} --fix
+```
+
+以一个`vue`项目为例,一个简单的`.eslintrc.js`配置:
+
+```js
+module.exports = {
+  env: {
+    browser: true,
+    es2020: true
+  },
+  extends: [
+    'standard'
+  ],
+  globals: {window: true},
+  parserOptions: {
+    ecmaVersion: 11,
+    sourceType: 'module'
+  },
+  rules: {
+    'no-eval': 0, // 允许eval 0 <==> off
+    'no-unused-expressions': 0,
+    'no-new': 0,
+    'no-sparse-arrays': 0,
+    'handle-callback-err': 0,
+    'standard/no-callback-literal': 0
+  }
+}
+
+```
+
+<a href=" https://eslint.org/docs/rules/" target="_blank">查看完整rules</a>
+
+<a href=" https://github.com/standard/standard/blob/master/docs/RULES-zhcn.md#javascript-standard-style" target="_blank">js代码规范</a>
+
+### 配合githooks做预检查
+
+```sh
+npm i husky lint-staged -D
+```
+
+`package.json`增加配置
+
+```json
+"lint-staged": {
+    "src/**/*.{js}": [
+        "eslint --fix"
+    ]
+},
+"husky": {
+    "hooks": {
+        "pre-commit": "lint-staged"
+    }
+}
+```
+
+配置完之后每次`commit`代码之前,`eslint`都会对**暂存区**的代码进行检查,如果检查不通过将会提交失败.
+
+## 优化构建

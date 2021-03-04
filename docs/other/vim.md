@@ -1,6 +1,6 @@
 ---
-title: vim入门图鉴
-date: 2020-10-30
+title: vim入门
+date: 2018-10-30
 categories: 
  - vim
 ---
