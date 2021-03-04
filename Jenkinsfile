@@ -17,7 +17,7 @@ pipeline {
             steps {
                 echo '---Deploying---'
                 sh 'ssh root@43.128.10.242 "cd /data/nginx/imliuk; rm -rf ./*"'
-                sh 'scp -r .vuepress/dist/* root@43.128.10.242:/data/nginx/imliuk'
+                sh 'scp -r .vuepress/dist/* root@43.128.10.242:/data/nginx/imliuk&&gzip --keep --recursive --best /data/nginx/imliuk'
             }
         }
     }

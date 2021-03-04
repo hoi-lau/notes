@@ -1,12 +1,15 @@
-const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
 
 module.exports = {
-  chainWebpack: (config, isServer) => {
-    config.plugin('CompressionWebpackPlugin').init(() => {
-      return new CompressionWebpackPlugin({
+  configureWebpack: {
+    plugins: [
+      new CompressionPlugin({
+        test: /\.(js|css|html)$/i,
         algorithm: 'gzip',
-        threshold: 8 * 1024
+        compressionOptions: {
+          level: 2
+        }
       })
-    })
+    ]
   }
 }
