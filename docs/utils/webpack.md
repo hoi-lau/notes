@@ -5,7 +5,6 @@ categories:
  - utils
 tags:
  - webpack
-publish: false
 ---
 
 > 基于webpack5.x. 

@@ -7,10 +7,7 @@ publish: false
 
 - java io nio ManagementFactory
 - Spring*,[springAOP之代理模式](https://www.cnblogs.com/teach/p/10763845.html)
-- 数据结构,算法
 - docker & k8s
-- Tcp
-- 指令重排
 - DelegatingFilterProxy
 -  seo  webpack插件
 -  首屏优化,骨架屏,nginx gzip
@@ -21,3 +18,6 @@ publish: false
  https://www.zhihu.com/question/20299384 
 
  https://blog.csdn.net/u014745069/article/details/83820511 
+
+强制踢下线
+

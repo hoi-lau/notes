@@ -1,6 +1,6 @@
 ---
 title: js 原型
-date: 2020-10-13
+date: 2019-10-13
 categories: 
  - web
 tags:
@@ -22,7 +22,7 @@ Object.getPrototypeOf(object1) === object1.__proto__ // true
 
 ### Object.create()
 
- **`Object.create()`**方法创建一个新对象，使用现有的对象来提供新创建的对象的\__proto__。 
+ `Object.create()`方法创建一个新对象，使用现有的对象来提供新创建的对象的\__proto__。 
 
 ```js
 const person = {

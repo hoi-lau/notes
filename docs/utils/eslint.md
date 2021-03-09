@@ -67,6 +67,44 @@ module.exports = {
 
 <a href=" https://github.com/standard/standard/blob/master/docs/RULES-zhcn.md#javascript-standard-style" target="_blank">js代码规范</a>
 
+## 配置.editorconfig
+
+```
+# https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties
+
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.md]
+insert_final_newline = false
+trim_trailing_whitespace = false
+
+[*.js]
+quote_type = single
+```
+
+## 配置.prettierrc.js
+
+```javascript
+module.exports = {
+  trailingComma: 'none',
+  bracketSpacing: true,
+  jsxBracketSameLine: false,
+  singleQuote: true,
+  semi: false,
+  proseWrap: 'preserve',
+  htmlWhitespaceSensitivity: 'css',
+  endOfLine: 'lf'
+}
+```
+
 ## 配合githooks做预检查
 
 ```sh

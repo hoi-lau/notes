@@ -1,5 +1,5 @@
 ---
-title: 分布式账本corda
+title: 分布式账本corda学习
 date: 2020-03-03
 categories:
  - block chain

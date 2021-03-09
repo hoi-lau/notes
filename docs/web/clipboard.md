@@ -8,7 +8,11 @@ tags:
  - js
 ---
 
-需求是需要将网页部分内容复制到剪切板,总结出以下方案
+需要将网页部分内容复制到剪切板,总结出以下方案
+
+1. document.execCommand('copy' )
+2. navigator.clipboard
+3. window.clipboardData
 
 ## document.execCommand('copy' )
 

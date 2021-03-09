@@ -1,5 +1,5 @@
 ---
-title: 使用github webhook + jenkins自动部署
+title: 使用github webhook + jenkins持续集成
 date: 2020-06-29
 categories:
  - utils
@@ -10,7 +10,7 @@ tags:
 
 ## Jenkins
 
-Jenkins是基于java开发的一个免费而强大的持续集成工具，用于监控持续重复的工作，旨在提供一个开放易用的软件平台，使软件的持续集成变成可能。
+Jenkins是基于java开发的一个免费而强大的持续集成工具，用于监控持续重复的工作。
 
 ## 安装jenkins
 
@@ -23,8 +23,8 @@ sudo docker volume create jenkins-docker-certs
 sudo docker volume create jenkins-data
 
 # 可选
-# 为了在Jenkins节点内执行Docker命令，请docker:dind使用以下docker container run 命令下载并运行Docker映像
-# 关闭容器后删除容器 --rm \
+# 为了在Jenkins节点内执行Docker命令
+# 关闭容器后删除容器 --rm
 sudo docker network create jenkins
 sudo docker run \
   -u root \
@@ -83,7 +83,7 @@ docker exec -it jenkins-blueocean sh
 ssh-keygen -t rsa -b 4096 -m PEM
 cat ~/.ssh/id_rsa.pub
 # 将公钥复制到目标服务器用户目录下authorized_keys文件中 ~/.ssh/authorized_keys
-# 目标服务器要支持私钥登录
+# 目标服务器要支持密钥登录
 cat ~/.ssh/id_rsa
 # 复制私钥
 ```
@@ -208,6 +208,8 @@ pipeline {
 
 ###### 阶段级别的 `agent` 部分
 
+
+
 ```groovy
 pipeline {
     agent none 
@@ -220,6 +222,10 @@ pipeline {
             }
         }
         stage('Example Test') {
+            // 可以用来区分多个分支
+            //when {
+            //    branch 'dev' 
+            //}
             agent { docker 'openjdk:8-jre' } 
             steps {
                 echo 'Hello, JDK'
@@ -230,3 +236,4 @@ pipeline {
 }
 ```
 
+### 

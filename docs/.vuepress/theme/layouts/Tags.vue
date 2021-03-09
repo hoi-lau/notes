@@ -88,7 +88,7 @@ export default {
           })
         } else {
           this.$myPosts.forEach(item => {
-            if (item.frontmatter.tags.includes(this.currentTag)) {
+            if (item.frontmatter.tags && item.frontmatter.tags.includes(this.currentTag)) {
               this.filterPosts.push(item)
             }
           })

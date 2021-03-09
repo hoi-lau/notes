@@ -1,11 +1,11 @@
 ---
-title: solidity 不完全指南
+title: solidity 笔记
 categories:
  - block chain
 date: 2020-06-30
 tags:
  - solidity
- - 以太坊
+ - block chain
 meta: 
  - name: description
    content: solidity 不完全指南

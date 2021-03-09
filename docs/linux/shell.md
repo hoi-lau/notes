@@ -372,6 +372,8 @@ sed '2i hello' study.txt
 sed '2c hello' study.txt
 # s替换字符串, 将第二行99替换成98
 sed '2c/99/98/g' study.txt
+# s后面表示分隔符
+sed 's#./#https://imliuk.com/#'
 ```
 
 ### test

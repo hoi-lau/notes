@@ -28,7 +28,7 @@
       <div class="align-right btn-wrapper">
         <button class="primary-btn preview" @click="parsePlain()">预览</button>
         <!-- 节流 -->
-        <button class="primary-btn submit" :class="loading" @click="submit()">{{ submitText }}</button>
+        <button class="primary-btn submit" :loading="loading" @click="submit()">{{ submitText }}</button>
       </div>
       <ModuleTransition>
         <div class="preview-container" v-show="showPreview" v-html="parseResult"></div>
@@ -68,6 +68,7 @@ export default {
         comment: ''
       },
       showPreview: false,
+      loading: false,
       emojiList: [
         '😀',
         '😁',
@@ -178,6 +179,7 @@ export default {
       form.path = location.pathname
       form.nickname = this.form.nickname || 'Anonymous'
       form.parentId = this.replyId
+      this.loading = true
       http({
         url: 'comment',
         method: 'post',
@@ -190,7 +192,7 @@ export default {
           GlobalBus.publish('msg', `评论发布失败: ${res.msg}.`)
         }
         this.clearContent()
-      }).catch(error => {console.log(error)})
+      }).catch(error => {console.log(error)}).finally(() => this.loading = false)
     },
     clearContent() {
       this.form.comment = ''
