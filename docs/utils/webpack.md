@@ -1,5 +1,5 @@
 ---
-title: [webpack5]从0开始配置
+title: 从0配置webpack
 date: 2021-01-10
 categories:
  - utils

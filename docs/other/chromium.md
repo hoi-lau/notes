@@ -1,11 +1,11 @@
 ---
 title: 在macos上调试chromium
 date: 2020-12-24
+publish: false
 categories:
  - web
 tags:
  - chromium
-publish: false
 ---
 
 拉取代码用了1个多小时(需要一个高速代理), 编译用了4~5个小时.(风扇声音巨大, intel i9还是压不住)
