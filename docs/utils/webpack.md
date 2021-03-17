@@ -341,7 +341,6 @@ npm i husky lint-staged -D
 
 配置完之后每次`commit`代码之前,`eslint`都会对**暂存区**的代码进行检查,如果检查不通过将会提交失败.
 
-<<<<<<< HEAD
 ## webpack优化
 
 ### 压缩代码
