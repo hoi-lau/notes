@@ -345,8 +345,112 @@ npm i husky lint-staged -D
 
 ### 压缩代码
 
-### 拆分模块
+**使用`TerserWebpackPlugin`压缩js代码**
 
-## 优化构建
+webpack5 自带 `TerserWebpackPlugin`, 并且默认支持多进程, 可以显著提高编译速度.
 
-// to do
+```js
+const TerserPlugin = require("terser-webpack-plugin");
+
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()]
+  }
+}
+```
+
+**使用compression-webpack-plugin开启gzip压缩**
+
+`npm i compression-webpack-plugin -D`
+
+```js
+const CompressionPlugin = require('compression-webpack-plugin')
+module.exports = {
+  plugins: [
+    new CompressionPlugin()
+  ]
+}
+```
+
+### treeshaking
+
+移除 JavaScript 上下文中的未引用代码, 依赖于 ES2015 模块语法的静态结构特性
+
+webpack默认开启`tree-Shaking`
+
+**side-effect-free:**
+
+1. 将文件标记为`side-effect-free`, 在`package.json`中定义`"sideEffects": ["./src/some-side-effectful-file.js"]`
+2. 将函数标记为`side-effect-free`, 在函数调用前面加上注释`/*#__PURE__*/ fn();`
+
+### 代码分离
+
+#### 入口起点
+
+```js
+module.exports = {
+	entry: {
+    app: {
+      import: pathResolve('src/index.js'),
+      dependOn: 'lodash'
+    },
+    lodash: pathResolve('node_modules/lodash')
+  }
+}
+```
+
+#### 动态代码拆分
+
+```js
+import('lodash').then(({ default: _ }) => {
+    console.log(_)
+})
+```
+
+#### SplitChunksPlugin
+
+webpack5中只需要进行如下配置:
+
+```js
+module.exports = {
+  optimization: {
+    splitChunks: {
+      // 分离异步chunk
+      chunks: 'async',
+      // size大于这个值(gzip前)的三方库将被拆分
+      minSize: 20 * 1024
+    }
+  }
+}
+```
+
+#### bundle分析
+
+`npm i -D  webpack-bundle-analyzer`
+
+```js
+module.exports = {
+	plugins: [
+		new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      reportFilename: pathResolve('report.html'),
+      openAnalyzer: false
+    })
+  ]
+}
+```
+
+### 优化构建
+
+## webpack5新特性
+
+### 官方描述
+
+1. 尝试用持久性缓存来提高构建性能。
+2. 尝试用更好的算法和默认值来改进长期缓存。
+3. 尝试用更好的 Tree Shaking 和代码生成来改善包大小。
+4. 尝试改善与网络平台的兼容性。
+5. 尝试在不引入任何破坏性变化的情况下，清理那些在实现 v4 功能时处于奇怪状态的内部结构。
+6. 试图通过现在引入突破性的变化来为未来的功能做准备，使其能够尽可能长时间地保持在 v5 版本上。
+7. 废弃了V4的一些能力

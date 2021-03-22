@@ -58,7 +58,7 @@ clientHeight,clientWidth: 元素宽高和padding, 不包括边框和margin, 如�
 
 **重绘:**  重绘负责元素的样式更新.重排必然导致重绘
 
-触发条件
+触发条件:  背景颜色等不改变位置
 
 #### 减少repaint reflow
 
@@ -84,5 +84,27 @@ ETag
 If-None-Match
 ```
 
+## 常见问题
 
+### FetchAPI与XHR的区别
 
+### XHR跨域
+
+#### 简单请求
+
+只要同时满足以下两大条件，就属于简单请求
+
+条件1：使用下列方法之一：
+
+1. GET
+2. HEAD
+3. POST
+
+条件2：Content-Type 的值仅限于下列三者之一：
+
+1. text/plain
+2. multipart/form-data
+3. application/x-www-form-urlencoded
+#### 复杂请求
+
+不符合以上条件的请求就肯定是复杂请求了。复杂请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为"预检"请求,该请求是 option 方法的，通过该请求来知道服务端是否允许跨域请求。
