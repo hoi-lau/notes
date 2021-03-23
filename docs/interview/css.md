@@ -82,7 +82,7 @@ BFC就是页面上的一个隔离的独立容器，容器里面的子元素不�
 
 ### flex布局:
 
-1. flex容器有两根轴:水平主轴就是x轴(main axis)和竖直轴也是y轴(cross axis),两轴相关位置标识如下:
+1. flex容器有两根轴:水平主轴就是x轴(main axis)和竖直轴也是y轴(cross axis),两轴相关位置标识如下
 2. flex容器属性:
 
 - flex-direction:决定项目的排列方向。
@@ -186,7 +186,7 @@ parentElement{
 
 ### transition
 
-transition 属性是一个简写属性，用于设置四个过渡属性：
+transition 属性设置元素当过渡效果，四个简写属性为：
 
 - transition-property
 - transition-duration

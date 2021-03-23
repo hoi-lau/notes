@@ -154,6 +154,36 @@ deep: 深度监听，为了发现**对象内部值**的变化，复杂类型的�
 
 ## keep-alive原理
 
+`keep-alive`是一个抽象组件, 它自身不会渲染一个DOM元素，也不会出现在父组件链中；使用keep-alive包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们.**keep-alive用于保存组件的渲染状态**
+
+```xml
+<!-- max: 最多可以缓存多少组件实例 -->
+<keep-alive :include="whiteList" :exclude="blackList" :max="amount">
+     <component :is="currentComponent"></component>
+</keep-alive>
+<keep-alive :include="whiteList" :exclude="blackList" :max="amount">
+    <router-view></router-view>
+</keep-alive>
+```
+
+**keep-alive**内部使用了`LRU`缓存算法,核心代码
+
+```js
+if (cache[key]) {
+  vnode.componentInstance = cache[key].componentInstance
+  // make current key freshest
+  remove(keys, key)
+  keys.push(key)
+} else {
+  cache[key] = vnode
+  keys.push(key)
+  // prune oldest entry
+  if (this.max && keys.length > parseInt(this.max)) {
+    pruneCacheEntry(cache, keys[0], keys, this._vnode)
+  }
+}
+```
+
 ## diff原理
 
 **总结**
@@ -164,7 +194,23 @@ deep: 深度监听，为了发现**对象内部值**的变化，复杂类型的�
 
 - key 的作用 主要是
 
-- - 决定节点是否可以复用
-  - 建立key-index的索引,主要是替代遍历，提升性能 
+- 决定节点是否可以复用
+
+- 建立key-index的索引,主要是替代遍历，提升性能 
+
+## 组件通信方式
+
+### props / $emit
+
+### $emit / $on
+
+同发布订阅
+
+### vuex
+
+### $attrs / $listeners
+
+- `$attrs`：包含了父作用域中不被 prop 所识别 (且获取) 的特性绑定 (class 和 style 除外)。当一个组件没有声明任何 prop 时，这里会包含所有父作用域的绑定 (class 和 style 除外)，并且可以通过 v-bind="$attrs" 传入内部组件。通常配合 interitAttrs 选项一起使用。
+- `$listeners`：包含了父作用域中的 (不含 .native 修饰器的) v-on 事件监听器。它可以通过 v-on="$listeners" 传入内部组件
 
 ## vuex原理
