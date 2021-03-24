@@ -443,6 +443,59 @@ module.exports = {
 
 ### 优化构建
 
+#### 缩小查找范围
+
+`oneOf`, `externals`...
+
+```js
+module.exports = {
+  resolve: {
+    extensions: ['js', 'jsx', 'vue', 'css'],
+    alias: {
+      '@': 'src'
+    },
+    mainFile: ['index']
+  },
+  // 打包时排除这些模块
+  externals: {
+    // 在html中引入cdn链接
+    jquery: 'jQuery'
+  },
+  module: {
+    noParse: /^(vue|lodash)$/,
+  }
+}
+```
+
+#### 构建缓存
+
+`cache-loader`, `babel-loader` ...
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.m?jsx?$/,
+        exclude: /node_modules/,
+        use: [
+          // thread-loader 多进程加速编译
+          'thread-loader',
+          'cache-loader',
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+              presets: ['@babel/preset-env']
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
 ## webpack5新特性
 
 ### 官方描述
