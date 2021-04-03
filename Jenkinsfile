@@ -18,15 +18,7 @@ pipeline {
                 echo '---Deploying---'
                 sh 'tar -cf dist.tar.gz .vuepress/dist/'
                 sh 'scp -r dist.tar.gz root@43.128.10.242:/data/nginx/backup'
-                sh 'ssh root@43.128.10.242 "cd /data/nginx/backup;
-                rm -rf .vuepress;
-                tar -xf dist.tar.gz;
-                rm -rf /data/nginx/imliuk/*;
-                cp -r .vuepress/dist/*  /data/nginx/imliuk/;
-                gzip -r -9 .vuepress/dist/;
-                cp -r .vuepress/dist/*  /data/nginx/imliuk/;
-                cp /data/nginx/study/study.html /data/nginx/imliuk/;
-                cp -r /data/nginx/study/what-is-fe\ \|\ Web\ 前端知识体系_files/ /data/nginx/imliuk/;
+                sh 'ssh root@43.128.10.242 "cd /data/nginx/backup;rm -rf .vuepress;tar -xf dist.tar.gz;rm -rf /data/nginx/imliuk/*;cp -r .vuepress/dist/*  /data/nginx/imliuk/;gzip -r -9 .vuepress/dist/;cp -r .vuepress/dist/*  /data/nginx/imliuk/;cp /data/nginx/study/study.html /data/nginx/imliuk/;cp -r /data/nginx/study/what-is-fe\ \|\ Web\ 前端知识体系_files/ /data/nginx/imliuk/;
                 "'
             }
         }
