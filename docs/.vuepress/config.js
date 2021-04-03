@@ -47,6 +47,10 @@ module.exports = {
         text: 'telegram',
         link: 'https://t.me/im_liukai',
         icon: 'icon-telegram'
+      }, {
+        text: 'fe learn',
+        link: 'https://imliuk.com/study.html'
+        // icon: 'icon-book'
       }]}
     ]
   }

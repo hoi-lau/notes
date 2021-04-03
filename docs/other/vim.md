@@ -1,6 +1,6 @@
 ---
 title: vim入门
-date: 2018-10-30
+date: 2019-03-16
 categories: 
  - vim
 tags:

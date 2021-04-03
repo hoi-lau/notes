@@ -2,4 +2,4 @@
 home: true
 ---
 
-blog powered by vuepress
+前端学习路线: <a href="https://imliuk.com/study.html" target="_blank">https://imliuk.com/study.html</a>

@@ -14,6 +14,9 @@
     <span>
       <a :href="'mailto:' + $themeConfig.email">{{ $themeConfig.email }}</a>
     </span>
+    <span>
+      thanks: <a href="https://www.recoluan.com/" target="_blank">recoluan</a>
+    </span>
     <span v-show="showViewNumber" class="pointer" :title="'浏览量:' + viewNumber">
       <a>
         <i class="iconfont icon-eye" style="color: #3eaf7c;"></i>

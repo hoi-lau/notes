@@ -14,3 +14,4 @@ performance.navigation.type
 - 1. 点击刷新页面按钮或者通过Location.reload()方法显示的页面，type值为1
 - 2. 页面通过历史记录和前进后退访问时。type值为2
 - 255. 任何其他方式，type值为255
+

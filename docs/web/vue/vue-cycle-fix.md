@@ -193,6 +193,4 @@ if (hasOwn(value, '__ob__') && value.__ob__ instanceof Observer) {
 }
 ```
 
-## 总结
 
-vue声明响应式数据阶段处于beforeCreate和created生命周期之间, 对每一个对象创建一个观察者

@@ -386,3 +386,24 @@ Child5.prototype.constructor = Child5;
   - `Boolean`：`true`仅当操作数为两个`true`或两个`false`时才返回`true`。
 
 此运算符与严格等于（`===`）运算符之间最显着的区别在于，严格等于运算符不尝试类型转换。相反，严格相等运算符始终将不同类型的操作数视为不同。
+
+## 函数式编程
+
+### 函数柯里化
+
+```js
+function add () {
+    var args = Array.prototype.slice.call(arguments);
+    var fn = function () {
+        var fn_args = Array.prototype.slice.call(arguments);
+        return add.apply(null, args.concat(fn_args));
+    };
+    fn.valueOf = function () {
+        return args.reduce(function (a, b) {
+            return a + b;
+        });
+    };
+    return fn;
+}
+```
+
