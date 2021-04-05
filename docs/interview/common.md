@@ -58,3 +58,7 @@ function flat(arr) {
 const flat = arr => [].concat(...arr.map(v => Array.isArray(v) ? flat(v) : v));
 ```
 
+## 前端缓存
+
+### h5离线缓存
+
