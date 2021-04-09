@@ -360,6 +360,38 @@ Child5.prototype.constructor = Child5;
 
 ```
 
+### 图片懒加载
+
+- 图片全部加载完成后移除事件监听
+- 加载完的图片，从 imgList 移除
+
+```js
+let imgList = [...document.querySelectorAll('img')]
+let length = imgList.length
+
+const imgLazyLoad = function() {
+    let count = 0
+    return function() {
+        let deleteIndexList = []
+        imgList.forEach((img, index) => {
+            let rect = img.getBoundingClientRect()
+            if (rect.top < window.innerHeight) {
+                img.src = img.dataset.src
+                deleteIndexList.push(index)
+                count++
+                if (count === length) {
+                    document.removeEventListener('scroll', imgLazyLoad)
+                }
+            }
+        })
+        imgList = imgList.filter((img, index) => !deleteIndexList.includes(index))
+    }
+}
+
+// 最好加上防抖处理
+document.addEventListener('scroll', imgLazyLoad)
+```
+
 ## ==比较规则
 
 相等运算符（`==`和`!=`）使用抽象相等比较算法比较两个操作数。可以大致概括如下：
