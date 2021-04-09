@@ -1,5 +1,5 @@
 ---
-title: [转载]证明快速排序的时间复杂度为O(nlogn)？
+title: (转载)证明快速排序的时间复杂度为O(nlogn)？
 date: 2021-04-09
 tags: 
  - algorithm
@@ -41,4 +41,4 @@ categories:
 
 最高阶是`2cn㏒n` 所以就是`O(n㏒n)`了.
 
-原文链接: https://www.zhihu.com/question/22393997/answer/406278523
+原文链接:<a target="_blank" href="https://www.zhihu.com/question/22393997/answer/406278523"> https://www.zhihu.com/question/22393997/answer/406278523</a>
