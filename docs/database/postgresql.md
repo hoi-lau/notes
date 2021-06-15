@@ -24,7 +24,7 @@ docker run --rm --name postgres -v postgre:/var/lib/postgresql/data -p 5431:5432
 ```sh
 # 进入容器
 docker exec -it postgres bash
-psql -U postgres
+psql -U liuk postgres
 # help
 \h
 ```
@@ -63,3 +63,8 @@ host  all    all    192.168.1.0/24    md5
 修改postgresql.conf文件
 
 listen_addresses = '*' 允许数据库服务器监听来自任何主机的连接请求
+
+## doc
+
+### 创建自增id
+
