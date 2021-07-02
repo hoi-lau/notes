@@ -51,6 +51,8 @@ chmod +x ./test.sh
 - **2) 环境变量** 所有的程序，包括shell启动的程序，都能访问环境变量，有些程序需要环境变量来保证其正常运行。必要的时候shell脚本也可以定义环境变量。
 - **3) shell变量** shell变量是由shell程序设置的特殊变量。shell变量中有一部分是环境变量，有一部分是局部变量，这些变量保证了shell的正常运行
 
+> 递归时使用`local`声明变量, 否则上层变量会被下层变量覆盖
+
 ### shell字符串
 
 ### 单引号' '
@@ -91,6 +93,25 @@ echo `expr index "${my_name}" iu`
 ## 2
 ```
 
+### 字符串切割
+
+```sh
+#!/bin/bash
+str='this is a good question, hello shell, look at me, show your enthusiasm'
+i=1
+while((1==1))
+do
+  splitchar=`echo $str|cut -d "," -f$i`
+  if [ "$splitchar" != "" ]
+  then
+      ((i++))
+      echo $splitchar
+  else
+      break
+  fi
+done
+```
+
 ### shell数组
 
 只支持一维数组
@@ -104,8 +125,6 @@ echo ${my_name[@]}
 # 获取数组的长度
 echo ${#my_name[@]}
 ```
-
-
 
 ## shell基础
 
@@ -304,6 +323,12 @@ SHELL_PATH=$(dirname $(readlink -f "$0"))
 输出命令
 
 -e: 支持反斜线控制的字符转换(转义字符)
+
+双引号""保留空格
+
+```sh
+echo "$tmp"
+```
 
 | 控制字符 | 用途                 |
 | -------- | -------------------- |
