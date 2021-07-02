@@ -1,11 +1,11 @@
 ---
 title: solidity 笔记
 categories:
- - block chain
+ - blockchain
 date: 2020-06-30
 tags:
  - solidity
- - block chain
+ - blockchain
 meta: 
  - name: description
    content: solidity 不完全指南
