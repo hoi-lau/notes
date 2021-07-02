@@ -295,8 +295,8 @@ mysql -uroot -p
 #123456 agQBD1^Hq
 GRANT ALL ON *.* TO 'root'@'%';
 flush privileges;
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'password' PASSWORD EXPIRE NEVER;
-ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'agQBD1^Hq' PASSWORD EXPIRE NEVER;
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'agQBD1^Hq';
 flush privileges;
 
 ```

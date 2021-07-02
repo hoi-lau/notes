@@ -68,3 +68,30 @@ listen_addresses = '*' 允许数据库服务器监听来自任何主机的连接
 
 ### 创建自增id
 
+## driver
+
+#### nodejs
+
+```sh
+npm i pg
+# driver
+```
+
+#### connecting
+
+```js
+const { Pool, Client } = require('pg')
+const pool = new Pool({
+  user: 'liuk',
+  host: 'localhost',
+  database: 'blog-cms',
+  password: '123456',
+  port: 5432,
+})
+pool.query('SELECT NOW()', (err, res) => {
+  console.log(err, res)
+  pool.end()
+})
+```
+
+**必须在相同的client实例上使用事务!!**

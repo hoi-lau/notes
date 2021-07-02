@@ -24,3 +24,8 @@ React 的组件可以定义为 class 或函数的形式。class 组件目前提�
 ## React-Router
 
 ## Redux
+
+```sh
+npm i @types/react-redux react-redux redux
+```
+
