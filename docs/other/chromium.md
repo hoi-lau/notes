@@ -1,14 +1,13 @@
 ---
 title: 在macos上调试chromium
-date: 2020-12-24
-publish: false
+date: 2021-08-01
 categories:
  - web
 tags:
  - chromium
 ---
 
-拉取代码用了1个多小时(需要一个高速代理), 编译用了4~5个小时.(风扇声音巨大, intel i9还是压不住)
+>在macos上学习调试chromium
 
 ## 环境
 
@@ -31,6 +30,7 @@ git config --global --unset https.proxy
 
 ```sh
 git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+# wait...
 ```
 
 添加到环境变量
@@ -65,4 +65,21 @@ gn gen out/chromium
 
 ## debug with xcode
 
+启动chromium进程
+
+```sh
+# path
+out/gn/Chromium.app/Contents/MacOS/Chromium
+```
+
 使用xcode打开`out/chromium/all.xcodeproj`
+
+debug -> attatch to process -> 选择Chromium 进程
+
+接下来就可以打断点调试了
+
+eg:
+
+chrome>browser>ui>views>tabs>new_tab_button.cc 146行 NotifyClick函数 添加一个断点
+
+在chromium中新开一个tab 就会进入断点了

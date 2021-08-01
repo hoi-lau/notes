@@ -66,6 +66,44 @@ function _apply() {
 }
 ```
 
+### list2tree
+
+```javascript
+function list2tree(arr, rootId = 0, id = 'id', pid = 'parentId', children = 'children') {
+  const res = [];
+  const map = new Map();
+  let index = 0;
+  let preLen;
+  while (index >= 0) {
+    console.log(arr[index], index, arr.length);
+    map.set(arr[index][id], arr[index]);
+    if (arr[index][pid] === rootId) {
+      res.push(arr[index]);
+      arr.splice(index, 1);
+    } else if (map.has(arr[index][pid])) {
+      const target = map.get(arr[index][pid]);
+      if (!target[children]) target[children] = [];
+      target[children].push(arr[index]);
+      arr.splice(index, 1);
+    } else {
+      index++;
+    }
+    if (index >= arr.length) {
+      if (preLen === arr.length) {
+        index = -1;
+      } else {
+        preLen = arr.length;
+        index = 0;
+      }
+    }
+    if (arr.length === 0) {
+      index = -1;
+    }
+  }
+  return res;
+}
+```
+
 ### Promise
 
 ```js
@@ -408,7 +446,7 @@ document.addEventListener('scroll', imgLazyLoad)
 
     - 如果是`true`，则转换为`1`。
 - 如果是 `false`，则转换为`0`。
-    
+  
   - 如果操作数之一是对象，另一个是数字或字符串，会尝试使用对象的`valueOf()`和`toString()`方法将对象转换为原始值。
 
 - 如果操作数具有相同的类型，则将它们进行如下比较：

@@ -1,5 +1,5 @@
 ---
-title: 从0配置webpack
+title: webpack5入门
 date: 2021-01-10
 categories:
  - utils
