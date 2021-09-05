@@ -103,7 +103,7 @@ public static class Initiator extends FlowLogic<T> {}
 
 交易是原子的.一笔完整的交易:
 
-<img src="https://s1.ax1x.com/2020/07/05/USDvee.png" alt="transaction" border="0" />
+<img class="zoom-custom-imgs" src="https://s1.ax1x.com/2020/07/05/USDvee.png" alt="transaction" border="0" />
 
 两种类型:
 

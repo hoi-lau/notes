@@ -17,13 +17,13 @@ tags:
 
 标准`ascii`定义了128个字符,其中0~31 & 127(共33个)为控制字符,用来操控已经处理过的文字.95个字符为可显示字符.
 
-<img src="https://s1.ax1x.com/2020/08/05/ary9Pg.gif" alt="ary9Pg.gif" border="0" />
+<img class="zoom-custom-imgs" src="https://s1.ax1x.com/2020/08/05/ary9Pg.gif" alt="ary9Pg.gif" border="0" />
 
 ### LATIN1
 
 `ISO 8859-1`的别名, 是一个8位的字符集,以`ASCII`为基础,在空置的`0xA0-0xFF`范围内加入96个字母及符号.
 
-<img src="https://s1.ax1x.com/2020/08/05/ar3uXd.png" alt="ar3uXd.png" border="0" />
+<img class="zoom-custom-imgs" src="https://s1.ax1x.com/2020/08/05/ar3uXd.png" alt="ar3uXd.png" border="0" />
 
 在上表中，`0x20`是空格、`0xA0`是不换行空格、`0xAD`是选择性连接号。
 

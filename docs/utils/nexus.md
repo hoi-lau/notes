@@ -21,4 +21,4 @@ group:
 
 ## docker仓库
 
-<img src="./img/nexus/docker1.png" class="zoom-custom-imgs"/>
+<img src="./img/nexus/docker1.png"/>

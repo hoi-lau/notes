@@ -40,7 +40,7 @@ if (document.queryCommandSupported('copy')) {
 
 点击上方代码块右上角'copy',粘贴到类markdown软件中,效果如图:
 
-<img src="https://s1.ax1x.com/2020/07/05/UShdVP.png">
+<img class="zoom-custom-imgs" src="https://s1.ax1x.com/2020/07/05/UShdVP.png">
 
 ## navigator.clipboard
 

@@ -6,7 +6,11 @@ module.exports = {
   head: [
     ['link', {name: 'applicable-device', content: 'pc,mobile'}],
     ['meta', {name: 'google', content: 'notranslate'}],
-    ['meta', {name: 'description', content: '刘凯的个人站点'}],
+    ['meta', {name: 'keyword', content: 'article,blog,computer science,it,web,javascript'}],
+    ['meta', {name: 'description', content: '刘凯的个人站点 https://imliuk.com'}],
+    ['meta', {property: 'og:type', content: 'article'}],
+    ['meta', {property: 'og:author', content: 'liu kai'}],
+    ['meta', {property: 'og:description', content: '刘凯的个人站点 https://imliuk.com'}],
     ['meta', {name: 'viewport', content: 'initial-scale=1.0,width=device-width,user-scalable=no,viewport-fit=cover'}],
     ['meta', {'http-equiv': 'Content-Type', content: 'text/html; charset=utf-8'}],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }]

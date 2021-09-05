@@ -90,7 +90,7 @@ cat ~/.ssh/id_rsa
 
 manage Jenkins->configure system->找到 Publish over SSH
 
-<img src="https://s1.ax1x.com/2020/07/05/UShWV0.png" alt="jenkins ssh server" border="0">
+<img class="zoom-custom-imgs" src="https://s1.ax1x.com/2020/07/05/UShWV0.png" alt="jenkins ssh server" border="0">
 
 > 配置ssh server完成后测试连接出现错误: ssh remote & invalid privatekey
 >
@@ -100,7 +100,7 @@ manage Jenkins->configure system->找到 Publish over SSH
 
 manage jenkins-> global tool configuration
 
-<img src="https://s1.ax1x.com/2020/07/05/UShfaV.png" alt="jenkins nodejs" border="0">
+<img class="zoom-custom-imgs" src="https://s1.ax1x.com/2020/07/05/UShfaV.png" alt="jenkins nodejs" border="0">
 
 jenkins会自动配置nodejs环境
 
@@ -120,7 +120,7 @@ jenkins会自动配置nodejs环境
 2. 选择`freestyle project` 
 3. 配置源码管理 
 
-<img src="https://s1.ax1x.com/2020/07/05/USh2bq.png" alt="jenkins build triggers" border="0">
+<img class="zoom-custom-imgs" src="https://s1.ax1x.com/2020/07/05/USh2bq.png" alt="jenkins build triggers" border="0">
 
 4. 配置`github webhook` (项目 -> settings -> add webhooks -> payload 填上`jenkins`服务器地址). 配置后每次 push 代码到github, github 都会发送一个 post 请求到 jenkins 服务器, jenkins 服务器就会去构建 job, 所以 jenkins 服务器必须是外网可以访问的(或者是 git 服务器可以访问到的).
 
