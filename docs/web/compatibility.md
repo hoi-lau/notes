@@ -8,3 +8,31 @@ tags:
  - 兼容性
 ---
 
+## IOS
+
+### input
+
+#### dataset
+
+dataset属性在Safari上不生效
+
+```
+// 
+-webkit-appearance: button;
+```
+
+### 动画
+
+#### 与overflow-hidden搭配时渲染异常
+
+```css
+@keyframes move {
+  0% {
+    z-index: 1;
+  }
+  100% {
+    z-index: 2;
+  }
+}
+```
+
