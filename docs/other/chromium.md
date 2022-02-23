@@ -5,6 +5,7 @@ categories:
  - web
 tags:
  - chromium
+publish: false
 ---
 
 >在macos上学习调试chromium
