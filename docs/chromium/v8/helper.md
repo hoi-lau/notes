@@ -1,5 +1,5 @@
 ---
-title: v8 helper
+title: v8一些重要的
 date: 2022-03-28
 categories:
  - chromium
@@ -27,9 +27,21 @@ publish: false
 
 ### HandleScope
 
+### Zone
+
+AST对象都是基于Zone进行内存管理的，Zone是多次分配临时块对象，然后可以一次性释放掉。
+
+### ZoneObject
+
+基于Zone分配，v8封装了ZoneObject来作为AST对象的基类
+
+### AstRawString
+
 ### Scanner
 
 JavaScript扫描器
+
+
 
 ## struct
 
@@ -71,7 +83,7 @@ void LiteralBuffer::ExpandBuffer() {
   // MB = 1024 * 1024
 ```
 
-默认容量64, 单个字符串的**解析长度**是有上限的，最大为2mb
+默认容量0, 第一次添加字符时扩容为64, 之后每次扩容 * 4, **单个token的解析长度是有上限的，最大约2mb**
 
 ### TokenDesc
 
