@@ -17,12 +17,21 @@
     <span>
       thanks: <a href="https://www.recoluan.com/" target="_blank">recoluan</a>
     </span>
-    <span v-show="showViewNumber" class="pointer" :title="'浏览量:' + viewNumber">
+    <span
+      v-show="showViewNumber"
+      class="pointer"
+      :title="'浏览量:' + viewNumber"
+    >
       <a>
         <i class="iconfont icon-eye" style="color: #3eaf7c;"></i>
-        <span>{{viewNumber}}</span>
+        <span>{{ viewNumber }}</span>
       </a>
     </span>
+    <p>
+      <a href="https://beian.miit.gov.cn/" target="_blank"
+        >鄂ICP备2022002249号-1</a
+      >
+    </p>
   </div>
 </template>
 
@@ -37,13 +46,17 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener('message', (e) => {
-      if (e.data === 'initDone') {
-        this.showViewNumber = true
-        const index = globalData.views.findIndex(item => item.path === '/')
-        this.viewNumber = numberFormat(globalData.views[index].totalViews)
-      }
-    }, false)
+    window.addEventListener(
+      'message',
+      e => {
+        if (e.data === 'initDone') {
+          this.showViewNumber = true
+          const index = globalData.views.findIndex(item => item.path === '/')
+          this.viewNumber = numberFormat(globalData.views[index].totalViews)
+        }
+      },
+      false
+    )
   }
 }
 </script>

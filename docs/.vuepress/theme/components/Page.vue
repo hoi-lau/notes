@@ -44,9 +44,9 @@
         </p>
       </div>
     </ModuleTransition>
-    <ModuleTransition delay="0.32">
+    <!-- <ModuleTransition delay="0.32">
       <Comments v-if="showModule" :commentsData="commentsData"/>
-    </ModuleTransition>
+    </ModuleTransition> -->
   </main>
 </template>
 

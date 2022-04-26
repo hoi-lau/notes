@@ -1,5 +1,5 @@
 ---
-title: 关于字符集的理解
+title: js基础之字符集
 date: 2019-08-04
 categories: 
  - other
@@ -192,24 +192,8 @@ UTF-16可看成是UCS-2的父集。在没有辅助平面字符（surrogate code 
 
 ### js默认编码方式
 
+>ECMAScript规范中没有明确指明默认编码方式.
+
 - 对于js引擎: ` UCS-2 or UTF-16 `,大部分是`UTF-16`
 - 对于 ECMAScript : `UCS-2`
-
-```mermaid
-gantt
-        dateFormat  YYYY-MM-DD
-        title 快乐的生活
-        section 吃一把鸡就学习
-        学习            :done,    des1, 2014-01-06,2014-01-09
-        疯狂学习               :active,  des2, 2014-01-09, 3d
-        继续疯狂学习               :         des3, after des2, 5d
-        吃鸡！               :         des4, after des3, 4d
-        section 具体内容
-        学习Python :crit, done, 2014-01-06,72h
-        学习C++          :crit, done, after des1, 2d
-        学习Lisp             :crit, active, 3d
-        学习图形学        :crit, 4d
-        跳伞           :2d
-        打枪                      :2d
-```
 
