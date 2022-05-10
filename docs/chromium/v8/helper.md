@@ -37,11 +37,61 @@ AST对象都是基于Zone进行内存管理的，Zone是多次分配临时块对
 
 ### AstRawString
 
+> Ast(Raw|Cons)String 和 AstValueFactory 用于存储字符串和  独立于 V8 堆的值并在以后将它们内部化。解析时，它们被创建并存储在堆外的 AstValueFactory 中。解析后，字符串和值被内部化（移动到 V8 堆中）。
+
+### AstNode
+
+```c++
+class AstNode: public ZoneObject {
+ public:
+#define DECLARE_TYPE_ENUM(type) k##type,
+  enum NodeType : uint8_t {
+    AST_NODE_LIST(DECLARE_TYPE_ENUM) /* , */
+    FAILURE_NODE_LIST(DECLARE_TYPE_ENUM)
+  };
+#undef DECLARE_TYPE_ENUM
+
+  NodeType node_type() const { return NodeTypeField::decode(bit_field_); }
+  int position() const { return position_; }
+
+#ifdef DEBUG
+  void Print(Isolate* isolate);
+#endif  // DEBUG
+
+  // Type testing & conversion functions overridden by concrete subclasses.
+#define DECLARE_NODE_FUNCTIONS(type) \
+  V8_INLINE bool Is##type() const;   \
+  V8_INLINE type* As##type();        \
+  V8_INLINE const type* As##type() const;
+  AST_NODE_LIST(DECLARE_NODE_FUNCTIONS)
+  FAILURE_NODE_LIST(DECLARE_NODE_FUNCTIONS)
+#undef DECLARE_NODE_FUNCTIONS
+
+  IterationStatement* AsIterationStatement();
+  MaterializedLiteral* AsMaterializedLiteral();
+
+ private:
+  int position_;
+  using NodeTypeField = base::BitField<NodeType, 0, 6>;
+
+ protected:
+  uint32_t bit_field_;
+
+  template <class T, int size>
+  using NextBitField = NodeTypeField::Next<T, size>;
+
+  AstNode(int position, NodeType type)
+      : position_(position), bit_field_(NodeTypeField::encode(type)) {}
+};
+```
+
+
+
+### FunctionLiteral
+
 ### Scanner
 
 JavaScript扫描器
-
-
 
 ## struct
 
@@ -83,7 +133,7 @@ void LiteralBuffer::ExpandBuffer() {
   // MB = 1024 * 1024
 ```
 
-默认容量0, 第一次添加字符时扩容为64, 之后每次扩容 * 4, **单个token的解析长度是有上限的，最大约2mb**
+第一次添加字符时扩容为64, 之后每次扩容 * 4, **单个token的解析长度是有上限的，最大约2mb**
 
 ### TokenDesc
 
