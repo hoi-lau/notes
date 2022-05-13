@@ -1,5 +1,5 @@
 ---
-title: 「v8」之词法分析
+title: 「v8」词法分析
 date: 2022-04-13
 categories:
  - chromium
