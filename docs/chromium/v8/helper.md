@@ -17,7 +17,7 @@ publish: false
 
 > 由 v8 垃圾收集器管理的对象引用。
 >
-> 从 v8 返回的所有对象都必须由垃圾收集器跟踪，因此它知道对象还活着。另外，因为垃圾收集器可能会移动对象，直接指向一个对象是不安全的。相反，所有对象都存储在垃圾已知的句柄中收集器并在对象移动时更新。句柄应始终按值传递（除了像 out-parameters 这样的情况），他们不应该在堆上分配。
+> 从 v8 返回的所有对象都必须由垃圾收集器跟踪，因此它知道对象存活。另外，因为垃圾收集器可能会移动对象，直接指向一个对象是不安全的。相反，所有对象都存储在垃圾已知的句柄中收集器并在对象移动时更新。句柄应始终按值传递（除了像 out-parameters 这样的情况），他们不应该在堆上分配。
 >
 > 有两种类型的句柄：local and persistent。本地句柄是轻量级和瞬态的，通常用于本地操作。它们由 HandleScopes 管理。这意味着 HandleScope必须在创建时存在于堆栈中并且它们仅有效HandleScope 在创建期间处于活动状态。对于通过本地外部 HandleScope、EscapableHandleScope 及其 Escape() 的句柄必须使用方法。跨多个存储对象时可以使用持久句柄独立操作，当它们不存在时必须显式释放使用时间更长。通过取消引用来提取存储在句柄中的对象是安全的句柄（例如，从 Local<Object> 中提取 Object*）；value仍将由幕后的句柄管理，并且适用相同的规则这些值作为它们的句柄。
 
@@ -37,10 +37,60 @@ AST对象都是基于Zone进行内存管理的，Zone是多次分配临时块对
 
 ### AstRawString
 
+> Ast(Raw|Cons)String 和 AstValueFactory 用于存储字符串和  独立于 V8 堆的值并在以后将它们内部化。解析时，它们被创建并存储在堆外的 AstValueFactory 中。解析后，字符串和值被内部化（移动到 V8 堆中）。
+
+### AstNode
+
+```c++
+class AstNode: public ZoneObject {
+ public:
+#define DECLARE_TYPE_ENUM(type) k##type,
+  enum NodeType : uint8_t {
+    AST_NODE_LIST(DECLARE_TYPE_ENUM) /* , */
+    FAILURE_NODE_LIST(DECLARE_TYPE_ENUM)
+  };
+#undef DECLARE_TYPE_ENUM
+
+  NodeType node_type() const { return NodeTypeField::decode(bit_field_); }
+  int position() const { return position_; }
+
+#ifdef DEBUG
+  void Print(Isolate* isolate);
+#endif  // DEBUG
+
+  // Type testing & conversion functions overridden by concrete subclasses.
+#define DECLARE_NODE_FUNCTIONS(type) \
+  V8_INLINE bool Is##type() const;   \
+  V8_INLINE type* As##type();        \
+  V8_INLINE const type* As##type() const;
+  AST_NODE_LIST(DECLARE_NODE_FUNCTIONS)
+  FAILURE_NODE_LIST(DECLARE_NODE_FUNCTIONS)
+#undef DECLARE_NODE_FUNCTIONS
+
+  IterationStatement* AsIterationStatement();
+  MaterializedLiteral* AsMaterializedLiteral();
+
+ private:
+  int position_;
+  using NodeTypeField = base::BitField<NodeType, 0, 6>;
+
+ protected:
+  uint32_t bit_field_;
+
+  template <class T, int size>
+  using NextBitField = NodeTypeField::Next<T, size>;
+
+  AstNode(int position, NodeType type)
+      : position_(position), bit_field_(NodeTypeField::encode(type)) {}
+};
+```
+
+
+### FunctionLiteral
+
 ### Scanner
 
 JavaScript扫描器
-
 
 ## struct
 
@@ -82,7 +132,7 @@ void LiteralBuffer::ExpandBuffer() {
   // MB = 1024 * 1024
 ```
 
-默认容量0, 第一次添加字符时扩容为64, 之后每次扩容 * 4, **单个token的解析长度是有上限的，最大约2mb**
+第一次添加字符时扩容为64, 每次扩容 * 4 直到大于 (1MB / 3), 之后每次扩容1MB
 
 ### TokenDesc
 
