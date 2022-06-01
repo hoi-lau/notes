@@ -2,9 +2,9 @@
 title: js 原型
 date: 2019-10-13
 categories: 
- - web
+ - JavaScript
 tags:
- - js
+ - JavaScript Api
 ---
 
 ## 几个重要的方法

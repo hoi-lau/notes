@@ -5,6 +5,7 @@ categories:
  - compiler
 tags:
  - lexical analysis
+publish: false
 ---
 
 编译过程的第一步是进行词法分析，词法分析的任务是对字符串表示的源程序从左到右地进行扫描和分解，根据语言的词法规则识别出一个一个具有独立意义的单词符号。

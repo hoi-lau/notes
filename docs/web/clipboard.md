@@ -2,10 +2,9 @@
 title: web api 之复制内容到剪切板
 date: 2020-07-02
 categories:
- - web
+ - JavaScript
 tags:
- - web-api
- - js
+ - web api
 ---
 
 需要将网页部分内容复制到剪切板,总结出以下方案

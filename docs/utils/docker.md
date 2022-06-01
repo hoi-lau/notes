@@ -5,6 +5,7 @@ categories:
  - utils
 tags:
  - docker
+publish: false
 ---
 
 ## 安装docker(centos)

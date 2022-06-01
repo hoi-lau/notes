@@ -7,6 +7,7 @@ tags:
  - jwt
  - token
  - security
+publish: false
 ---
 
 > JSON Web令牌（JWT）是一个开放标准（[RFC 7519](https://tools.ietf.org/html/rfc7519)），它定义了一种紧凑且自包含的方式，用于在各方之间安全地将信息作为JSON对象传输。由于此信息是经过数字签名的，因此可以被验证和信任。可以使用秘密（使用**HMAC**算法）或使用**RSA**或**ECDSA**的公用/专用密钥对对JWT进行**签名**。

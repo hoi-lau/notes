@@ -2,9 +2,9 @@
 title: 使用eslint规范代码
 date: 2020-08-14
 categories:
- - utils
+ - JavaScript
 tags:
- - js
+ - utils
 meta:
  - name: description
    content: 使用eslint规范代码

@@ -2,10 +2,9 @@
 title: 从源码看Vue如何解决循环引用
 date: 2021-03-17
 categories:
- - web
+ - JavaScript
 tags: 
  - vue
- - js
 ---
 
 **问题抛出**
