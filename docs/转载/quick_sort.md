@@ -1,5 +1,5 @@
 ---
-title: (转载)证明快速排序的时间复杂度为O(nlogn)？
+title: 「转载」证明快速排序的时间复杂度为O(nlogn)？
 date: 2021-04-09
 tags: 
  - algorithm

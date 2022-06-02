@@ -2,6 +2,8 @@
 title: browser
 date: 2021-03-14
 publish: false
+categories:
+ - JavaScript
 tags: 
  - web
 ---

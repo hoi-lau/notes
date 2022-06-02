@@ -1,14 +1,13 @@
 ---
 title: solidity 笔记
 categories:
- - blockchain
+ - solidity
 date: 2020-06-30
 tags:
- - solidity
  - blockchain
 meta: 
  - name: description
-   content: solidity 不完全指南
+   content: solidity
  - name: keywords
    content: solidity,以太坊,智能合约
 ---

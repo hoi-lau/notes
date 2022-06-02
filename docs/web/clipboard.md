@@ -4,7 +4,7 @@ date: 2020-07-02
 categories:
  - JavaScript
 tags:
- - web api
+ - web
 ---
 
 需要将网页部分内容复制到剪切板,总结出以下方案
