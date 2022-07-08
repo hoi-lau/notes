@@ -5,7 +5,7 @@ const conf =
 // console.log(conf)
 module.exports = {
   base: '/',
-  title: 'im.liuk | carry your world',
+  title: 'im.liukai | carry your world',
   head: [
     ['link', { name: 'applicable-device', content: 'pc,mobile' }],
     ['meta', { name: 'google', content: 'notranslate' }],

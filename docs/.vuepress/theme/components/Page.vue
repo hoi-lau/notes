@@ -138,13 +138,13 @@ export default {
     },
     // pager...
     fetchCommentsData() {
-      http({
-        url: `comments?path=${location.pathname}`
-      }).then(res => {
-        this.commentsData = res.data || []
-      }).catch(error => {
-        console.error(error)
-      })
+      // http({
+      //   url: `comments?path=${location.pathname}`
+      // }).then(res => {
+      //   this.commentsData = res.data || []
+      // }).catch(error => {
+      //   console.error(error)
+      // })
     },
 
     copyCode(e) {
