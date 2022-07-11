@@ -7,7 +7,7 @@ tags:
  - v8
 ---
 
-> 理解 JavaScript 引擎工作原理有助于写出高效的 JavaScript 代码,本文讲讲v8编译前端部分
+> 理解 JavaScript 引擎工作原理有助于写出高效的 JavaScript 代码,本文简单的了解一下v8编译前端部分
 
 
 **一个编译程序的结构**
@@ -285,7 +285,6 @@ V8_INLINE Token::Value Scanner::ScanSingleToken() {
 `scanner_.Initialize()`会初始化`scanner`,也就是词法分析器,同时读取一个token.
 
 `DoParseProgram(isolate, info)`表示语法分析的开始,返回的结果就是AST.
-在v8中,词法分析和语法分析是同时工作的,语法分析器会驱动词法分析器扫描下一个token.
 
 **后台编译**
 
