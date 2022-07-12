@@ -74,7 +74,7 @@ module.exports = {
       { text: 'Home', link: '/', icon: 'icon-home_n' },
       { text: 'Category', link: '/category/', icon: 'icon-icon-goodscategory' },
       { text: 'Tags', link: '/tag/', icon: 'icon-tag' },
-      // {text: 'Resume', link: '/resume/', icon: ''},
+      {text: 'Resume', link: '/resume/', icon: ''},
       // {text: 'Timeline', link: '/timeline/', icon: 'icon-shijian'},
       {
         text: 'Contact',
