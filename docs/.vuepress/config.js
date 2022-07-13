@@ -18,7 +18,7 @@ module.exports = {
     ],
     [
       'meta',
-      { name: 'description', content: '刘凯的个人站点 https://imliuk.com' }
+      { name: 'description', content: '刘凯的个人站点 https://www.imliuk.com' }
     ],
     ['meta', { property: 'og:type', content: 'article' }],
     ['meta', { property: 'og:author', content: 'liu kai' }],
@@ -26,7 +26,7 @@ module.exports = {
       'meta',
       {
         property: 'og:description',
-        content: '刘凯的个人站点 https://imliuk.com'
+        content: '刘凯的个人站点 https://www.imliuk.com'
       }
     ],
     [
@@ -90,11 +90,11 @@ module.exports = {
             link: 'https://t.me/im_liukai',
             icon: 'icon-telegram'
           },
-          {
-            text: 'fe learn',
-            link: 'https://imliuk.com/study.html'
-            // icon: 'icon-book'
-          }
+          // {
+          //   text: 'fe learn',
+          //   link: 'https://www.imliuk.com/study.html'
+          //   // icon: 'icon-book'
+          // }
         ]
       }
     ]

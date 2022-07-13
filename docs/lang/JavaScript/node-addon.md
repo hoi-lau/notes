@@ -120,7 +120,6 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   return exports;
 }
 // node-addon-api 中用于注册函数的宏
-// hello 为 key, 可以是任意变量
 // Init 则会注册的函数
 NODE_API_MODULE(Tess, Init);
 ```
