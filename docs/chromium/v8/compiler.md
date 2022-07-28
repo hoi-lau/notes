@@ -83,21 +83,6 @@ void Parser::ParseProgram(Isolate* isolate, Handle<Script> script,
 
 从 Chrome 66 开始,V8 可以在后台线程上编译 JavaScript 源代码,后台编译可以让主线程空闲更长的时间.目前，只有顶层代码和立即调用的函数表达式（IIFE）在后台线程上编译,内部函数仍然在主线程上延迟编译。
 
-**lazy parsing**
-
-v8实现了lazy parsing(延迟编译),在遇到函数时进行预解析(pre-parse), 而不是完全解析, 这样可以减少编译时间提升应用启动速度,同时减少内存占用(代码对象也是要占用内存的).预解析不会生成Ast,函数在第一次被调用时,会进行完全解析和编译.预解析由PreParser类实现.
-
-**顶层代码**
-
-以下代码,除了function body部分,其他是顶层代码.
-
-```JavaScript
-const name = 'k'
-function fullName(_name) {
-  return _name + name
-}
-```
-
 ## AstNode
 
 AstNode继承自ZoneObject. AstNode数据结构:
