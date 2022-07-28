@@ -10,6 +10,7 @@ meta:
    content: solidity
  - name: keywords
    content: solidity,以太坊,智能合约
+publish: false
 ---
 
 > Solidity 是一门面向合约的、为实现智能合约而创建的高级编程语言, 运行于以太坊虚拟机EVM上. solidity官方文档 https://solidity.readthedocs.io
