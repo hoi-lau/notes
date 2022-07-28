@@ -346,7 +346,9 @@ ParserBase<Impl>::ParseHoistableDeclaration(
 ```
 ## ParseFunctionLiteral
 
-ParseFunctionLiteral 负责对函数body进行语义分析.
+ParseFunctionLiteral 负责对函数body进行语义分析. 从以下代码可以发现 !is_lazy && is_top_level 为true时才会立即编译该函数, 否则执行 SkipFunction.
+
+SkipFunction的作用: 检查语法是否正确, 比如函数重复的参数(严格模式下会报错Uncaught SyntaxError), 创建arguments object(非箭头函数中)等.
 
 ```cpp
 FunctionLiteral* Parser::ParseFunctionLiteral(
