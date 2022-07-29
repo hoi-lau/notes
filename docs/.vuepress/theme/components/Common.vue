@@ -132,13 +132,13 @@ export default {
   methods: {
     fetchData() {
       if (globalData.views.length > 0) return
-      http({
-        url: 'records'
-      }).then(res => {
-        globalData.views = res.data
-        window.postMessage('initDone', location.origin)
-      }).catch(error => {  
-      })
+      // http({
+      //   url: 'records'
+      // }).then(res => {
+      //   globalData.views = res.data
+      //   window.postMessage('initDone', location.origin)
+      // }).catch(error => {  
+      // })
     },
 
     toggleSidebar (to) {
