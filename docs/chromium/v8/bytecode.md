@@ -1,12 +1,147 @@
 ---
-title: 「v8」之字节码
+title: 「v8」字节码
 date: 2022-04-28
 categories:
  - chromium
 tags:
  - v8
-publish: false
 ---
+
+## 字节码生成
+
+### 入口函数
+
+```cpp
+void BytecodeGenerator::GenerateBytecodeBody() {
+  // Build the arguments object if it is used.
+  VisitArgumentsObject(closure_scope()->arguments());
+
+  // Build rest arguments array if it is used.
+  Variable* rest_parameter = closure_scope()->rest_parameter();
+  VisitRestArgumentsArray(rest_parameter);
+
+  // Build assignment to the function name or {.this_function}
+  // variables if used.
+  VisitThisFunctionVariable(closure_scope()->function_var());
+  VisitThisFunctionVariable(closure_scope()->this_function_var());
+
+  // Build assignment to {new.target} variable if it is used.
+  VisitNewTargetVariable(closure_scope()->new_target_var());
+
+  // Create a generator object if necessary and initialize the
+  // {.generator_object} variable.
+  FunctionLiteral* literal = info()->literal();
+  if (IsResumableFunction(literal->kind())) {
+    BuildGeneratorObjectVariableInitialization();
+  }
+
+  // Emit tracing call if requested to do so.
+  if (FLAG_trace) builder()->CallRuntime(Runtime::kTraceEnter);
+
+  // Emit type profile call.
+  if (info()->flags().collect_type_profile()) {
+    feedback_spec()->AddTypeProfileSlot();
+    int num_parameters = closure_scope()->num_parameters();
+    for (int i = 0; i < num_parameters; i++) {
+      Register parameter(builder()->Parameter(i));
+      builder()->LoadAccumulatorWithRegister(parameter).CollectTypeProfile(
+          closure_scope()->parameter(i)->initializer_position());
+    }
+  }
+
+  // Increment the function-scope block coverage counter.
+  BuildIncrementBlockCoverageCounterIfEnabled(literal, SourceRangeKind::kBody);
+
+  // Visit declarations within the function scope.
+  if (closure_scope()->is_script_scope()) {
+    VisitGlobalDeclarations(closure_scope()->declarations());
+  } else if (closure_scope()->is_module_scope()) {
+    VisitModuleDeclarations(closure_scope()->declarations());
+  } else {
+    VisitDeclarations(closure_scope()->declarations());
+  }
+
+  // Emit initializing assignments for module namespace imports (if any).
+  VisitModuleNamespaceImports();
+
+  // The derived constructor case is handled in VisitCallSuper.
+  if (IsBaseConstructor(function_kind())) {
+    if (literal->class_scope_has_private_brand()) {
+      BuildPrivateBrandInitialization(builder()->Receiver());
+    }
+
+    if (literal->requires_instance_members_initializer()) {
+      BuildInstanceMemberInitialization(Register::function_closure(),
+                                        builder()->Receiver());
+    }
+  }
+
+  // Visit statements in the function body.
+  VisitStatements(literal->body());
+
+  // Emit an implicit return instruction in case control flow can fall off the
+  // end of the function without an explicit return being present on all paths.
+  if (!builder()->RemainderOfBlockIsDead()) {
+    builder()->LoadUndefined();
+    BuildReturn(literal->return_position());
+  }
+}
+```
+
+#### VisitArgumentsObject
+
+当函数中调用了`arguments`(或者使用了`eval`函数, 因为`eval`可能访问`arguments`对象)时,会生成一个`arguments`对象并对`arguments`赋值.
+
+#### VisitRestArgumentsArray
+
+如果使用了`rest arguments`, 将构建一个`arguments`数组
+
+rest arguments : 
+
+```JavaScript
+function fn(a, ...rest) {
+  console.log(...rest)
+}
+```
+
+#### VisitStatements
+
+VisitStatements(literal->body()), 遍历AST为`function body`生成bytecode.
+
+#### BuildReturn
+
+生成`Return`字节码指令, 当函数没有显示调用`return`, 这时会调用`LoadUndefined`, 加载undefined到累加器, 末尾再加一条`Return`指令.
+
+`Return`指令用于设置函数返回值, 可以再次`Return`以修改函数返回值:
+
+```JavaScript
+function fn() {
+  try {
+    return 1
+  } finally {
+    return 2
+  }
+}
+console.log(fn())
+// 2
+```
+
+### ast翻译
+
+v8通过跳转指令实现语句内部的控制流,从而将语句转化为三地址指令.
+
+JumpIfFalse : 满足条件将会跳转到指令地址0000010E081D3115
+
+```txt
+0000010E081D3110 @   30 : 99 05             JumpIfFalse [5] (0000010E081D3115 @ 35)
+0000010E081D3112 @   32 : 0d 01             LdaSmi [1]
+0000010E081D3114 @   34 : a9                Return 
+0000010E081D3115 @   35 : 21 03 08          LdaGlobal [3], [8]
+```
+
+ast翻译整体上和编译原理中描述一致.
+
+## d8
 
 使用v8提供的工具d8可以生成js文件对应的字节码.
 
