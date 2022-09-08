@@ -1,11 +1,13 @@
 ---
-title: 「v8」字节码
+title: 「v8」字节码生成
 date: 2022-04-28
 categories:
  - chromium
 tags:
  - v8
 ---
+
+v8字节码定义: `src/interpreter/bytecodes.h`
 
 ## 字节码生成
 

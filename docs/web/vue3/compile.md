@@ -1085,7 +1085,9 @@ export const transformElement: NodeTransform = (node, context) => {
 
 ### v-if
 
-如果当前node含有 `v-if` 指令, 一个`IfNode`将会替换当前`VNode`, 而当前`VNode`成为`branches`子节点,同时将`v-if`从该节点`props`中移除, `v-for`指令也是类似处理.
+如果`VNode`含有 `v-if` 指令, 一个`IfNode`将会替换当前`VNode`, 而当前`VNode`成为`branches`子节点, 同时将`v-if`从`props`中移除, `v-for`指令也是类似处理.
+
+IfNode: 
 
 ```typescript
 export interface IfNode extends Node {
@@ -1107,3 +1109,108 @@ function createIfBranch(node, dir) {
 }
 ```
 
+## generate
+
+深度优先遍历ast生成render函数.
+
+在这之前会做一些处理模块化相关代码,ast搜集了所有编译过程中的辅助模块,从而可以在打包时对Vue进行代码拆分,将不需要的功能剔除.
+
+genNode代码:
+
+```typescript
+function genNode(node: CodegenNode | symbol | string, context: CodegenContext) {
+  if (isString(node)) {
+    context.push(node)
+    return
+  }
+  if (isSymbol(node)) {
+    context.push(context.helper(node))
+    return
+  }
+  switch (node.type) {
+    case NodeTypes.ELEMENT:
+    case NodeTypes.IF:
+    case NodeTypes.FOR:
+      __DEV__ &&
+        assert(
+          node.codegenNode != null,
+          `Codegen node is missing for element/if/for node. ` +
+            `Apply appropriate transforms first.`
+        )
+      genNode(node.codegenNode!, context)
+      break
+    case NodeTypes.TEXT:
+      genText(node, context)
+      break
+    case NodeTypes.SIMPLE_EXPRESSION:
+      genExpression(node, context)
+      break
+    case NodeTypes.INTERPOLATION:
+      genInterpolation(node, context)
+      break
+    case NodeTypes.TEXT_CALL:
+      genNode(node.codegenNode, context)
+      break
+    case NodeTypes.COMPOUND_EXPRESSION:
+      genCompoundExpression(node, context)
+      break
+    case NodeTypes.COMMENT:
+      genComment(node, context)
+      break
+    case NodeTypes.VNODE_CALL:
+      genVNodeCall(node, context)
+      break
+
+    case NodeTypes.JS_CALL_EXPRESSION:
+      genCallExpression(node, context)
+      break
+    case NodeTypes.JS_OBJECT_EXPRESSION:
+      genObjectExpression(node, context)
+      break
+    case NodeTypes.JS_ARRAY_EXPRESSION:
+      genArrayExpression(node, context)
+      break
+    case NodeTypes.JS_FUNCTION_EXPRESSION:
+      genFunctionExpression(node, context)
+      break
+    case NodeTypes.JS_CONDITIONAL_EXPRESSION:
+      genConditionalExpression(node, context)
+      break
+    case NodeTypes.JS_CACHE_EXPRESSION:
+      genCacheExpression(node, context)
+      break
+    case NodeTypes.JS_BLOCK_STATEMENT:
+      genNodeList(node.body, context, true, false)
+      break
+
+    // SSR only types
+    case NodeTypes.JS_TEMPLATE_LITERAL:
+      !__BROWSER__ && genTemplateLiteral(node, context)
+      break
+    case NodeTypes.JS_IF_STATEMENT:
+      !__BROWSER__ && genIfStatement(node, context)
+      break
+    case NodeTypes.JS_ASSIGNMENT_EXPRESSION:
+      !__BROWSER__ && genAssignmentExpression(node, context)
+      break
+    case NodeTypes.JS_SEQUENCE_EXPRESSION:
+      !__BROWSER__ && genSequenceExpression(node, context)
+      break
+    case NodeTypes.JS_RETURN_STATEMENT:
+      !__BROWSER__ && genReturnStatement(node, context)
+      break
+
+    /* istanbul ignore next */
+    case NodeTypes.IF_BRANCH:
+      // noop
+      break
+    default:
+      if (__DEV__) {
+        assert(false, `unhandled codegen node type: ${(node as any).type}`)
+        // make sure we exhaust all possible types
+        const exhaustiveCheck: never = node
+        return exhaustiveCheck
+      }
+  }
+}
+```
