@@ -126,6 +126,7 @@ function fn() {
 }
 console.log(fn())
 // 2
+// es规范
 ```
 
 ### ast翻译
