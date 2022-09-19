@@ -1,5 +1,5 @@
 ---
-title: 「v8」内存管理
+title: 「v8」内存
 date: 2022-05-16
 categories:
  - chromium
@@ -14,9 +14,9 @@ publish: false
 
 ## stack 
 
-一个v8进程只有一个调用栈. 理论上来讲,调用一个函数会将这个函数放到栈顶, 当函数返回时会从栈顶移除.
+栈是存储静态数据的地方，包括function、function frame(函数调用)、基础类型的值和指针.
 
-栈是存储静态数据的地方，包括function、function frame、基础类型的值和指针.
+一个v8进程只有一个栈. 调用一个函数会将这个函数放到栈顶, 当函数返回时会从栈顶移除.
 
 ## heap
 
@@ -53,17 +53,37 @@ old generation使用标记-清除算法回收垃圾
 
 ## garbage collection(垃圾搜集)
 
-垃圾搜集是v8中最重要的一部分,V8 实现了两种垃圾收集器：一种频繁收集young generation，另一种收集old generation
+垃圾搜集是v8中很重要的一部分,V8 实现了两种垃圾收集器：一种频繁收集young generation，另一种收集old generation
 
-### Parallel Mark-Evacuate
+### Mark-Sweep
 
-![](https://img.imliuk.com/20220630151247.png)
+v8 主要的垃圾收集器, 从整个堆中收集垃圾.
+
+<!-- ![](https://img.imliuk.com/20220630151247.png) -->
 
 该算法包括三个阶段
 
-1. 标记
-2. 复制
-3. 更新指针
+#### 1.标记
+
+标记的目的是找到所有可访问的对象, 从一组指针集合开始访问每一个指针指向的`JavaScript object`, 并将其标记为`reachable`(未被标记的对象称为`dead objects`), 这个过程是递归的.
+
+#### 2. 清除
+
+清除: `dead objects`内存将会被添加到`FreeList`中, 可以从`FreeList`中申请内存.
+
+内存页状态枚举: 
+
+```cpp
+enum class ConcurrentSweepingState : intptr_t {
+  kDone,
+  kPending,
+  kInProgress,
+};
+```
+
+#### 3. 碎片整理
+
+对于高度碎片化的内存页,v8将存活的对象复制到未经压缩的内存页中.大多数情况下,v8中一个内存页的大小是`256k`.
 
 ### Parallel Scavenger
 

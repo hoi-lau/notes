@@ -5,6 +5,7 @@ categories:
  - JavaScript
 tags: 
  - vue
+publish: false
 ---
 
 **问题抛出**
@@ -47,7 +48,7 @@ new Vue({
 })
 ```
 
-众所周知, new一个vue实例会对data函数中返回的对象进行递归遍历, 并且没有抛出堆栈溢出异常,可见vue内部已经对循环引用做了处理.
+new一个vue实例会对data函数中返回的对象进行递归遍历, 并且没有抛出堆栈溢出异常,可见vue内部已经对循环引用做了处理.
 
 贴一段源码:
 
