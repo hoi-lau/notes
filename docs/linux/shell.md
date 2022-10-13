@@ -399,6 +399,10 @@ sed '2c hello' study.txt
 sed '2c/99/98/g' study.txt
 # s后面表示分隔符
 sed 's#./#https://imliuk.com/#'
+
+# macos 递归替换目录下的字符
+export LC_CTYPE=C
+sed -i "" "s/flutter_app/faire/g"  $(find ./macos -type f)
 ```
 
 ### test

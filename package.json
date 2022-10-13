@@ -23,6 +23,7 @@
     "watchpack": "1.6.1"
   },
   "dependencies": {
+    "markdown-it-container": "^3.0.0",
     "marked": ">=2.0.0",
     "vue-click-outside": "^1.1.0"
   }

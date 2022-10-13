@@ -867,7 +867,9 @@ function walk(
 
 ### getBaseTransformPreset
 
-以下顺序代表了内置指令的解析顺序,`v-if`优先级高于`v-for`,`v-once`优先级最高
+ > 在vue2中，v-for的优先级高于v-if, 在vue3中，v-if的优先级高于v-for
+
+getBaseTransformPreset函数返回数组的顺序代表了内置指令的解析顺序,`v-if`优先级高于`v-for`,`v-once`优先级最高.
 
 自定义指令的触发顺序由props中的先后顺序决定,如`<div v-help v-focus></div>`, `v-help`优先触发
 
