@@ -1,5 +1,6 @@
 <template>
-  <section class="theme-container" v-if="!noFoundPageByTencent">
+  <!--  v-if="!noFoundPageByTencent" -->
+  <section class="theme-container">
     <article class="content">
       <h1>404</h1>
       <blockquote>{{ getMsg() }}</blockquote>
