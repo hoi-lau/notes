@@ -11,7 +11,7 @@ tags:
 
 ###  **Object.getPrototypeOf()** 
 
- 返回指定对象的[隐式原型](#implicit)(\__proto__)
+ 返回指定对象的[隐式原型](#implicit)(`__proto__`)
 
 ```js
 const prototype1 = {}
