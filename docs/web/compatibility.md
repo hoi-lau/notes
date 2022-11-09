@@ -19,6 +19,8 @@ tags:
 ```js
 // 绑定一个空函数
 document.body.addEventListener('touchstart', function () {});
+```
+
 ### input
 
 #### dataset
